@@ -1,4 +1,4 @@
-# BlueAPIRoleManagementSystem
+# Blue API Role Management System
 
 Welcome to the **Blue API Role Management System** documentation. This document provides an overview of the features and endpoints available for managing users, roles, features, endpoints, pages, and applications within the system.
 
