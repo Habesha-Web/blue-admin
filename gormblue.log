@@ -1,0 +1,108 @@
+
+2024/08/14 15:01:09 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.097ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="roles"
+
+2024/08/14 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[9.088ms] [34;1m[rows:0][0m CREATE TABLE `roles` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`description` text NOT NULL,`active` numeric DEFAULT true,`app_id` integer,CONSTRAINT `uni_roles_description` UNIQUE (`description`),CONSTRAINT `uni_roles_name` UNIQUE (`name`))
+
+2024/08/14 15:01:09 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.151ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="pages"
+
+2024/08/14 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[5.368ms] [34;1m[rows:0][0m CREATE TABLE `pages` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`active` numeric DEFAULT true,`description` text NOT NULL,CONSTRAINT `uni_pages_name` UNIQUE (`name`),CONSTRAINT `uni_pages_description` UNIQUE (`description`))
+
+2024/08/14 15:01:09 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.143ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="page_roles"
+
+2024/08/14 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[5.407ms] [34;1m[rows:0][0m CREATE TABLE `page_roles` (`page_id` integer,`role_id` integer,PRIMARY KEY (`page_id`,`role_id`))
+
+2024/08/14 15:01:09 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.131ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="users"
+
+2024/08/14 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[5.875ms] [34;1m[rows:0][0m CREATE TABLE `users` (`id` integer PRIMARY KEY AUTOINCREMENT,`email` text NOT NULL,`password` text NOT NULL,`date_registred` datetime DEFAULT current_timestamp,`disabled` numeric DEFAULT true,`uuid` text,CONSTRAINT `uni_users_email` UNIQUE (`email`),CONSTRAINT `uni_users_uuid` UNIQUE (`uuid`))
+
+2024/08/14 15:01:09 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.156ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="user_roles"
+
+2024/08/14 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[5.556ms] [34;1m[rows:0][0m CREATE TABLE `user_roles` (`user_id` integer,`role_id` integer,PRIMARY KEY (`user_id`,`role_id`))
+
+2024/08/14 15:01:09 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.122ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="apps"
+
+2024/08/14 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[4.948ms] [34;1m[rows:0][0m CREATE TABLE `apps` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`uuid` text,`active` numeric DEFAULT true,`description` text NOT NULL,CONSTRAINT `uni_apps_name` UNIQUE (`name`),CONSTRAINT `uni_apps_uuid` UNIQUE (`uuid`),CONSTRAINT `uni_apps_description` UNIQUE (`description`))
+
+2024/08/14 15:01:09 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.108ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="features"
+
+2024/08/14 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[6.132ms] [34;1m[rows:0][0m CREATE TABLE `features` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`description` text NOT NULL,`active` numeric DEFAULT true,`role_id` integer,CONSTRAINT `uni_features_name` UNIQUE (`name`),CONSTRAINT `uni_features_description` UNIQUE (`description`))
+
+2024/08/14 15:01:09 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.175ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="endpoints"
+
+2024/08/14 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[9.278ms] [34;1m[rows:0][0m CREATE TABLE `endpoints` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`route_path` text NOT NULL,`method` text NOT NULL,`description` text NOT NULL,`feature_id` integer,CONSTRAINT `uni_endpoints_name` UNIQUE (`name`),CONSTRAINT `uni_endpoints_route_path` UNIQUE (`route_path`),CONSTRAINT `uni_endpoints_method` UNIQUE (`method`),CONSTRAINT `uni_endpoints_description` UNIQUE (`description`))
+
+2024/08/14 15:01:09 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.178ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="jwt_salts"
+
+2024/08/14 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[7.479ms] [34;1m[rows:0][0m CREATE TABLE `jwt_salts` (`id` integer PRIMARY KEY AUTOINCREMENT,`salt_a` text NOT NULL,`salt_b` text NOT NULL,CONSTRAINT `uni_jwt_salts_salt_b` UNIQUE (`salt_b`),CONSTRAINT `uni_jwt_salts_salt_a` UNIQUE (`salt_a`))
+
+2024/08/14 15:01:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.169ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="roles"
+
+2024/08/14 15:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[9.588ms] [34;1m[rows:0][0m CREATE TABLE `roles` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`description` text NOT NULL,`active` numeric DEFAULT true,`app_id` integer,CONSTRAINT `uni_roles_description` UNIQUE (`description`),CONSTRAINT `uni_roles_name` UNIQUE (`name`))
+
+2024/08/14 15:01:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.184ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="pages"
+
+2024/08/14 15:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[6.749ms] [34;1m[rows:0][0m CREATE TABLE `pages` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`active` numeric DEFAULT true,`description` text NOT NULL,CONSTRAINT `uni_pages_name` UNIQUE (`name`),CONSTRAINT `uni_pages_description` UNIQUE (`description`))
+
+2024/08/14 15:01:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.123ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="page_roles"
+
+2024/08/14 15:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[5.196ms] [34;1m[rows:0][0m CREATE TABLE `page_roles` (`page_id` integer,`role_id` integer,PRIMARY KEY (`page_id`,`role_id`))
+
+2024/08/14 15:01:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.094ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="users"
+
+2024/08/14 15:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[4.807ms] [34;1m[rows:0][0m CREATE TABLE `users` (`id` integer PRIMARY KEY AUTOINCREMENT,`email` text NOT NULL,`password` text NOT NULL,`date_registred` datetime DEFAULT current_timestamp,`disabled` numeric DEFAULT true,`uuid` text,CONSTRAINT `uni_users_email` UNIQUE (`email`),CONSTRAINT `uni_users_uuid` UNIQUE (`uuid`))
+
+2024/08/14 15:01:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.114ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="user_roles"
+
+2024/08/14 15:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[9.295ms] [34;1m[rows:0][0m CREATE TABLE `user_roles` (`user_id` integer,`role_id` integer,PRIMARY KEY (`user_id`,`role_id`))
+
+2024/08/14 15:01:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.161ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="apps"
+
+2024/08/14 15:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[6.964ms] [34;1m[rows:0][0m CREATE TABLE `apps` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`uuid` text,`active` numeric DEFAULT true,`description` text NOT NULL,CONSTRAINT `uni_apps_name` UNIQUE (`name`),CONSTRAINT `uni_apps_uuid` UNIQUE (`uuid`),CONSTRAINT `uni_apps_description` UNIQUE (`description`))
+
+2024/08/14 15:01:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.199ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="features"
+
+2024/08/14 15:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[14.030ms] [34;1m[rows:0][0m CREATE TABLE `features` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`description` text NOT NULL,`active` numeric DEFAULT true,`role_id` integer,CONSTRAINT `uni_features_name` UNIQUE (`name`),CONSTRAINT `uni_features_description` UNIQUE (`description`))
+
+2024/08/14 15:01:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.245ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="endpoints"
+
+2024/08/14 15:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[8.001ms] [34;1m[rows:0][0m CREATE TABLE `endpoints` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`route_path` text NOT NULL,`method` text NOT NULL,`description` text NOT NULL,`feature_id` integer,CONSTRAINT `uni_endpoints_name` UNIQUE (`name`),CONSTRAINT `uni_endpoints_route_path` UNIQUE (`route_path`),CONSTRAINT `uni_endpoints_method` UNIQUE (`method`),CONSTRAINT `uni_endpoints_description` UNIQUE (`description`))
+
+2024/08/14 15:01:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.122ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="jwt_salts"
+
+2024/08/14 15:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[7.553ms] [34;1m[rows:0][0m CREATE TABLE `jwt_salts` (`id` integer PRIMARY KEY AUTOINCREMENT,`salt_a` text NOT NULL,`salt_b` text NOT NULL,CONSTRAINT `uni_jwt_salts_salt_a` UNIQUE (`salt_a`),CONSTRAINT `uni_jwt_salts_salt_b` UNIQUE (`salt_b`))
