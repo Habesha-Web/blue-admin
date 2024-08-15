@@ -315,6 +315,58 @@ const docTemplate = `{
                 }
             }
         },
+        "/checklogin": {
+            "get": {
+                "description": "CheckLogin",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Auth",
+                "parameters": [
+                    {
+                        "description": "Login",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.LoginPost"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/controllers.TokenResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
         "/endpoint": {
             "get": {
                 "security": [
@@ -1078,6 +1130,64 @@ const docTemplate = `{
                 "responses": {
                     "400": {
                         "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "description": "Login",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Auth",
+                "parameters": [
+                    {
+                        "description": "Login",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.LoginPost"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/controllers.TokenResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
                         "schema": {
                             "$ref": "#/definitions/common.ResponseHTTP"
                         }
@@ -2326,6 +2436,42 @@ const docTemplate = `{
                 }
             }
         },
+        "controllers.LoginPost": {
+            "type": "object",
+            "required": [
+                "grant_type"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "maxLength": 32,
+                    "minLength": 6
+                },
+                "grant_type": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.TokenResponse": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "token_type": {
+                    "type": "string"
+                }
+            }
+        },
         "models.AppGet": {
             "description": "AppGet type information",
             "type": "object",
@@ -2705,13 +2851,13 @@ const docTemplate = `{
             "description": "UserPost type information",
             "type": "object",
             "properties": {
-                "date_registered": {
-                    "type": "string"
-                },
                 "disabled": {
                     "type": "boolean"
                 },
                 "email": {
+                    "type": "string"
+                },
+                "password": {
                     "type": "string"
                 }
             }

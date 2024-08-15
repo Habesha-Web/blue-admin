@@ -106,3 +106,258 @@
 
 2024/08/14 15:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
 [0m[33m[7.553ms] [34;1m[rows:0][0m CREATE TABLE `jwt_salts` (`id` integer PRIMARY KEY AUTOINCREMENT,`salt_a` text NOT NULL,`salt_b` text NOT NULL,CONSTRAINT `uni_jwt_salts_salt_a` UNIQUE (`salt_a`),CONSTRAINT `uni_jwt_salts_salt_b` UNIQUE (`salt_b`))
+
+2024/08/14 16:21:17 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:186
+[0m[33m[10.355ms] [34;1m[rows:1][0m INSERT INTO `apps` (`name`,`uuid`,`active`,`description`) VALUES ("Blue Admin","",true,"Blue Admin SSO Role Based API Administration solution") RETURNING `id`
+
+2024/08/14 16:21:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.469ms] [34;1m[rows:1][0m SELECT count(*) FROM `apps`
+
+2024/08/14 16:21:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[8.759ms] [34;1m[rows:1][0m SELECT * FROM `apps` ORDER BY id asc LIMIT 20
+
+2024/08/14 16:22:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:344
+[0m[33m[9.114ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE id = 1 ORDER BY `apps`.`id` LIMIT 1
+
+2024/08/14 16:22:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:361
+[0m[33m[5.157ms] [34;1m[rows:1][0m DELETE FROM `apps` WHERE `apps`.`id` = 1
+
+2024/08/14 16:24:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:186
+[0m[33m[9.867ms] [34;1m[rows:1][0m INSERT INTO `apps` (`name`,`uuid`,`active`,`description`) VALUES ("Blue Admin","01915110-08a6-7898-b034-e759fd6dc261",true,"Blue Admin SSO Role Based API Administration solution") RETURNING `id`
+
+2024/08/14 16:42:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[19.602ms] [34;1m[rows:1][0m SELECT * FROM `apps` ORDER BY id asc LIMIT 20
+
+2024/08/14 16:42:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[2.874ms] [34;1m[rows:1][0m SELECT count(*) FROM `apps`
+
+2024/08/15 14:57:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:186
+[0m[33m[4.071ms] [34;1m[rows:1][0m INSERT INTO `roles` (`name`,`description`,`active`,`app_id`) VALUES ("Have Access to Everything","superuser",true,NULL) RETURNING `id`
+
+2024/08/15 14:58:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:177
+[0m[33m[2.298ms] [34;1m[rows:1][0m INSERT INTO `users` (`email`,`password`,`disabled`,`uuid`) VALUES ("","22ddf8724f0238403f39e61cddcf11009414edc012d81f8efa8967f06969ab5dd9e16a2d9a8d8d0d2c6a5c5a1f4afb1be860d31d8f3fbc50bc58696b6213e5b8",true,"019155e7-6a38-7f19-a3ee-b9ee52e41df9") RETURNING `id`,`date_registred`
+
+2024/08/15 14:58:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:432
+[0m[33m[2.584ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 1
+
+2024/08/15 14:58:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:443
+[0m[33m[0.167ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE `users`.`id` = 1
+
+2024/08/15 14:58:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:452
+[0m[33m[0.726ms] [34;1m[rows:0][0m INSERT INTO `roles` (`name`,`description`,`active`,`app_id`,`id`) VALUES ("Have Access to Everything","superuser",true,NULL,1) ON CONFLICT DO NOTHING RETURNING `id`
+
+2024/08/15 14:58:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:452
+[0m[33m[3.660ms] [34;1m[rows:1][0m INSERT INTO `user_roles` (`user_id`,`role_id`) VALUES (1,1) ON CONFLICT DO NOTHING
+
+2024/08/15 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:514
+[0m[33m[2.786ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 1
+
+2024/08/15 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:525
+[0m[33m[0.170ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE `users`.`id` = 1
+
+2024/08/15 15:01:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:535
+[0m[33m[10.209ms] [34;1m[rows:1][0m DELETE FROM `user_roles` WHERE `user_roles`.`user_id` = 1 AND `user_roles`.`role_id` = 1
+
+2024/08/15 15:01:47 logger.go:167: [31;1m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:177 [35;1mUNIQUE constraint failed: users.email
+[0m[33m[4.117ms] [34;1m[rows:0][0m INSERT INTO `users` (`email`,`password`,`disabled`,`uuid`) VALUES ("","22ddf8724f0238403f39e61cddcf11009414edc012d81f8efa8967f06969ab5dd9e16a2d9a8d8d0d2c6a5c5a1f4afb1be860d31d8f3fbc50bc58696b6213e5b8",true,"019155ea-5b5f-7b92-bb2f-ced150b05cec") RETURNING `id`,`date_registred`
+
+2024/08/15 15:02:25 logger.go:167: [31;1m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:177 [35;1mUNIQUE constraint failed: users.email
+[0m[33m[1.797ms] [34;1m[rows:0][0m INSERT INTO `users` (`email`,`password`,`disabled`,`uuid`) VALUES ("","22ddf8724f0238403f39e61cddcf11009414edc012d81f8efa8967f06969ab5dd9e16a2d9a8d8d0d2c6a5c5a1f4afb1be860d31d8f3fbc50bc58696b6213e5b8",true,"019155ea-ed58-73c3-9e5d-78b39af8dc5f") RETURNING `id`,`date_registred`
+
+2024/08/15 15:03:14 logger.go:167: [31;1m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:177 [35;1mUNIQUE constraint failed: users.email
+[0m[33m[3.134ms] [34;1m[rows:0][0m INSERT INTO `users` (`email`,`password`,`disabled`,`uuid`) VALUES ("","22ddf8724f0238403f39e61cddcf11009414edc012d81f8efa8967f06969ab5dd9e16a2d9a8d8d0d2c6a5c5a1f4afb1be860d31d8f3fbc50bc58696b6213e5b8",true,"019155eb-ad40-7335-bc05-cd6932d0a2ba") RETURNING `id`,`date_registred`
+
+2024/08/15 15:03:53 logger.go:167: [31;1m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:177 [35;1mUNIQUE constraint failed: users.email
+[0m[33m[2.917ms] [34;1m[rows:0][0m INSERT INTO `users` (`email`,`password`,`disabled`,`uuid`) VALUES ("","22ddf8724f0238403f39e61cddcf11009414edc012d81f8efa8967f06969ab5dd9e16a2d9a8d8d0d2c6a5c5a1f4afb1be860d31d8f3fbc50bc58696b6213e5b8",true,"019155ec-464d-7a19-947b-92c24caaddcf") RETURNING `id`,`date_registred`
+
+2024/08/15 15:04:08 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[1.771ms] [34;1m[rows:1][0m SELECT * FROM `users` ORDER BY id asc LIMIT 14
+
+2024/08/15 15:04:08 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.644ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/08/15 15:04:28 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:332
+[0m[33m[3.434ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE id = 1 ORDER BY `users`.`id` LIMIT 1
+
+2024/08/15 15:04:28 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:349
+[0m[33m[7.169ms] [34;1m[rows:1][0m DELETE FROM `users` WHERE `users`.`id` = 1
+
+2024/08/15 15:04:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:177
+[0m[33m[13.874ms] [34;1m[rows:1][0m INSERT INTO `users` (`email`,`password`,`disabled`,`uuid`) VALUES ("","22ddf8724f0238403f39e61cddcf11009414edc012d81f8efa8967f06969ab5dd9e16a2d9a8d8d0d2c6a5c5a1f4afb1be860d31d8f3fbc50bc58696b6213e5b8",true,"019155ec-e532-7610-acdb-88cae1ac8259") RETURNING `id`,`date_registred`
+
+2024/08/15 15:05:36 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:432
+[0m[33m[1.304ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 1
+
+2024/08/15 15:05:36 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:443
+[0m[33m[0.138ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE `users`.`id` = 1
+
+2024/08/15 15:05:36 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:452
+[0m[33m[1.044ms] [34;1m[rows:0][0m INSERT INTO `roles` (`name`,`description`,`active`,`app_id`,`id`) VALUES ("Have Access to Everything","superuser",true,NULL,1) ON CONFLICT DO NOTHING RETURNING `id`
+
+2024/08/15 15:05:36 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:452
+[0m[33m[4.110ms] [34;1m[rows:1][0m INSERT INTO `user_roles` (`user_id`,`role_id`) VALUES (1,1) ON CONFLICT DO NOTHING
+
+2024/08/15 15:07:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[1.926ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE email = "superuser@mail.com" ORDER BY `users`.`id` LIMIT 1
+
+2024/08/15 15:08:20 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.220ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/08/15 15:08:20 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[3.217ms] [34;1m[rows:1][0m SELECT * FROM `users` ORDER BY id asc LIMIT 10
+
+2024/08/15 15:09:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:99
+[0m[33m[3.205ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE id = 1 ORDER BY `users`.`id` LIMIT 1
+
+2024/08/15 15:09:36 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:99
+[0m[33m[3.870ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE id = 1 ORDER BY `users`.`id` LIMIT 1
+
+2024/08/15 15:09:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:99
+[0m[33m[2.115ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE id = 1 ORDER BY `users`.`id` LIMIT 1
+
+2024/08/15 15:10:26 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.823ms] [34;1m[rows:1][0m SELECT * FROM `users` ORDER BY id asc LIMIT 10
+
+2024/08/15 15:10:26 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.817ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/08/15 15:10:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.195ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/08/15 15:10:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:121
+[0m[33m[3.437ms] [34;1m[rows:0][0m SELECT * FROM `users` ORDER BY id asc LIMIT 10 OFFSET 10
+
+2024/08/15 15:10:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[4.064ms] [34;1m[rows:1][0m SELECT * FROM `users` ORDER BY id asc LIMIT 10
+
+2024/08/15 15:10:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.845ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/08/15 15:10:45 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:99
+[0m[33m[0.166ms] [34;1m[rows:0][0m SELECT * FROM `user_roles` WHERE `user_roles`.`user_id` = 2
+
+2024/08/15 15:10:45 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:99
+[0m[33m[3.200ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE id = 2 ORDER BY `users`.`id` LIMIT 1
+
+2024/08/15 15:13:20 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:99
+[0m[33m[0.130ms] [34;1m[rows:0][0m SELECT * FROM `user_roles` WHERE `user_roles`.`user_id` = 2
+
+2024/08/15 15:13:20 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:99
+[0m[33m[1.844ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE id = 2 ORDER BY `users`.`id` LIMIT 1
+
+2024/08/15 15:17:23 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:177
+[0m[33m[4.083ms] [34;1m[rows:1][0m INSERT INTO `users` (`email`,`password`,`disabled`,`uuid`) VALUES ("","22ddf8724f0238403f39e61cddcf11009414edc012d81f8efa8967f06969ab5dd9e16a2d9a8d8d0d2c6a5c5a1f4afb1be860d31d8f3fbc50bc58696b6213e5b8",true,"019155f8-a22f-73ed-ac4e-23b64d96b51d") RETURNING `id`,`date_registred`
+
+2024/08/15 15:18:10 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.146ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="roles"
+
+2024/08/15 15:18:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[9.440ms] [34;1m[rows:0][0m CREATE TABLE `roles` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`description` text NOT NULL,`active` numeric DEFAULT true,`app_id` integer,CONSTRAINT `uni_roles_name` UNIQUE (`name`),CONSTRAINT `uni_roles_description` UNIQUE (`description`))
+
+2024/08/15 15:18:10 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.077ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="users"
+
+2024/08/15 15:18:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[5.280ms] [34;1m[rows:0][0m CREATE TABLE `users` (`id` integer PRIMARY KEY AUTOINCREMENT,`email` text NOT NULL,`password` text NOT NULL,`date_registred` datetime DEFAULT current_timestamp,`disabled` numeric DEFAULT true,`uuid` text,CONSTRAINT `uni_users_email` UNIQUE (`email`),CONSTRAINT `uni_users_uuid` UNIQUE (`uuid`))
+
+2024/08/15 15:18:10 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.129ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="user_roles"
+
+2024/08/15 15:18:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[4.072ms] [34;1m[rows:0][0m CREATE TABLE `user_roles` (`user_id` integer,`role_id` integer,PRIMARY KEY (`user_id`,`role_id`))
+
+2024/08/15 15:18:10 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.166ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="pages"
+
+2024/08/15 15:18:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[3.856ms] [34;1m[rows:0][0m CREATE TABLE `pages` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`active` numeric DEFAULT true,`description` text NOT NULL,CONSTRAINT `uni_pages_name` UNIQUE (`name`),CONSTRAINT `uni_pages_description` UNIQUE (`description`))
+
+2024/08/15 15:18:10 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.077ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="page_roles"
+
+2024/08/15 15:18:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[4.553ms] [34;1m[rows:0][0m CREATE TABLE `page_roles` (`page_id` integer,`role_id` integer,PRIMARY KEY (`page_id`,`role_id`))
+
+2024/08/15 15:18:10 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.198ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="apps"
+
+2024/08/15 15:18:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[5.319ms] [34;1m[rows:0][0m CREATE TABLE `apps` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`uuid` text,`active` numeric DEFAULT true,`description` text NOT NULL,CONSTRAINT `uni_apps_name` UNIQUE (`name`),CONSTRAINT `uni_apps_uuid` UNIQUE (`uuid`),CONSTRAINT `uni_apps_description` UNIQUE (`description`))
+
+2024/08/15 15:18:10 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.086ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="features"
+
+2024/08/15 15:18:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[4.626ms] [34;1m[rows:0][0m CREATE TABLE `features` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`description` text NOT NULL,`active` numeric DEFAULT true,`role_id` integer,CONSTRAINT `uni_features_name` UNIQUE (`name`),CONSTRAINT `uni_features_description` UNIQUE (`description`))
+
+2024/08/15 15:18:10 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.094ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="endpoints"
+
+2024/08/15 15:18:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[3.904ms] [34;1m[rows:0][0m CREATE TABLE `endpoints` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`route_path` text NOT NULL,`method` text NOT NULL,`description` text NOT NULL,`feature_id` integer,CONSTRAINT `uni_endpoints_name` UNIQUE (`name`),CONSTRAINT `uni_endpoints_route_path` UNIQUE (`route_path`),CONSTRAINT `uni_endpoints_method` UNIQUE (`method`),CONSTRAINT `uni_endpoints_description` UNIQUE (`description`))
+
+2024/08/15 15:18:10 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.079ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="jwt_salts"
+
+2024/08/15 15:18:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[5.195ms] [34;1m[rows:0][0m CREATE TABLE `jwt_salts` (`id` integer PRIMARY KEY AUTOINCREMENT,`salt_a` text NOT NULL,`salt_b` text NOT NULL,CONSTRAINT `uni_jwt_salts_salt_a` UNIQUE (`salt_a`),CONSTRAINT `uni_jwt_salts_salt_b` UNIQUE (`salt_b`))
+
+2024/08/15 15:21:23 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:178
+[0m[33m[5.367ms] [34;1m[rows:1][0m INSERT INTO `users` (`email`,`password`,`disabled`,`uuid`) VALUES ("superuser@mail.com","089925fe07a4819e2f032fc4e7b6c1e191dc5d59dbf0bd6b7857a87ef1f7e5c6915ce7ca93f74b136417e362752f81ac5258f2f0be890eff3b7f7679e2cc1b7a",true,"019155fc-4d06-7545-802d-39f245382518") RETURNING `id`,`date_registred`
+
+2024/08/15 15:22:12 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:186
+[0m[33m[2.886ms] [34;1m[rows:1][0m INSERT INTO `apps` (`name`,`uuid`,`active`,`description`) VALUES ("Blue Admin","019155fd-0c66-7ef1-84bc-556c163821f9",true,"Blue Admin API Role Management System") RETURNING `id`
+
+2024/08/15 15:22:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:186
+[0m[33m[15.085ms] [34;1m[rows:1][0m INSERT INTO `roles` (`name`,`description`,`active`,`app_id`) VALUES ("Have Access to everything","superuser",true,NULL) RETURNING `id`
+
+2024/08/15 15:23:14 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:425
+[0m[33m[3.142ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE id = 1 ORDER BY `roles`.`id` LIMIT 1
+
+2024/08/15 15:23:14 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:436
+[0m[33m[0.294ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE id = 1 ORDER BY `apps`.`id` LIMIT 1
+
+2024/08/15 15:23:14 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:448
+[0m[33m[5.741ms] [34;1m[rows:1][0m INSERT INTO `roles` (`name`,`description`,`active`,`app_id`,`id`) VALUES ("Have Access to everything","superuser",true,1,1) ON CONFLICT (`id`) DO UPDATE SET `app_id`=`excluded`.`app_id` RETURNING `id`
+
+2024/08/15 15:23:29 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:417
+[0m[33m[2.695ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE `users`.`id` = 1
+
+2024/08/15 15:23:29 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:428
+[0m[33m[0.149ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 1
+
+2024/08/15 15:23:29 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:437
+[0m[33m[0.917ms] [34;1m[rows:0][0m INSERT INTO `users` (`email`,`password`,`disabled`,`uuid`,`id`,`date_registred`) VALUES ("superuser@mail.com","3e1c6ad52da3c588e0a3c176d83affbbf9a37b12753ca2cdd14a91f73e51ce7fb65c8221c8465470570e1efb6ba9109b6ecfeabf12893b916caf0b2c6f3d92d0",true,"019155fe-3750-7280-949b-e332a6845e96",1,"2024-08-15 12:21:23") ON CONFLICT DO NOTHING RETURNING `id`,`date_registred`
+
+2024/08/15 15:23:29 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:437
+[0m[33m[6.003ms] [34;1m[rows:1][0m INSERT INTO `user_roles` (`role_id`,`user_id`) VALUES (1,1) ON CONFLICT DO NOTHING
+
+2024/08/15 15:23:38 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[0.154ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`user_id` = 1
+
+2024/08/15 15:23:38 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[0.179ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 1
+
+2024/08/15 15:23:38 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[2.120ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE email = "superuser@mail.com" ORDER BY `users`.`id` LIMIT 1
+
+2024/08/15 15:23:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[0.161ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`user_id` = 1
+
+2024/08/15 15:23:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[0.189ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 1
+
+2024/08/15 15:23:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[3.595ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE email = "superuser@mail.com" ORDER BY `users`.`id` LIMIT 1
+
+2024/08/15 15:23:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:78
+[0m[33m[0.331ms] [34;1m[rows:0][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1
+
+2024/08/15 15:23:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:41
+[0m[33m[0.391ms] [34;1m[rows:0][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1
+
+2024/08/15 15:23:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:63
+[0m[33m[0.617ms] [34;1m[rows:1][0m INSERT INTO `jwt_salts` (`salt_a`,`salt_b`) VALUES ("k8m5zbFKDYRYzk2DtAM4VOv4D","kgSAvJibq07latJP5KZUsU2BP") RETURNING `id`
+
+2024/08/15 15:23:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:78
+[0m[33m[0.359ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1

@@ -24,6 +24,30 @@ definitions:
       total:
         type: integer
     type: object
+  controllers.LoginPost:
+    properties:
+      email:
+        maxLength: 32
+        minLength: 6
+        type: string
+      grant_type:
+        type: string
+      password:
+        type: string
+      token:
+        type: string
+    required:
+    - grant_type
+    type: object
+  controllers.TokenResponse:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+      token_type:
+        type: string
+    type: object
   models.AppGet:
     description: AppGet type information
     properties:
@@ -277,11 +301,11 @@ definitions:
   models.UserPost:
     description: UserPost type information
     properties:
-      date_registered:
-        type: string
       disabled:
         type: boolean
       email:
+        type: string
+      password:
         type: string
     type: object
 info:
@@ -470,6 +494,37 @@ paths:
       summary: Patch App
       tags:
       - Apps
+  /checklogin:
+    get:
+      consumes:
+      - application/json
+      description: CheckLogin
+      parameters:
+      - description: Login
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.LoginPost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/controllers.TokenResponse'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      summary: Auth
+      tags:
+      - Authentication
   /endpoint:
     get:
       consumes:
@@ -938,6 +993,41 @@ paths:
       summary: Add Role to Feature
       tags:
       - Roles
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: Login
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.LoginPost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/controllers.TokenResponse'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      summary: Auth
+      tags:
+      - Authentication
   /page:
     get:
       consumes:

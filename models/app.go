@@ -1,5 +1,10 @@
 package models
 
+import (
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+)
+
 // App Database model info
 // @Description App type information
 type App struct {
@@ -9,6 +14,13 @@ type App struct {
 	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
 	Description string `gorm:"not null; unique;" json:"description,omitempty"`
 	Roles       []Role `gorm:"association_foreignkey:AppID constraint:OnUpdate:SET NULL OnDelete:SET NULL" json:"roles,omitempty"`
+}
+
+func (app *App) BeforeCreate(tx *gorm.DB) (err error) {
+	gen, _ := uuid.NewV7()
+	id := gen.String()
+	app.UUID = id
+	return
 }
 
 // AppPost model info

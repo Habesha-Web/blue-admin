@@ -246,4 +246,8 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Patch("/page/:page_id", NextFunc).Name("patch_page").Patch("/page/:page_id", controllers.PatchPage)
 	gapp.Delete("/page/:page_id", NextFunc).Name("delete_page").Delete("/page/:page_id", controllers.DeletePage).Name("delete_page")
 
+	// adding endpoints
+	gapp.Get("/checklogin", NextFunc).Name("check_login").Get("/checklogin", controllers.CheckLogin).Name("check_login")
+	gapp.Post("/login", controllers.PostLogin).Name("login_route")
+
 }
