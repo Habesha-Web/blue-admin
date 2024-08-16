@@ -19,6 +19,7 @@ import (
 	"blue-admin.com/controllers"
 	"blue-admin.com/database"
 	_ "blue-admin.com/docs"
+	"blue-admin.com/messages"
 	"blue-admin.com/observe"
 	"github.com/ansrivas/fiberprometheus/v2"
 	"github.com/gofiber/contrib/otelfiber"
@@ -156,7 +157,7 @@ func fiber_run() {
 	app.Use(cors.New())
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
+		return c.SendString("Hello, World!\n")
 	})
 	// swagger docs
 	app.Get("/docs/*", swagger.HandlerDefault)
@@ -176,6 +177,14 @@ func fiber_run() {
 	go func(app *fiber.App) {
 		app.Listen("0.0.0.0:" + HTTP_PORT)
 	}(app)
+
+	// Starting App Conumers
+	// // running background consumer on specific quues
+	// the provided arument is the name of the queues
+	go func() {
+		messages.RabbitConsumer("email")
+		messages.RabbitConsumer("esb")
+	}()
 
 	c := make(chan os.Signal, 1)   // Create channel to signify a signal being sent
 	signal.Notify(c, os.Interrupt) // When an interrupt or termination signal is sent, notify the channel
@@ -249,5 +258,8 @@ func setupRoutes(gapp *fiber.Group) {
 	// adding endpoints
 	gapp.Get("/checklogin", NextFunc).Name("check_login").Get("/checklogin", controllers.CheckLogin).Name("check_login")
 	gapp.Post("/login", controllers.PostLogin).Name("login_route")
+
+	// adding email endpoint
+	gapp.Get("/email", NextFunc).Name("send_email").Get("/email", controllers.SendEmail).Name("send_email")
 
 }

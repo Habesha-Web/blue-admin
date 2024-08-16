@@ -1,4 +1,3 @@
-
 package observe
 
 import (
@@ -9,9 +8,9 @@ import (
 	"github.com/google/uuid"
 
 	"blue-admin.com/configs"
+	"github.com/gofiber/fiber/v2"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
-	"github.com/gofiber/fiber/v2"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/sdk/resource"
@@ -61,8 +60,7 @@ func InitTracer() *sdktrace.TracerProvider {
 	return tp
 }
 
-
-func FiberAppSpanner(ctx *fiber.Ctx, span_name string ) (context.Context, oteltrace.Span) {
+func FiberAppSpanner(ctx *fiber.Ctx, span_name string) (context.Context, oteltrace.Span) {
 	gen, _ := uuid.NewV7()
 	id := gen.String()
 
@@ -73,10 +71,7 @@ func FiberAppSpanner(ctx *fiber.Ctx, span_name string ) (context.Context, oteltr
 	return trace, span
 }
 
-
 type RouteTracer struct {
 	Tracer context.Context
 	Span   oteltrace.Span
 }
-
-

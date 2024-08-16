@@ -48,6 +48,21 @@ definitions:
       token_type:
         type: string
     type: object
+  messages.EmailMessage:
+    properties:
+      emails:
+        items:
+          type: string
+        type: array
+      message:
+        type: string
+      subject:
+        type: string
+    required:
+    - emails
+    - message
+    - subject
+    type: object
   models.AppGet:
     description: AppGet type information
     properties:
@@ -525,6 +540,39 @@ paths:
       summary: Auth
       tags:
       - Authentication
+  /email:
+    post:
+      consumes:
+      - application/json
+      description: Sending Email
+      parameters:
+      - description: messages
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/messages.EmailMessage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/messages.EmailMessage'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Send Email to
+      tags:
+      - Utilities
   /endpoint:
     get:
       consumes:

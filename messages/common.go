@@ -1,4 +1,3 @@
-
 package messages
 
 //  request object def for the consumer
@@ -10,4 +9,10 @@ type RequestObject struct {
 	Method   string
 	Body     string
 	Tp       map[string][]string
+}
+
+type EmailMessage struct {
+	Emails  []string `json:"emails" validate:"required"`
+	Subject string   `json:"subject" validate:"required"`
+	Message string   `json:"message" validate:"required"`
 }

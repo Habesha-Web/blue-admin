@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "./bluerpc";
+
+message BlueSalt {
+    string salt_a = 1;
+    string salt_b = 2;
+}
+
+message BlueAppID { 
+    string app_id = 1;
+}
+
+message BlueAppRoles {
+    repeated string roles =1;
+}
+
+service BlueService {
+    rpc GetSalt(BlueAppID) returns (BlueSalt) {}
+    rpc GetAppRoles(BlueAppID) returns (BlueAppRoles) {}
+}

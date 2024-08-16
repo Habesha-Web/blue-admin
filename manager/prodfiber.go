@@ -19,6 +19,7 @@ import (
 	"blue-admin.com/controllers"
 	"blue-admin.com/database"
 	_ "blue-admin.com/docs"
+	"blue-admin.com/messages"
 	"blue-admin.com/observe"
 	"github.com/ansrivas/fiberprometheus/v2"
 	"github.com/gofiber/contrib/otelfiber"
@@ -37,7 +38,7 @@ import (
 var (
 	BlueAPIRoleManagementSystemprodcli = &cobra.Command{
 		Use:   "prod",
-		Short: "Run Development server ",
+		Short: "Run Production server ",
 		Long:  `Run Blue API Role Management System development server`,
 		Run: func(cmd *cobra.Command, args []string) {
 			prod_run()
@@ -176,6 +177,14 @@ func prod_run() {
 	go func(app *fiber.App) {
 		app.Listen("0.0.0.0:" + HTTP_PORT)
 	}(app)
+
+	// Starting App Conumers
+	// // running background consumer on specific quues
+	// the provided arument is the name of the queues
+	go func() {
+		messages.RabbitConsumer("email")
+		messages.RabbitConsumer("esb")
+	}()
 
 	c := make(chan os.Signal, 1)   // Create channel to signify a signal being sent
 	signal.Notify(c, os.Interrupt) // When an interrupt or termination signal is sent, notify the channel
