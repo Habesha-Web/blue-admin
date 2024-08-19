@@ -14,6 +14,7 @@ import (
 	"os"
 	"os/signal"
 
+	"blue-admin.com/bluetasks"
 	"blue-admin.com/common"
 	"blue-admin.com/configs"
 	"blue-admin.com/controllers"
@@ -77,13 +78,28 @@ func dbsessioninjectionprod(ctx *fiber.Ctx) error {
 }
 
 func prod_run() {
+	// Loading Config files
 	configs.AppConfig.SetEnv("prod")
+
+	//  Startng Global otel tracer
 	tp := observe.InitTracer()
 	defer func() {
 		if err := tp.Shutdown(context.Background()); err != nil {
 			log.Printf("Error shutting down tracer provider: %v", err)
 		}
 	}()
+
+	//  starting scheduler files
+	schd := bluetasks.ScheduledTasks()
+	defer schd.Stop()
+
+	//  Creating App logger output file
+	//  App should not start with out clearing log scheduler, so panic here error response
+	log_file, err := bluetasks.Logfile()
+	if err != nil {
+		fmt.Printf("Error Creating Logfile %v\n", err)
+		panic(err)
+	}
 
 	// Basic App Configs
 	body_limit, _ := strconv.Atoi(configs.AppConfig.GetOrDefault("BODY_LIMIT", "70"))
@@ -140,7 +156,7 @@ func prod_run() {
 		Format:     "\n${cyan}-[${time}]-[${ip}] -${white}${pid} ${red}${status} ${blue}[${method}] ${white}-${path}\n [${body}]\n[${error}]\n[${resBody}]\n[${reqHeaders}]\n[${queryParams}]\n",
 		TimeFormat: "15:04:05",
 		TimeZone:   "Local",
-		Output:     os.Stdout,
+		Output:     log_file,
 	}))
 
 	// prometheus middleware concrete instance

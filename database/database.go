@@ -1,18 +1,17 @@
-
 package database
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"time"
-	"fmt"
 
+	"blue-admin.com/configs"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"blue-admin.com/configs"
 	"gorm.io/plugin/opentelemetry/tracing"
 )
 
@@ -20,26 +19,30 @@ var (
 	DBConn *gorm.DB
 )
 
-func GormLoggerFile() *os.File {
-
+func GormLoggerFile() (*os.File, error) {
+	//  Gorm logging file
 	gormLogFile, gerr := os.OpenFile("gormblue.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if gerr != nil {
 		log.Fatalf("error opening file: %v", gerr)
 	}
-	return gormLogFile
+	return gormLogFile, nil
 }
 
-func ReturnSession() (*gorm.DB,error) {
+func ReturnSession() (*gorm.DB, error) {
 
 	//  setting up database connection based on DB type
-
 	app_env := configs.AppConfig.Get("DB_TYPE")
+
 	//  This is file to output gorm logger on to
-	gormlogger := GormLoggerFile()
+	gormlogger, err := GormLoggerFile()
+	if err != nil {
+		fmt.Printf("unable to create log file: %v\n", err)
+		return nil, err
+	}
+
 	gormFileLogger := log.Logger{}
 	gormFileLogger.SetOutput(gormlogger)
 	gormFileLogger.Writer()
-
 
 	gormLogger := log.New(gormFileLogger.Writer(), "\r\n", log.LstdFlags|log.Ldate|log.Ltime|log.Lshortfile)
 	newLogger := logger.New(
@@ -64,14 +67,14 @@ func ReturnSession() (*gorm.DB,error) {
 
 		}), &gorm.Config{
 			DisableForeignKeyConstraintWhenMigrating: true,
-			Logger:                 newLogger,
-			SkipDefaultTransaction: true,
+			Logger:                                   newLogger,
+			SkipDefaultTransaction:                   true,
 		})
 		if err != nil {
 			panic(err)
 		}
 
-		sqlDB,err := db.DB()
+		sqlDB, err := db.DB()
 		if err != nil {
 			fmt.Printf("Error during connecting to database: %v\n", err)
 			return nil, err
@@ -84,11 +87,11 @@ func ReturnSession() (*gorm.DB,error) {
 		//  this is sqlite connection
 		db, _ := gorm.Open(sqlite.Open(configs.AppConfig.Get("SQLLITE_URI")), &gorm.Config{
 			DisableForeignKeyConstraintWhenMigrating: true,
-			Logger:                 newLogger,
-			SkipDefaultTransaction: true,
+			Logger:                                   newLogger,
+			SkipDefaultTransaction:                   true,
 		})
 
-		sqlDB,err := db.DB()
+		sqlDB, err := db.DB()
 		if err != nil {
 			fmt.Printf("Error during connecting to database: %v\n", err)
 			return nil, err
@@ -106,11 +109,11 @@ func ReturnSession() (*gorm.DB,error) {
 			SkipInitializeWithVersion: false,                              // auto configure based on currently MySQL version
 		}), &gorm.Config{
 			DisableForeignKeyConstraintWhenMigrating: true,
-			Logger:                 newLogger,
-			SkipDefaultTransaction: true,
+			Logger:                                   newLogger,
+			SkipDefaultTransaction:                   true,
 		})
 
-		sqlDB,err := db.DB()
+		sqlDB, err := db.DB()
 		if err != nil {
 			fmt.Printf("Error during connecting to database: %v\n", err)
 			return nil, err
@@ -122,11 +125,11 @@ func ReturnSession() (*gorm.DB,error) {
 		//  this is sqlite connection
 		db, _ := gorm.Open(sqlite.Open("goframe-2.db"), &gorm.Config{
 			DisableForeignKeyConstraintWhenMigrating: true,
-			Logger:                 newLogger,
-			SkipDefaultTransaction: true,
+			Logger:                                   newLogger,
+			SkipDefaultTransaction:                   true,
 		})
 
-		sqlDB, err:= db.DB()
+		sqlDB, err := db.DB()
 		if err != nil {
 			fmt.Printf("Error during connecting to database: %v\n", err)
 			return nil, err
@@ -138,11 +141,11 @@ func ReturnSession() (*gorm.DB,error) {
 		//  this is sqlite connection
 		db, _ := gorm.Open(sqlite.Open(configs.AppConfig.Get("SQLITE_URI")), &gorm.Config{
 			DisableForeignKeyConstraintWhenMigrating: true,
-			Logger:                 newLogger,
-			SkipDefaultTransaction: true,
+			Logger:                                   newLogger,
+			SkipDefaultTransaction:                   true,
 		})
 
-		sqlDB, err:= db.DB()
+		sqlDB, err := db.DB()
 		if err != nil {
 			fmt.Printf("Error during connecting to database: %v\n", err)
 			return nil, err
@@ -154,7 +157,6 @@ func ReturnSession() (*gorm.DB,error) {
 	}
 
 	DBSession.Use(tracing.NewPlugin())
-	return DBSession,nil
+	return DBSession, nil
 
 }
-
