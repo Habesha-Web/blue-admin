@@ -26,12 +26,11 @@ type FeaturePost struct {
 // FeatureGet model info
 // @Description FeatureGet type information
 type FeatureGet struct {
-	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
-	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
-	Description string `gorm:"not null; unique;" json:"description,omitempty"`
-	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
-
-	Endpoints []Endpoint `gorm:"association_foreignkey:FeatureID constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"endpoints,omitempty"`
+	ID          uint       `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
+	Name        string     `gorm:"not null; unique;" json:"name,omitempty"`
+	Description string     `gorm:"not null; unique;" json:"description,omitempty"`
+	Active      bool       `gorm:"default:true; constraint:not null;" json:"active"`
+	Endpoints   []Endpoint `gorm:"association_foreignkey:FeatureID constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"endpoints,omitempty"`
 }
 
 // FeaturePut model info

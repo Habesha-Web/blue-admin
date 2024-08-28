@@ -1,4 +1,3 @@
-
 package controllers
 
 import (
@@ -6,14 +5,14 @@ import (
 	"net/http"
 	"strconv"
 
+	"blue-admin.com/common"
+	"blue-admin.com/models"
+	"blue-admin.com/observe"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/mitchellh/mapstructure"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
-	"blue-admin.com/common"
-	"blue-admin.com/models"
-	"blue-admin.com/observe"
 )
 
 // GetFeatureis a function to get a Features by ID
@@ -35,7 +34,6 @@ func GetFeatures(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	//  Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -50,7 +48,6 @@ func GetFeatures(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	//  querying result with pagination using gorm function
 	result, err := common.PaginationPureModel(db, models.Feature{}, []models.Feature{}, uint(Page), uint(Limit), tracer.Tracer)
@@ -83,7 +80,6 @@ func GetFeatureByID(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	//  Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -96,7 +92,6 @@ func GetFeatureByID(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	// Preparing and querying database using Gorm
 	var features_get models.FeatureGet
@@ -145,10 +140,8 @@ func PostFeature(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	// Getting Database Connection
 	db, _ := contx.Locals("db").(*gorm.DB)
-
 
 	// validator initialization
 	validate := validator.New()
@@ -221,7 +214,6 @@ func PatchFeature(contx *fiber.Ctx) error {
 	// Starting tracer context and tracer
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
-
 
 	// Get database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
@@ -319,7 +311,6 @@ func DeleteFeature(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	// Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -335,7 +326,6 @@ func DeleteFeature(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	// perform delete operation if the object exists
 	tx := db.WithContext(tracer.Tracer).Begin()
@@ -382,13 +372,6 @@ func DeleteFeature(contx *fiber.Ctx) error {
 // Relationship Based Endpoints
 // ################################################################
 
-
-
-
-
-
-
-
 // Add Feature Endpoint
 // @Summary Add Feature to Endpoint
 // @Description Add Feature to Endpoint
@@ -405,7 +388,6 @@ func AddEndpointFeatures(contx *fiber.Ctx) error {
 	// Starting tracer context and tracer
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
-
 
 	// connect
 	db, _ := contx.Locals("db").(*gorm.DB)
@@ -480,7 +462,6 @@ func DeleteEndpointFeatures(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	//  database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -535,8 +516,95 @@ func DeleteEndpointFeatures(contx *fiber.Ctx) error {
 	})
 }
 
+type FeatureDropDown struct {
+	ID   uint   `validate:"required" json:"id"`
+	Name string `validate:"required" json:"name"`
+}
 
+// Get Feature Dropdown only active roles
+// @Summary Get FeatureDropDown
+// @Description Get FeatureDropDown
+// @Tags Feature
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Success 200 {object} common.ResponseHTTP{data=[]FeatureDropDown}
+// @Failure 404 {object} common.ResponseHTTP{}
+// @Router /featuredrop [get]
+func GetDropFeatures(contx *fiber.Ctx) error {
+	//  Getting tracer context
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
 
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
 
+	var features_drop []FeatureDropDown
+	if res := db.WithContext(tracer.Tracer).Model(&models.Feature{}).Where("active = ?", true).Find(&features_drop); res.Error != nil {
+		return contx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
 
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success got one role.",
+		Data:    &features_drop,
+	})
+}
 
+// Activate/Deactivate Feature to data
+// @Summary Activate/Deactivate Feature
+// @Description Activate/Deactivate Feature
+// @Tags Feature
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param feature_id path int true "Feature ID"
+// @Param active query bool true "Active"
+// @Success 200 {object} common.ResponseHTTP{data=models.FeaturePost}
+// @Failure 400 {object} common.ResponseHTTP{}
+// @Router /features/{feature_id} [put]
+func ActivateDeactivateFeature(contx *fiber.Ctx) error {
+
+	//  Getting tracer context
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	// validate path params
+	feature_id, err := strconv.Atoi(contx.Params("feature_id"))
+	if err != nil {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+	}
+	//  gettng query parm
+	active := contx.QueryBool("active")
+	// startng update transaction
+	var feature models.Feature
+	feature.ID = uint(feature_id)
+	tx := db.WithContext(tracer.Tracer).Begin()
+	if err := db.WithContext(tracer.Tracer).Model(&feature).Update("active", active).Error; err != nil {
+		tx.Rollback()
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Record not Found",
+			Data:    err,
+		})
+	}
+	tx.Commit()
+	feature.Active = active
+	// return value if transaction is sucessfull
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success Updating a feature.",
+		Data:    feature,
+	})
+}

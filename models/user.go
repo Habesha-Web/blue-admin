@@ -58,8 +58,7 @@ type UserPut struct {
 // UserPatch model info
 // @Description UserPatch type information
 type UserPatch struct {
-	Email string `gorm:"not null; unique;" json:"email,omitempty"`
-
+	Email         string    `gorm:"not null; unique;" json:"email,omitempty"`
 	DateRegistred time.Time `gorm:"constraint:not null; default:current_timestamp;" json:"date_registered,omitempty"`
 	Disabled      bool      `gorm:"default:true; constraint:not null;" json:"disabled"`
 }

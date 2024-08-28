@@ -26,8 +26,7 @@ func (app *App) BeforeCreate(tx *gorm.DB) (err error) {
 // AppPost model info
 // @Description AppPost type information
 type AppPost struct {
-	Name string `gorm:"not null; unique;" json:"name,omitempty"`
-
+	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
 	Description string `gorm:"not null; unique;" json:"description,omitempty"`
 }
 
@@ -55,9 +54,8 @@ type AppPut struct {
 // AppPatch model info
 // @Description AppPatch type information
 type AppPatch struct {
-	ID   uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
-	Name string `gorm:"not null; unique;" json:"name,omitempty"`
-
+	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
+	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
 	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
 	Description string `gorm:"not null; unique;" json:"description,omitempty"`
 }

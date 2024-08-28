@@ -24,6 +24,49 @@ definitions:
       total:
         type: integer
     type: object
+  controllers.AppEndpointsMeta:
+    additionalProperties:
+      items:
+        type: string
+      type: array
+    type: object
+  controllers.AppFeaturesMeta:
+    additionalProperties:
+      items:
+        type: string
+      type: array
+    type: object
+  controllers.AppMeta:
+    properties:
+      name:
+        type: string
+      roles:
+        items:
+          $ref: '#/definitions/controllers.roles'
+        type: array
+      uuid:
+        type: string
+    type: object
+  controllers.EndPointDropDown:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    required:
+    - id
+    - name
+    type: object
+  controllers.FeatureDropDown:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    required:
+    - id
+    - name
+    type: object
   controllers.LoginPost:
     properties:
       email:
@@ -39,6 +82,16 @@ definitions:
     required:
     - grant_type
     type: object
+  controllers.RoleDropDown:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    required:
+    - id
+    - name
+    type: object
   controllers.TokenResponse:
     properties:
       access_token:
@@ -46,6 +99,44 @@ definitions:
       refresh_token:
         type: string
       token_type:
+        type: string
+    type: object
+  controllers.UserPassword:
+    properties:
+      email:
+        example: someone@domain.com
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  controllers.endpoints:
+    properties:
+      method:
+        type: string
+      name:
+        type: string
+      route_path:
+        type: string
+    type: object
+  controllers.features:
+    properties:
+      endpoints:
+        items:
+          $ref: '#/definitions/controllers.endpoints'
+        type: array
+      name:
+        type: string
+    type: object
+  controllers.roles:
+    properties:
+      features:
+        items:
+          $ref: '#/definitions/controllers.features'
+        type: array
+      name:
         type: string
     type: object
   messages.EmailMessage:
@@ -540,6 +631,226 @@ paths:
       summary: Auth
       tags:
       - Authentication
+  /dashboard:
+    get:
+      consumes:
+      - application/json
+      description: Get App summary by App ID
+      parameters:
+      - description: App ID
+        in: query
+        name: app_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/controllers.AppMeta'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get Roles Grouped By APP ID
+      tags:
+      - Dashboard Meta
+  /dashboardends:
+    get:
+      consumes:
+      - application/json
+      description: Get App Endpoints summary
+      parameters:
+      - description: App ID
+        in: query
+        name: app_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/controllers.AppEndpointsMeta'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App Endpoints Grouped By Role
+      tags:
+      - Dashboard Meta
+  /dashboardfeat:
+    get:
+      consumes:
+      - application/json
+      description: Get App Featuers summary
+      parameters:
+      - description: App ID
+        in: query
+        name: app_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/controllers.AppFeaturesMeta'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App Features Grouped By Role
+      tags:
+      - Dashboard Meta
+  /dashboardpages:
+    get:
+      consumes:
+      - application/json
+      description: Get App Pages summary
+      parameters:
+      - description: App ID
+        in: query
+        name: app_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/controllers.AppFeaturesMeta'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App Pages
+      tags:
+      - Dashboard Meta
+  /dashboardroles:
+    get:
+      consumes:
+      - application/json
+      description: Get App Roles summary
+      parameters:
+      - description: App ID
+        in: query
+        name: app_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/controllers.AppFeaturesMeta'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App Roles
+      tags:
+      - Dashboard Meta
+  /dashboardrolespage:
+    get:
+      consumes:
+      - application/json
+      description: Get Roles by page by ID
+      parameters:
+      - description: App ID
+        in: query
+        name: app_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.PageGet'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get Page Roles for Secfic App by ID
+      tags:
+      - Dashboard Meta
+  /droproles:
+    get:
+      consumes:
+      - application/json
+      description: Get RoleDropDown
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/controllers.RoleDropDown'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get RoleDropDown
+      tags:
+      - Role
   /email:
     post:
       consumes:
@@ -752,6 +1063,34 @@ paths:
       summary: Patch Endpoint
       tags:
       - Endpoints
+  /endpointdrop:
+    get:
+      consumes:
+      - application/json
+      description: Get EndPointDropDown
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/controllers.EndPointDropDown'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get EndPointDropDown
+      tags:
+      - EndPoints
   /endpointfeature/{endpoint_id}:
     delete:
       consumes:
@@ -986,6 +1325,34 @@ paths:
       summary: Patch Feature
       tags:
       - Features
+  /featuredrop:
+    get:
+      consumes:
+      - application/json
+      description: Get FeatureDropDown
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/controllers.FeatureDropDown'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get FeatureDropDown
+      tags:
+      - Feature
   /featurerole/{feature_id}:
     delete:
       consumes:
@@ -1041,6 +1408,43 @@ paths:
       summary: Add Role to Feature
       tags:
       - Roles
+  /features/{feature_id}:
+    put:
+      consumes:
+      - application/json
+      description: Activate/Deactivate Feature
+      parameters:
+      - description: Feature ID
+        in: path
+        name: feature_id
+        required: true
+        type: integer
+      - description: Active
+        in: query
+        name: active
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.FeaturePost'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Activate/Deactivate Feature
+      tags:
+      - Feature
   /login:
     post:
       consumes:
@@ -1434,6 +1838,40 @@ paths:
       summary: Patch Role
       tags:
       - Roles
+  /role_endpoints:
+    get:
+      consumes:
+      - application/json
+      description: Get role EndPoints by ID
+      parameters:
+      - description: Role ID
+        in: query
+        name: role_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.EndpointGet'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get EndPoints Role by ID
+      tags:
+      - Role
   /roleapp/{role_id}:
     delete:
       consumes:
@@ -1489,6 +1927,43 @@ paths:
       summary: Add App to Role
       tags:
       - Apps
+  /roles/{role_id}:
+    put:
+      consumes:
+      - application/json
+      description: Activate/Deactivate
+      parameters:
+      - description: Role ID
+        in: path
+        name: role_id
+        required: true
+        type: integer
+      - description: Active
+        in: query
+        name: active
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.RolePost'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Activate/Deactivate
+      tags:
+      - Role
   /roleuser/{role_id}/{user_id}:
     delete:
       consumes:
@@ -1804,6 +2279,72 @@ paths:
       summary: Add Role to User
       tags:
       - UserRoles
+  /users:
+    put:
+      consumes:
+      - application/json
+      description: Put User
+      parameters:
+      - description: Password User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.UserPassword'
+      - description: Reset Password
+        in: query
+        name: reset
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.UserGet'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Put User
+      tags:
+      - Users
+  /users/{user_id}:
+    put:
+      consumes:
+      - application/json
+      description: Activate/Deactivate User
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: Disabled
+        in: query
+        name: status
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Activate/Deactivate User
+      tags:
+      - Users
 securityDefinitions:
   ApiKeyAuth:
     description: Description for what is this security definition being used

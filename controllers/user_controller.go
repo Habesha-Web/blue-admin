@@ -8,6 +8,7 @@ import (
 	"blue-admin.com/common"
 	"blue-admin.com/models"
 	"blue-admin.com/observe"
+	"blue-admin.com/utils"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/mitchellh/mapstructure"
@@ -531,6 +532,159 @@ func DeleteRoleUsers(contx *fiber.Ctx) error {
 	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
 		Success: true,
 		Message: "Success Removing a user from role.",
+		Data:    user,
+	})
+}
+
+// Activate/Deactivate User
+// @Summary Activate/Deactivate User
+// @Description Activate/Deactivate User
+// @Tags Users
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param user_id path int true "User ID"
+// @Param status query bool true "Disabled"
+// @Failure 400 {object} common.ResponseHTTP{}
+// @Router /users/{user_id} [put]
+func ActivateDeactivateUser(contx *fiber.Ctx) error {
+	//  Getting tracer context
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	// validate path params
+	user_id, err := strconv.Atoi(contx.Params("user_id"))
+	if err != nil {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+	}
+
+	// Getting Query Parameter
+	status := contx.QueryBool("status")
+
+	// Fetching User
+	var user models.User
+	user.ID = uint(user_id)
+
+	//Updating Didabled Status
+	tx := db.WithContext(tracer.Tracer).Begin()
+	if err := db.WithContext(tracer.Tracer).Model(&user).Update("disabled", status).Error; err != nil {
+		tx.Rollback()
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Record not Found",
+			Data:    err.Error(),
+		})
+	}
+	tx.Commit()
+	var response_user models.UserGet
+	mapstructure.Decode(user, &response_user)
+	response_user.Disabled = status
+	// return value if transaction is sucessfull
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success Updating a User.",
+		Data:    response_user,
+	})
+}
+
+type UserPassword struct {
+	Email    string `validate:"required" json:"email" example:"someone@domain.com"`
+	Password string `validate:"required" json:"password"`
+}
+
+// Update User Password Details
+// @Summary Put User
+// @Description Put User
+// @Tags Users
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param user body UserPassword true "Password User"
+// @Param reset query bool true "Reset Password"
+// @Success 200 {object} common.ResponseHTTP{data=models.UserGet}
+// @Failure 400 {object} common.ResponseHTTP{}
+// @Router /users 	[put]
+func ChangePassword(contx *fiber.Ctx) error {
+	//  Getting tracer context
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	validate := validator.New()
+	// get query parms
+	reset_password := contx.QueryBool("reset")
+
+	// first parsing
+	patch_User := new(UserPassword)
+	if err := contx.BodyParser(&patch_User); err != nil {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+	}
+	// then validating
+	if err := validate.Struct(patch_User); err != nil {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+	}
+
+	// startng update transaction
+	var user_q models.User
+	if err := db.WithContext(tracer.Tracer).Model(&user_q).Where("email =?", patch_User.Email).Find(&user_q).Error; err != nil {
+
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Record not Found",
+			Data:    err,
+		})
+	}
+
+	var user models.UserGet
+
+	if !reset_password {
+		tx := db.WithContext(tracer.Tracer).Begin()
+		patch_User.Password = utils.HashFunc(patch_User.Password)
+		if err := db.WithContext(tracer.Tracer).Model(&user_q).UpdateColumns(*patch_User).Error; err != nil {
+			tx.Rollback()
+			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "Record not Found",
+				Data:    err,
+			})
+		}
+		tx.Commit()
+	} else {
+		tx := db.WithContext(tracer.Tracer).Begin()
+		patch_User.Password = utils.HashFunc("default@123")
+		if err := db.WithContext(tracer.Tracer).Model(&user_q).UpdateColumns(*patch_User).Error; err != nil {
+			tx.Rollback()
+			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "Record not Found",
+				Data:    err,
+			})
+		}
+		tx.Commit()
+	}
+
+	mapstructure.Decode(user_q, &user)
+	// return value if transaction is sucessfull
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success Updating a Password.",
 		Data:    user,
 	})
 }

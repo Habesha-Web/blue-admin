@@ -227,6 +227,9 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Post("/role", NextFunc).Name("post_role").Post("/role", controllers.PostRole)
 	gapp.Patch("/role/:role_id", NextFunc).Name("patch_role").Patch("/role/:role_id", controllers.PatchRole)
 	gapp.Delete("/role/:role_id", NextFunc).Name("delete_role").Delete("/role/:role_id", controllers.DeleteRole).Name("delete_role")
+	gapp.Get("/droproles", NextFunc).Name("drop_roles").Get("/droproles", controllers.GetDropDownRoles)
+	gapp.Put("/roles/:role_id", NextFunc).Name("activate_deactivate_role").Put("/roles/:role_id", controllers.ActivateDeactivateRoles)
+	gapp.Get("/role_endpoints", NextFunc).Name("roles_endpoints").Get("/role_endpoints", controllers.GetRoleEndpointsID)
 
 	gapp.Post("/userrole/:user_id/:role_id", NextFunc).Name("add_userrole").Post("/userrole/:user_id/:role_id", controllers.AddUserRoles)
 	gapp.Delete("/userrole/:user_id/:role_id", NextFunc).Name("delete_userrole").Delete("/userrole/:user_id/:role_id", controllers.DeleteUserRoles)
@@ -247,6 +250,8 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Post("/user", NextFunc).Name("post_user").Post("/user", controllers.PostUser)
 	gapp.Patch("/user/:user_id", NextFunc).Name("patch_user").Patch("/user/:user_id", controllers.PatchUser)
 	gapp.Delete("/user/:user_id", NextFunc).Name("delete_user").Delete("/user/:user_id", controllers.DeleteUser).Name("delete_user")
+	gapp.Put("/users/:user_id", NextFunc).Name("activate_deactivate_user").Put("/users/:user_id", controllers.ActivateDeactivateUser)
+	gapp.Put("/users", NextFunc).Name("change_reset_password").Put("/users", controllers.ChangePassword)
 
 	gapp.Post("/roleuser/:role_id/:user_id", NextFunc).Name("add_roleuser").Post("/roleuser/:role_id/:user_id", controllers.AddRoleUsers)
 	gapp.Delete("/roleuser/:role_id/:user_id", NextFunc).Name("delete_roleuser").Delete("/roleuser/:role_id/:user_id", controllers.DeleteRoleUsers)
@@ -256,6 +261,8 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Post("/feature", NextFunc).Name("post_feature").Post("/feature", controllers.PostFeature)
 	gapp.Patch("/feature/:feature_id", NextFunc).Name("patch_feature").Patch("/feature/:feature_id", controllers.PatchFeature)
 	gapp.Delete("/feature/:feature_id", NextFunc).Name("delete_feature").Delete("/feature/:feature_id", controllers.DeleteFeature).Name("delete_feature")
+	gapp.Put("/features/:feature_id", NextFunc).Name("activate_deactivate_features").Put("/features/:feature_id", controllers.ActivateDeactivateFeature)
+	gapp.Get("/featuredrop", NextFunc).Name("drop_features").Get("/featuredrop", controllers.GetDropFeatures)
 
 	gapp.Patch("/endpointfeature/:endpoint_id", NextFunc).Name("add_endpointfeature").Patch("/endpointfeature/:endpoint_id", controllers.AddEndpointFeatures)
 	gapp.Delete("/endpointfeature/:endpoint_id", NextFunc).Name("delete_endpointfeature").Delete("/endpointfeature/:endpoint_id", controllers.DeleteEndpointFeatures)
@@ -278,5 +285,13 @@ func setupRoutes(gapp *fiber.Group) {
 
 	// adding email endpoint
 	gapp.Get("/email", NextFunc).Name("send_email").Get("/email", controllers.SendEmail).Name("send_email")
+
+	// dashboard
+	gapp.Get("/dashboard", NextFunc).Name("dashboard_one").Get("/dashboard", controllers.GetDashBoardGrouped)
+	gapp.Get("/dashboardends", NextFunc).Name("dashboard_two").Get("/dashboardends", controllers.GetAppEndpoitnsGroupedBy)
+	gapp.Get("/dashboardfeat", NextFunc).Name("dashboard_three").Get("/dashboardfeat", controllers.GetAppFeaturesGroupedBy)
+	gapp.Get("/dashboardpages", NextFunc).Name("dashboard_four").Get("/dashboardpages", controllers.GetAppPages)
+	gapp.Get("/dashboardroles", NextFunc).Name("dashboard_five").Get("/dashboardroles", controllers.GetAppRoles)
+	gapp.Get("/dashboardrolespage", NextFunc).Name("dashboard_six").Get("/dashboardrolespage", controllers.GetAppPagesInRoles)
 
 }

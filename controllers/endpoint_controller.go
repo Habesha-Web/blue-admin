@@ -1,4 +1,3 @@
-
 package controllers
 
 import (
@@ -6,14 +5,14 @@ import (
 	"net/http"
 	"strconv"
 
+	"blue-admin.com/common"
+	"blue-admin.com/models"
+	"blue-admin.com/observe"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/mitchellh/mapstructure"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
-	"blue-admin.com/common"
-	"blue-admin.com/models"
-	"blue-admin.com/observe"
 )
 
 // GetEndpointis a function to get a Endpoints by ID
@@ -35,7 +34,6 @@ func GetEndpoints(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	//  Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -50,7 +48,6 @@ func GetEndpoints(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	//  querying result with pagination using gorm function
 	result, err := common.PaginationPureModel(db, models.Endpoint{}, []models.Endpoint{}, uint(Page), uint(Limit), tracer.Tracer)
@@ -83,7 +80,6 @@ func GetEndpointByID(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	//  Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -96,7 +92,6 @@ func GetEndpointByID(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	// Preparing and querying database using Gorm
 	var endpoints_get models.EndpointGet
@@ -145,10 +140,8 @@ func PostEndpoint(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	// Getting Database Connection
 	db, _ := contx.Locals("db").(*gorm.DB)
-
 
 	// validator initialization
 	validate := validator.New()
@@ -221,7 +214,6 @@ func PatchEndpoint(contx *fiber.Ctx) error {
 	// Starting tracer context and tracer
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
-
 
 	// Get database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
@@ -319,7 +311,6 @@ func DeleteEndpoint(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	// Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -335,7 +326,6 @@ func DeleteEndpoint(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	// perform delete operation if the object exists
 	tx := db.WithContext(tracer.Tracer).Begin()
@@ -382,8 +372,41 @@ func DeleteEndpoint(contx *fiber.Ctx) error {
 // Relationship Based Endpoints
 // ################################################################
 
+type EndPointDropDown struct {
+	ID   uint   `validate:"required" json:"id"`
+	Name string `validate:"required" json:"name"`
+}
 
+// Get EndPoint Dropdown only active roles
+// @Summary Get EndPointDropDown
+// @Description Get EndPointDropDown
+// @Tags EndPoints
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Success 200 {object} common.ResponseHTTP{data=[]EndPointDropDown}
+// @Failure 404 {object} common.ResponseHTTP{}
+// @Router /endpointdrop [get]
+func GetDropEndPoints(contx *fiber.Ctx) error {
+	//  Getting tracer context
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
 
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
 
+	var features_drop []EndPointDropDown
+	if res := db.WithContext(tracer.Tracer).Model(&models.Endpoint{}).Find(&features_drop); res.Error != nil {
+		return contx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
 
-
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success got one role.",
+		Data:    &features_drop,
+	})
+}

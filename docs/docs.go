@@ -367,6 +367,385 @@ const docTemplate = `{
                 }
             }
         },
+        "/dashboard": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get App summary by App ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Dashboard Meta"
+                ],
+                "summary": "Get Roles Grouped By APP ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App ID",
+                        "name": "app_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/controllers.AppMeta"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboardends": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get App Endpoints summary",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Dashboard Meta"
+                ],
+                "summary": "Get App Endpoints Grouped By Role",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App ID",
+                        "name": "app_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/controllers.AppEndpointsMeta"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboardfeat": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get App Featuers summary",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Dashboard Meta"
+                ],
+                "summary": "Get App Features Grouped By Role",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App ID",
+                        "name": "app_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/controllers.AppFeaturesMeta"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboardpages": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get App Pages summary",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Dashboard Meta"
+                ],
+                "summary": "Get App Pages",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App ID",
+                        "name": "app_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/controllers.AppFeaturesMeta"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboardroles": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get App Roles summary",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Dashboard Meta"
+                ],
+                "summary": "Get App Roles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App ID",
+                        "name": "app_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/controllers.AppFeaturesMeta"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/dashboardrolespage": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get Roles by page by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Dashboard Meta"
+                ],
+                "summary": "Get Page Roles for Secfic App by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App ID",
+                        "name": "app_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.PageGet"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/droproles": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get RoleDropDown",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Get RoleDropDown",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/controllers.RoleDropDown"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
         "/email": {
             "post": {
                 "security": [
@@ -716,6 +1095,55 @@ const docTemplate = `{
                     },
                     "500": {
                         "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/endpointdrop": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get EndPointDropDown",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "EndPoints"
+                ],
+                "summary": "Get EndPointDropDown",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/controllers.EndPointDropDown"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/common.ResponseHTTP"
                         }
@@ -1108,6 +1536,55 @@ const docTemplate = `{
                 }
             }
         },
+        "/featuredrop": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get FeatureDropDown",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Feature"
+                ],
+                "summary": "Get FeatureDropDown",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/controllers.FeatureDropDown"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
         "/featurerole/{feature_id}": {
             "delete": {
                 "security": [
@@ -1185,6 +1662,68 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/features/{feature_id}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Activate/Deactivate Feature",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Feature"
+                ],
+                "summary": "Activate/Deactivate Feature",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Feature ID",
+                        "name": "feature_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Active",
+                        "name": "active",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.FeaturePost"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
@@ -1850,6 +2389,64 @@ const docTemplate = `{
                 }
             }
         },
+        "/role_endpoints": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get role EndPoints by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Get EndPoints Role by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Role ID",
+                        "name": "role_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/models.EndpointGet"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
         "/roleapp/{role_id}": {
             "delete": {
                 "security": [
@@ -1927,6 +2524,68 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/roles/{role_id}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Activate/Deactivate",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Activate/Deactivate",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Role ID",
+                        "name": "role_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Active",
+                        "name": "active",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.RolePost"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
@@ -2454,6 +3113,114 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/users": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Put User",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Put User",
+                "parameters": [
+                    {
+                        "description": "Password User",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.UserPassword"
+                        }
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Reset Password",
+                        "name": "reset",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.UserGet"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{user_id}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Activate/Deactivate User",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Activate/Deactivate User",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Disabled",
+                        "name": "status",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -2493,6 +3260,71 @@ const docTemplate = `{
                 }
             }
         },
+        "controllers.AppEndpointsMeta": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.AppFeaturesMeta": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.AppMeta": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/controllers.roles"
+                    }
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.EndPointDropDown": {
+            "type": "object",
+            "required": [
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.FeatureDropDown": {
+            "type": "object",
+            "required": [
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
         "controllers.LoginPost": {
             "type": "object",
             "required": [
@@ -2515,6 +3347,21 @@ const docTemplate = `{
                 }
             }
         },
+        "controllers.RoleDropDown": {
+            "type": "object",
+            "required": [
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
         "controllers.TokenResponse": {
             "type": "object",
             "properties": {
@@ -2525,6 +3372,64 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "token_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.UserPassword": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "someone@domain.com"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.endpoints": {
+            "type": "object",
+            "properties": {
+                "method": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "route_path": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.features": {
+            "type": "object",
+            "properties": {
+                "endpoints": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/controllers.endpoints"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.roles": {
+            "type": "object",
+            "properties": {
+                "features": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/controllers.features"
+                    }
+                },
+                "name": {
                     "type": "string"
                 }
             }

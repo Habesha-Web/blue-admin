@@ -1,5 +1,5 @@
 
 configs/*.env
-*.logs
+*.log
 tests/.env
 tests/.test.env

@@ -1,4 +1,3 @@
-
 package controllers
 
 import (
@@ -6,14 +5,14 @@ import (
 	"net/http"
 	"strconv"
 
+	"blue-admin.com/common"
+	"blue-admin.com/models"
+	"blue-admin.com/observe"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/mitchellh/mapstructure"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
-	"blue-admin.com/common"
-	"blue-admin.com/models"
-	"blue-admin.com/observe"
 )
 
 // GetAppis a function to get a Apps by ID
@@ -383,12 +382,6 @@ func DeleteApp(contx *fiber.Ctx) error {
 // ################################################################
 
 
-
-
-
-
-
-
 // Add App Role
 // @Summary Add App to Role
 // @Description Add App to Role
@@ -534,9 +527,3 @@ func DeleteRoleApps(contx *fiber.Ctx) error {
 		Data:    app,
 	})
 }
-
-
-
-
-
-

@@ -13,8 +13,7 @@ type Page struct {
 // PagePost model info
 // @Description PagePost type information
 type PagePost struct {
-	Name string `gorm:"not null; unique;" json:"name,omitempty"`
-
+	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
 	Description string `gorm:"not null; unique;" json:"description,omitempty"`
 }
 
