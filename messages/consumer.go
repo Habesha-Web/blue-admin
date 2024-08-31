@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"math/rand"
 	"net/http"
 	"net/http/httptrace"
@@ -24,18 +23,18 @@ import (
 
 type sample_message struct{}
 
-func RabbitConsumer(queue_name string) {
+func RabbitConsumer(queue_name string, env string) {
 
 	// Loading configuration file
-	configs.AppConfig.SetEnv("dev")
+	configs.AppConfig.SetEnv(env)
 
 	//  tracer
-	tp := observe.InitTracer()
-	defer func() {
-		if err := tp.Shutdown(context.Background()); err != nil {
-			log.Printf("Error shutting down tracer provider: %v", err)
-		}
-	}()
+	// tp := observe.InitTracer()
+	// defer func() {
+	// 	if err := tp.Shutdown(context.Background()); err != nil {
+	// 		log.Printf("Error shutting down tracer provider: %v", err)
+	// 	}
+	// }()
 
 	// Getting app connection and channel
 	connection, channel, err := QeueConnect(queue_name)

@@ -15,7 +15,7 @@ import (
 
 // Login Request for Endpoint
 type LoginPost struct {
-	GrantType string `json:"grant_type" validate:"required"`
+	GrantType string `json:"grant_type" validate:"required" example:"authorization_code"`
 	Email     string `json:"email" validate:"email,min=6,max=32"`
 	Password  string `json:"password"`
 	Token     string `json:"token"`

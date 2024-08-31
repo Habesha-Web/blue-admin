@@ -10,17 +10,17 @@ import (
 
 func InitDatabase() {
 	configs.NewEnvFile("./configs")
-	database, err  := database.ReturnSession()
+	database, err := database.ReturnSession()
 	fmt.Println("Connection Opened to Database")
 	if err == nil {
 		if err := database.AutoMigrate(
-			&Role{},
-			&App{},
-			&User{},
-			&Feature{},
+			// &Role{},
+			// &App{},
+			// &User{},
+			// &Feature{},
 			&Endpoint{},
-			&Page{},
-			&JWTSalt{},
+			// &Page{},
+			// &JWTSalt{},
 		); err != nil {
 			log.Fatalln(err)
 		}
@@ -51,7 +51,6 @@ func CleanDatabase() {
 			&Page{},
 
 			&JWTSalt{},
-
 		)
 
 		fmt.Println("Database Cleaned")

@@ -1,4 +1,3 @@
-
 package controllers
 
 import (
@@ -6,14 +5,14 @@ import (
 	"net/http"
 	"strconv"
 
+	"blue-admin.com/common"
+	"blue-admin.com/models"
+	"blue-admin.com/observe"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/mitchellh/mapstructure"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
-	"blue-admin.com/common"
-	"blue-admin.com/models"
-	"blue-admin.com/observe"
 )
 
 // GetPageis a function to get a Pages by ID
@@ -35,7 +34,6 @@ func GetPages(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	//  Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -51,9 +49,8 @@ func GetPages(contx *fiber.Ctx) error {
 		})
 	}
 
-
 	//  querying result with pagination using gorm function
-	result, err := common.PaginationPureModel(db, models.Page{}, []models.Page{}, uint(Page), uint(Limit), tracer.Tracer)
+	result, err := common.Pagination(db, models.Page{}, []models.Page{}, uint(Page), uint(Limit), tracer.Tracer)
 	if err != nil {
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,
@@ -83,7 +80,6 @@ func GetPageByID(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	//  Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -96,7 +92,6 @@ func GetPageByID(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	// Preparing and querying database using Gorm
 	var pages_get models.PageGet
@@ -145,10 +140,8 @@ func PostPage(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	// Getting Database Connection
 	db, _ := contx.Locals("db").(*gorm.DB)
-
 
 	// validator initialization
 	validate := validator.New()
@@ -221,7 +214,6 @@ func PatchPage(contx *fiber.Ctx) error {
 	// Starting tracer context and tracer
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
-
 
 	// Get database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
@@ -319,7 +311,6 @@ func DeletePage(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	// Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -335,7 +326,6 @@ func DeletePage(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	// perform delete operation if the object exists
 	tx := db.WithContext(tracer.Tracer).Begin()
@@ -382,8 +372,166 @@ func DeletePage(contx *fiber.Ctx) error {
 // Relationship Based Endpoints
 // ################################################################
 
+// Add Role to Page
+// @Summary Add Page to Role
+// @Description Add Role Page
+// @Tags RolePages
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param role_id path int true "Role ID"
+// @Param page_id path int true "Page ID"
+// @Failure 400 {object} common.ResponseHTTP{}
+// @Router /rolepage/{role_id}/{page_id} [post]
+func AddRolePages(contx *fiber.Ctx) error {
 
+	// Starting tracer context and tracer
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
 
+	// database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
 
+	// validate path params
+	role_id, err := strconv.Atoi(contx.Params("role_id"))
+	if err != nil {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+	}
 
+	// validate path params
+	page_id, err := strconv.Atoi(contx.Params("page_id"))
+	if err != nil {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+	}
 
+	// fetching page to be added
+	var page models.Page
+	page.ID = uint(page_id)
+	if res := db.Find(&page); res.Error != nil {
+		return contx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
+
+	//  pageending assocation
+	var role models.Role
+	role.ID = uint(role_id)
+	if err := db.Find(&role); err.Error != nil {
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Record not Found",
+			Data:    err.Error.Error(),
+		})
+	}
+
+	tx := db.WithContext(tracer.Tracer).Begin()
+	if err := db.WithContext(tracer.Tracer).Model(&role).Association("Pages").Append(&page); err != nil {
+		tx.Rollback()
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Pageending Page Failed",
+			Data:    err.Error(),
+		})
+	}
+	tx.Commit()
+
+	// return value if transaction is sucessfull
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success Creating a page Role.",
+		Data:    page,
+	})
+}
+
+// Delete Page to Role
+// @Summary Add Page
+// @Description Delete Role Page
+// @Tags Roles
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param role_id path int true "Role ID"
+// @Param page_id path int true "Page ID"
+// @Success 200 {object} common.ResponseHTTP{data=models.PagePost}
+// @Failure 400 {object} common.ResponseHTTP{}
+// @Failure 500 {object} common.ResponseHTTP{}
+// @Router /rolepage/{role_id}/{page_id} [delete]
+func DeleteRolePages(contx *fiber.Ctx) error {
+
+	// Starting tracer context and tracer
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//Connect to Database
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	// validate path params
+	role_id, err := strconv.Atoi(contx.Params("role_id"))
+	if err != nil || role_id == 0 {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+	}
+
+	page_id, err := strconv.Atoi(contx.Params("page_id"))
+	if err != nil || page_id == 0 {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+	}
+	// fetching page to be deleted
+	var page models.Page
+	page.ID = uint(page_id)
+	if res := db.Find(&page); res.Error != nil {
+		return contx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
+
+	// fettchng role
+	var role models.Role
+	role.ID = uint(role_id)
+	if err := db.Find(&role); err.Error != nil {
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Record not Found",
+			Data:    err.Error.Error(),
+		})
+	}
+
+	// removing page
+	tx := db.WithContext(tracer.Tracer).Begin()
+	if err := db.WithContext(tracer.Tracer).Model(&role).Association("Pages").Delete(&page); err != nil {
+		tx.Rollback()
+		return contx.Status(http.StatusNonAuthoritativeInfo).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Please Try Again Something Unexpected Hpageened",
+			Data:    err.Error(),
+		})
+	}
+
+	tx.Commit()
+
+	// return value if transaction is sucessfull
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success Removing a page from role.",
+		Data:    page,
+	})
+}

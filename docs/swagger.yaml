@@ -74,6 +74,7 @@ definitions:
         minLength: 6
         type: string
       grant_type:
+        example: authorization_code
         type: string
       password:
         type: string
@@ -268,6 +269,16 @@ definitions:
       name:
         type: string
     type: object
+  models.JWTSalt:
+    description: App type information
+    properties:
+      id:
+        type: integer
+      salt_a:
+        type: string
+      salt_b:
+        type: string
+    type: object
   models.Page:
     description: App type information
     properties:
@@ -339,6 +350,8 @@ definitions:
     properties:
       active:
         type: boolean
+      app:
+        type: number
       description:
         type: string
       features:
@@ -349,10 +362,6 @@ definitions:
         type: integer
       name:
         type: string
-      pages:
-        items:
-          $ref: '#/definitions/models.Page'
-        type: array
       users:
         items:
           $ref: '#/definitions/models.User'
@@ -600,6 +609,34 @@ paths:
       summary: Patch App
       tags:
       - Apps
+  /appsdrop:
+    get:
+      consumes:
+      - application/json
+      description: Get FeatureDropDown
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/controllers.FeatureDropDown'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get FeatureDropDown
+      tags:
+      - Feature
   /checklogin:
     get:
       consumes:
@@ -1445,6 +1482,46 @@ paths:
       summary: Activate/Deactivate Feature
       tags:
       - Feature
+  /jwtsalt:
+    get:
+      consumes:
+      - application/json
+      description: Get JWTSalts
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponsePagination'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.JWTSalt'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      - Refresh: []
+      summary: Get JWTSalts
+      tags:
+      - JWTSalts
   /login:
     post:
       consumes:
@@ -1927,6 +2004,74 @@ paths:
       summary: Add App to Role
       tags:
       - Apps
+  /rolepage/{role_id}/{page_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Role Page
+      parameters:
+      - description: Role ID
+        in: path
+        name: role_id
+        required: true
+        type: integer
+      - description: Page ID
+        in: path
+        name: page_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.PagePost'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Add Page
+      tags:
+      - Roles
+    post:
+      consumes:
+      - application/json
+      description: Add Role Page
+      parameters:
+      - description: Role ID
+        in: path
+        name: role_id
+        required: true
+        type: integer
+      - description: Page ID
+        in: path
+        name: page_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Add Page to Role
+      tags:
+      - RolePages
   /roles/{role_id}:
     put:
       consumes:

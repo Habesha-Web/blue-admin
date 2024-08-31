@@ -1,11 +1,9 @@
 package manager
 
 import (
-	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -37,14 +35,25 @@ import (
 )
 
 var (
+	env                            string
 	BlueAPIRoleManagementSystemcli = &cobra.Command{
-		Use:   "dev",
+		Use:   "run",
 		Short: "Run Development server ",
 		Long:  `Run Blue API Role Management System development server`,
 		Run: func(cmd *cobra.Command, args []string) {
-			fiber_run()
+
+			switch env {
+			case "":
+				fiber_run("dev")
+			default:
+				fiber_run(env)
+			}
+
 		},
 	}
+
+	// Define flags using cobra's mechanism
+
 )
 
 func otelspanstarter(ctx *fiber.Ctx) error {
@@ -77,17 +86,22 @@ func NextFunc(contx *fiber.Ctx) error {
 	return contx.Next()
 }
 
-func fiber_run() {
-	//  Loading Configuration
-	configs.AppConfig.SetEnv("dev")
+func fiber_run(env string) {
 
-	//  Staring global tracer
-	tp := observe.InitTracer()
-	defer func() {
-		if err := tp.Shutdown(context.Background()); err != nil {
-			log.Printf("Error shutting down tracer provider: %v", err)
-		}
-	}()
+	prefork := false
+	if env == "prod" {
+		prefork = true
+	}
+	//  Loading Configuration
+	configs.AppConfig.SetEnv(env)
+
+	// //  Staring global tracer
+	// tp := observe.InitTracer()
+	// defer func() {
+	// 	if err := tp.Shutdown(context.Background()); err != nil {
+	// 		log.Printf("Error shutting down tracer provider: %v", err)
+	// 	}
+	// }()
 
 	//  starting scheduler files
 	schd := bluetasks.ScheduledTasks()
@@ -107,7 +121,7 @@ func fiber_run() {
 	rate_limit_per_second, _ := strconv.Atoi(configs.AppConfig.GetOrDefault("RATE_LIMIT_PER_SECOND", "5000"))
 	//load config file
 	app := fiber.New(fiber.Config{
-		// Prefork: true,
+		Prefork: prefork,
 		// Network:     fiber.NetworkTCP,
 		// Immutable:   true,
 		JSONEncoder:    json.Marshal,
@@ -199,8 +213,8 @@ func fiber_run() {
 	// // running background consumer on specific quues
 	// the provided arument is the name of the queues
 	go func() {
-		messages.RabbitConsumer("email")
-		messages.RabbitConsumer("esb")
+		messages.RabbitConsumer("email", env)
+		messages.RabbitConsumer("esb", env)
 	}()
 
 	c := make(chan os.Signal, 1)   // Create channel to signify a signal being sent
@@ -216,6 +230,7 @@ func fiber_run() {
 }
 
 func init() {
+	BlueAPIRoleManagementSystemcli.Flags().StringVar(&env, "env", "help", "Which environment to run for example prod or dev")
 	goFrame.AddCommand(BlueAPIRoleManagementSystemcli)
 
 }
@@ -250,8 +265,8 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Post("/user", NextFunc).Name("post_user").Post("/user", controllers.PostUser)
 	gapp.Patch("/user/:user_id", NextFunc).Name("patch_user").Patch("/user/:user_id", controllers.PatchUser)
 	gapp.Delete("/user/:user_id", NextFunc).Name("delete_user").Delete("/user/:user_id", controllers.DeleteUser).Name("delete_user")
-	gapp.Put("/users/:user_id", NextFunc).Name("activate_deactivate_user").Put("/users/:user_id", controllers.ActivateDeactivateUser)
-	gapp.Put("/users", NextFunc).Name("change_reset_password").Put("/users", controllers.ChangePassword)
+	gapp.Put("/user/:user_id", NextFunc).Name("activate_deactivate_user").Put("/user/:user_id", controllers.ActivateDeactivateUser)
+	gapp.Put("/user", NextFunc).Name("change_reset_password").Put("/user", controllers.ChangePassword)
 
 	gapp.Post("/roleuser/:role_id/:user_id", NextFunc).Name("add_roleuser").Post("/roleuser/:role_id/:user_id", controllers.AddRoleUsers)
 	gapp.Delete("/roleuser/:role_id/:user_id", NextFunc).Name("delete_roleuser").Delete("/roleuser/:role_id/:user_id", controllers.DeleteRoleUsers)
@@ -279,12 +294,20 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Patch("/page/:page_id", NextFunc).Name("patch_page").Patch("/page/:page_id", controllers.PatchPage)
 	gapp.Delete("/page/:page_id", NextFunc).Name("delete_page").Delete("/page/:page_id", controllers.DeletePage).Name("delete_page")
 
+	gapp.Post("/rolepage/:role_id/:page_id", NextFunc).Name("add_rolepage").Post("/rolepage/:role_id/:page_id", controllers.AddRolePages)
+	gapp.Delete("/rolepage/:role_id/:page_id", NextFunc).Name("delete_rolepage").Delete("/rolepage/:role_id/:page_id", controllers.DeleteRolePages)
+
 	// adding endpoints
 	gapp.Get("/checklogin", NextFunc).Name("check_login").Get("/checklogin", controllers.CheckLogin).Name("check_login")
 	gapp.Post("/login", controllers.PostLogin).Name("login_route")
 
+	gapp.Get("/endpointdrop", NextFunc).Name("drop_endpoints").Get("/endpointdrop", controllers.GetDropEndPoints)
+	gapp.Get("/appsdrop", NextFunc).Name("drop_sppd").Get("/appsdrop", controllers.GetDropApps)
+
 	// adding email endpoint
 	gapp.Get("/email", NextFunc).Name("send_email").Get("/email", controllers.SendEmail).Name("send_email")
+
+	gapp.Get("/jwtsalt", NextFunc).Name("get_all_jwtsalts").Get("/jwtsalt", controllers.GetJWTSalts)
 
 	// dashboard
 	gapp.Get("/dashboard", NextFunc).Name("dashboard_one").Get("/dashboard", controllers.GetDashBoardGrouped)

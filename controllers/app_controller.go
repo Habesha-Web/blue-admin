@@ -34,7 +34,6 @@ func GetApps(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	//  Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -49,7 +48,6 @@ func GetApps(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	//  querying result with pagination using gorm function
 	result, err := common.PaginationPureModel(db, models.App{}, []models.App{}, uint(Page), uint(Limit), tracer.Tracer)
@@ -82,7 +80,6 @@ func GetAppByID(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	//  Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -95,7 +92,6 @@ func GetAppByID(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	// Preparing and querying database using Gorm
 	var apps_get models.AppGet
@@ -144,10 +140,8 @@ func PostApp(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	// Getting Database Connection
 	db, _ := contx.Locals("db").(*gorm.DB)
-
 
 	// validator initialization
 	validate := validator.New()
@@ -220,7 +214,6 @@ func PatchApp(contx *fiber.Ctx) error {
 	// Starting tracer context and tracer
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
-
 
 	// Get database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
@@ -318,7 +311,6 @@ func DeleteApp(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	// Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -334,7 +326,6 @@ func DeleteApp(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-
 
 	// perform delete operation if the object exists
 	tx := db.WithContext(tracer.Tracer).Begin()
@@ -381,7 +372,6 @@ func DeleteApp(contx *fiber.Ctx) error {
 // Relationship Based Endpoints
 // ################################################################
 
-
 // Add App Role
 // @Summary Add App to Role
 // @Description Add App to Role
@@ -398,7 +388,6 @@ func AddRoleApps(contx *fiber.Ctx) error {
 	// Starting tracer context and tracer
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
-
 
 	// connect
 	db, _ := contx.Locals("db").(*gorm.DB)
@@ -473,7 +462,6 @@ func DeleteRoleApps(contx *fiber.Ctx) error {
 	ctx := contx.Locals("tracer")
 	tracer, _ := ctx.(*observe.RouteTracer)
 
-
 	//  database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
@@ -525,5 +513,45 @@ func DeleteRoleApps(contx *fiber.Ctx) error {
 		Success: true,
 		Message: "Success Deleteing a Role From App.",
 		Data:    app,
+	})
+}
+
+type AppsDropDown struct {
+	ID   uint   `validate:"required" json:"id"`
+	Name string `validate:"required" json:"name"`
+}
+
+// Get Feature Dropdown only active roles
+// @Summary Get FeatureDropDown
+// @Description Get FeatureDropDown
+// @Tags Feature
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Success 200 {object} common.ResponseHTTP{data=[]FeatureDropDown}
+// @Failure 404 {object} common.ResponseHTTP{}
+// @Router /appsdrop [get]
+func GetDropApps(contx *fiber.Ctx) error {
+
+	// Starting tracer context and tracer
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//  database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	var apps_drop []AppsDropDown
+	if res := db.WithContext(tracer.Tracer).Model(&models.App{}).Where("active = ?", true).Find(&apps_drop); res.Error != nil {
+		return contx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
+
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success got response",
+		Data:    &apps_drop,
 	})
 }

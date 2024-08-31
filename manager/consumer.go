@@ -17,8 +17,8 @@ var (
 )
 
 func startconsumer() {
-	messages.RabbitConsumer("esb")
-	messages.RabbitConsumer("email")
+	messages.RabbitConsumer("esb", env)
+	messages.RabbitConsumer("email", env)
 }
 
 func init() {
