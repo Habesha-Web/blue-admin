@@ -26,7 +26,9 @@ type sample_message struct{}
 func RabbitConsumer(queue_name string, env string) {
 
 	// Loading configuration file
-	configs.AppConfig.SetEnv(env)
+	if env == "" {
+		configs.AppConfig.SetEnv(env)
+	}
 
 	//  tracer
 	// tp := observe.InitTracer()

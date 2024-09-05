@@ -2155,3 +2155,2487 @@
 
 2024/08/30 15:21:27 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/endpoint_controller.go:399
 [0m[33m[1.276ms] [34;1m[rows:58][0m SELECT `endpoints`.`id`,`endpoints`.`name` FROM `endpoints`
+
+2024/09/05 13:23:24 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.038ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="endpoints"
+
+2024/09/05 13:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[8.728ms] [34;1m[rows:0][0m CREATE TABLE `endpoints` (`id` integer PRIMARY KEY AUTOINCREMENT,`name` text NOT NULL,`route_path` text NOT NULL,`method` text NOT NULL,`description` text NOT NULL,`feature_id` integer)
+
+2024/09/05 13:23:57 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.043ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="endpoints"
+
+2024/09/05 13:23:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.115ms] [34;1m[rows:1][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "endpoints" AND sql IS NOT NULL order by type = "table" desc
+
+2024/09/05 13:23:57 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.040ms] [34;1m[rows:-][0m SELECT * FROM `endpoints` LIMIT 1
+
+2024/09/05 13:24:36 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.038ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="endpoints"
+
+2024/09/05 13:24:36 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.094ms] [34;1m[rows:1][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "endpoints" AND sql IS NOT NULL order by type = "table" desc
+
+2024/09/05 13:24:36 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.036ms] [34;1m[rows:-][0m SELECT * FROM `endpoints` LIMIT 1
+
+2024/09/05 13:25:46 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.036ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="endpoints"
+
+2024/09/05 13:25:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.110ms] [34;1m[rows:1][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "endpoints" AND sql IS NOT NULL order by type = "table" desc
+
+2024/09/05 13:25:46 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.034ms] [34;1m[rows:-][0m SELECT * FROM `endpoints` LIMIT 1
+
+2024/09/05 13:26:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.038ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="endpoints"
+
+2024/09/05 13:26:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.092ms] [34;1m[rows:1][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "endpoints" AND sql IS NOT NULL order by type = "table" desc
+
+2024/09/05 13:26:52 logger.go:180: [32m/home/bushu/Documents/goland/blue-admin/models/init.go:16
+[0m[33m[0.034ms] [34;1m[rows:-][0m SELECT * FROM `endpoints` LIMIT 1
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.634ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.712ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.226ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.266ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[2.569ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.614ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[6.885ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[7.298ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:43 logger.go:182: [32m
+[0m[33m[6.147ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[8.251ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[8.537ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[14.111ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.425ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.370ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.641ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[6.213ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.484ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.336ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.394ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.328ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:43 logger.go:182: [32m
+[0m[33m[0.845ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.486ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.860ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:43 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.561ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[0.317ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`user_id` = 1
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[0.395ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 1
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[5.669ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE email = "superuser@mail.com" ORDER BY `users`.`id` LIMIT 1
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:78
+[0m[33m[0.978ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:78
+[0m[33m[0.589ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.390ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.865ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.105ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:54 logger.go:182: [32m
+[0m[33m[2.398ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[5.278ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.454ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.877ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[7.330ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.751ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.518ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.068ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[7.198ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.388ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.244ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.018ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[6.661ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:57 logger.go:182: [32m
+[0m[33m[1.806ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.460ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.980ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[8.612ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.683ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[5.881ms] [34;1m[rows:3][0m SELECT * FROM `users` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[3.197ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[5.296ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[10.005ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[2.300ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.115ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.329ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[4.139ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[7.030ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:57 logger.go:182: [32m
+[0m[33m[1.218ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.584ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.097ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[5.892ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.633ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[5.837ms] [34;1m[rows:3][0m SELECT * FROM `users` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.240ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.495ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[6.254ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.332ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.332ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:59 logger.go:182: [32m
+[0m[33m[0.665ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.398ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.217ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.580ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.944ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.216ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.933ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[2.915ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.208ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.010ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[3.102ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.388ms] [34;1m[rows:1][0m SELECT count(*) FROM `apps`
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.423ms] [34;1m[rows:1][0m SELECT * FROM `apps` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.722ms] [34;1m[rows:1][0m SELECT * FROM `apps` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.641ms] [34;1m[rows:1][0m SELECT count(*) FROM `apps`
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.381ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.209ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.056ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.378ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[4.267ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:59 logger.go:182: [32m
+[0m[33m[0.628ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.186ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.489ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.859ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.231ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.007ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:44:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.649ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[0.500ms] [34;1m[rows:15][0m SELECT * FROM `endpoints` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.575ms] [34;1m[rows:1][0m SELECT count(*) FROM `endpoints`
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.414ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.375ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.964ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[5.389ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.242ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:05 logger.go:182: [32m
+[0m[33m[2.828ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.488ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.972ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[7.597ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.704ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.840ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[8.467ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[0.664ms] [34;1m[rows:15][0m SELECT * FROM `endpoints` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.695ms] [34;1m[rows:1][0m SELECT count(*) FROM `endpoints`
+
+2024/09/05 16:45:05 logger.go:182: [32m
+[0m[33m[0.921ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.545ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.903ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[5.034ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.506ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.505ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.517ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.488ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.749ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.758ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.699ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:05 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[4.699ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.510ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.336ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.454ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[7.216ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:06 logger.go:182: [32m
+[0m[33m[1.226ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.249ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.741ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[5.334ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.371ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.548ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.261ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[2.561ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[13.056ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.569ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[3.736ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[6.654ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[3.858ms] [34;1m[rows:14][0m SELECT * FROM `features` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.951ms] [34;1m[rows:1][0m SELECT count(*) FROM `features`
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.512ms] [34;1m[rows:1][0m SELECT count(*) FROM `features`
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.063ms] [34;1m[rows:14][0m SELECT * FROM `features` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.354ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:06 logger.go:182: [32m
+[0m[33m[0.969ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.747ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.071ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[11.695ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.666ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.621ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[6.696ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.670ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:07 logger.go:182: [32m
+[0m[33m[2.198ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.809ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.115ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[5.675ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.393ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[2.899ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[5.288ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.600ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.364ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.609ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.946ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:07 logger.go:182: [32m
+[0m[33m[0.884ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.645ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.972ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.372ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.335ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.185ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.277ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.277ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[5.565ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.222ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.893ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:07 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[5.226ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.438ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.224ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.229ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[3.460ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:09 logger.go:182: [32m
+[0m[33m[0.868ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.497ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.832ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.158ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.474ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.433ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.462ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.943ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.352ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.226ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.093ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[11.969ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:09 logger.go:182: [32m
+[0m[33m[1.309ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.996ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.339ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.676ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[9.939ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.670ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.701ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:09 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[10.290ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.434ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.357ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.367ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.287ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.387ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.291ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[6.441ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.259ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.489ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:43
+[0m[33m[2.076ms] [34;1m[rows:1][0m SELECT count(*) FROM `pages`
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[2.177ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`page_id` IN (1,2,3,4,5,6,7,8,9)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[0.242ms] [34;1m[rows:5][0m SELECT * FROM `roles` WHERE `roles`.`id` IN (1,4,5,2,3)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[6.053ms] [34;1m[rows:9][0m SELECT * FROM `pages` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:45:11 logger.go:182: [32m
+[0m[33m[1.604ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.535ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.986ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[10.452ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:43
+[0m[33m[0.963ms] [34;1m[rows:1][0m SELECT count(*) FROM `pages`
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.472ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[1.842ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`page_id` IN (1,2,3,4,5,6,7,8,9)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[0.477ms] [34;1m[rows:5][0m SELECT * FROM `roles` WHERE `roles`.`id` IN (1,4,5,2,3)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[5.225ms] [34;1m[rows:9][0m SELECT * FROM `pages` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.365ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.239ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.327ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.489ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[7.482ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.305ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.491ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[7.515ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:11 logger.go:182: [32m
+[0m[33m[1.018ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.417ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.739ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[8.391ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.725ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[4.514ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.360ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.116ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[8.498ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[4.071ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[16.990ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[7.586ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[10.204ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[11.850ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[11.681ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.516ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.535ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.404ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.259ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[7.169ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.577ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.704ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.235ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.676ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.708ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.907ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.760ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.089ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[4.782ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.087ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.443ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.877ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[5.480ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[14.856ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.545ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.392ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.325ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.662ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.792ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:11 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.848ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[2.656ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.428ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.410ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.811ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[7.410ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.317ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.524ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.572ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[6.976ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[5.681ms] [34;1m[rows:6][0m SELECT * FROM `roles` ORDER BY id asc LIMIT 25
+
+2024/09/05 16:45:22 logger.go:182: [32m
+[0m[33m[1.000ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.095ms] [34;1m[rows:1][0m SELECT count(*) FROM `roles`
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[3.236ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.204ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.509ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[8.500ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.304ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.263ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.193ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[6.189ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.357ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.232ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.128ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.229ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:22 logger.go:182: [32m
+[0m[33m[0.783ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.710ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.039ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.733ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[1.464ms] [34;1m[rows:6][0m SELECT * FROM `roles` ORDER BY id asc LIMIT 25
+
+2024/09/05 16:45:22 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.599ms] [34;1m[rows:1][0m SELECT count(*) FROM `roles`
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.144ms] [34;1m[rows:1][0m SELECT count(*) FROM `apps`
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.592ms] [34;1m[rows:1][0m SELECT * FROM `apps` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.529ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.184ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:33 logger.go:182: [32m
+[0m[33m[0.794ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.206ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[6.583ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.281ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.558ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.259ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[4.137ms] [34;1m[rows:1][0m SELECT * FROM `apps` ORDER BY id asc LIMIT 15
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.080ms] [34;1m[rows:1][0m SELECT count(*) FROM `apps`
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.304ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.342ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.177ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[9.795ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.273ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.230ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.939ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.186ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:33 logger.go:182: [32m
+[0m[33m[1.057ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.642ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.038ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.729ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.283ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.313ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.223ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 16:45:33 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[3.604ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.374ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.188ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:01:52 logger.go:182: [32m
+[0m[33m[0.712ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.129ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.335ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.061ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.683ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.291ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.558ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.521ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.030ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:01:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[5.009ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:19:35 logger.go:182: [32m
+[0m[33m[1.572ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.941ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.525ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[16.247ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.977ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.722ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.408ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[7.946ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.602ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.620ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.078ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:19:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[8.773ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:22:58 logger.go:182: [32m
+[0m[33m[0.809ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.594ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.063ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.941ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.438ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.419ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.412ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[4.123ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.488ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.360ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.512ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:22:58 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.652ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:23:24 logger.go:182: [32m
+[0m[33m[0.994ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.749ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.509ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[5.502ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.615ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.229ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.265ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.647ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[3.938ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.258ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[2.040ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:23:24 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[6.208ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[0.175ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`user_id` = 1
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[0.174ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 1
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/login.go:75
+[0m[33m[3.831ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE email = "superuser@mail.com" ORDER BY `users`.`id` LIMIT 1
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:78
+[0m[33m[0.422ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:78
+[0m[33m[0.545ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1
+
+2024/09/05 17:23:34 logger.go:182: [32m
+[0m[33m[1.652ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.987ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.409ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[6.734ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.625ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.326ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.631ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[6.308ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.588ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.367ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.663ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:23:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.475ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.430ms] [34;1m[rows:3][0m SELECT * FROM `users` ORDER BY id asc LIMIT 15
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.082ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/09/05 17:23:46 logger.go:182: [32m
+[0m[33m[0.732ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.385ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.912ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[12.554ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.455ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.348ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.507ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[7.884ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.419ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.424ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.561ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:23:46 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[12.592ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[3.740ms] [34;1m[rows:3][0m SELECT * FROM `users` ORDER BY id asc LIMIT 15
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.820ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/09/05 17:26:30 logger.go:182: [32m
+[0m[33m[1.280ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.664ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.384ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[8.982ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.736ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.423ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.140ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[5.828ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.689ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.349ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[5.031ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:30 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[7.887ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:32 logger.go:182: [32m
+[0m[33m[1.038ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.809ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.116ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[5.180ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.474ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.446ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[2.072ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[5.107ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.511ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.337ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.375ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.194ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:43
+[0m[33m[0.110ms] [34;1m[rows:1][0m SELECT count(*) FROM `pages`
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[5.711ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[5.255ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`page_id` IN (1,2,3,4,5,6,7,8,9)
+
+2024/09/05 17:26:34 logger.go:182: [32m
+[0m[33m[1.041ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.985ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.433ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[7.552ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[3.357ms] [34;1m[rows:5][0m SELECT * FROM `roles` WHERE `roles`.`id` IN (1,4,5,2,3)
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[11.958ms] [34;1m[rows:9][0m SELECT * FROM `pages` ORDER BY id asc LIMIT 15
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.679ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.272ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.602ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[4.259ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.046ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.242ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.863ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:34 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[5.195ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.500ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.160ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[1.982ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[4.567ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.092ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[4.459ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.713ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.634ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.833ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.768ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.380ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.331ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.289ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[6.891ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[4.239ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.274ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[6.976ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:35 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[5.775ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.004ms] [34;1m[rows:1][0m SELECT * FROM `apps` ORDER BY id asc LIMIT 15
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.107ms] [34;1m[rows:1][0m SELECT count(*) FROM `apps`
+
+2024/09/05 17:26:37 logger.go:182: [32m
+[0m[33m[0.897ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.397ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.535ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.684ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.783ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.447ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.561ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.342ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.582ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.690ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.954ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:37 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.301ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:39 logger.go:182: [32m
+[0m[33m[3.832ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[5.256ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[10.720ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[14.766ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.587ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.402ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.835ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[3.616ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[12.691ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.639ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[5.911ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:39 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[20.881ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[3.248ms] [34;1m[rows:3][0m SELECT * FROM `users` ORDER BY id asc LIMIT 15
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.553ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/09/05 17:26:41 logger.go:182: [32m
+[0m[33m[1.211ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.415ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.072ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.562ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[12.582ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.271ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.330ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[5.313ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.813ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.285ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.809ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:41 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[7.815ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[2.227ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.145ms] [34;1m[rows:1][0m SELECT count(*) FROM `roles`
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.451ms] [34;1m[rows:6][0m SELECT * FROM `roles` ORDER BY id asc LIMIT 25
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.382ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.306ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.222ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.809ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:55 logger.go:182: [32m
+[0m[33m[2.314ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.836ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.138ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[10.853ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.586ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.363ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.840ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:55 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[5.287ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:43
+[0m[33m[0.623ms] [34;1m[rows:1][0m SELECT count(*) FROM `pages`
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[0.330ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`page_id` IN (1,2,3,4,5,6,7,8,9)
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[0.424ms] [34;1m[rows:5][0m SELECT * FROM `roles` WHERE `roles`.`id` IN (1,4,5,2,3)
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:55
+[0m[33m[3.488ms] [34;1m[rows:9][0m SELECT * FROM `pages` ORDER BY id asc LIMIT 15
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.382ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m
+[0m[33m[1.017ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.811ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.616ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[6.047ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.359ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.482ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.899ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[11.013ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.253ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.321ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.250ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[8.113ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.128ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.946ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.835ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.705ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.871ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[4.240ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.404ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.463ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.052ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.645ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.702ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.641ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[8.387ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.119ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.473ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.165ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[8.017ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:26:57 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.568ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.186ms] [34;1m[rows:1][0m SELECT count(*) FROM `features`
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[1.583ms] [34;1m[rows:14][0m SELECT * FROM `features` ORDER BY id asc LIMIT 15
+
+2024/09/05 17:27:00 logger.go:182: [32m
+[0m[33m[1.374ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.974ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.309ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[5.143ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.444ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.214ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.188ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.702ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.370ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.282ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.153ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:27:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[3.482ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[3.119ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.636ms] [34;1m[rows:6][0m SELECT * FROM `roles` ORDER BY id asc LIMIT 25
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[1.216ms] [34;1m[rows:1][0m SELECT count(*) FROM `roles`
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[7.397ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:27:50 logger.go:182: [32m
+[0m[33m[2.778ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.871ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[12.010ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[15.587ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[9.983ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[10.471ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[17.122ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.424ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.259ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.571ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:27:50 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[8.005ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.235ms] [34;1m[rows:3][0m SELECT * FROM `users` ORDER BY id asc LIMIT 15
+
+2024/09/05 17:27:54 logger.go:182: [32m
+[0m[33m[1.044ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[2.861ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.336ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.534ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[6.614ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.304ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.238ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.057ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[11.089ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.408ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.291ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.644ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:27:54 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[14.157ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:100
+[0m[33m[0.141ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`user_id` = 1
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:100
+[0m[33m[0.210ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 1
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:100
+[0m[33m[3.397ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE id = 1 ORDER BY `users`.`id` LIMIT 1
+
+2024/09/05 17:29:32 logger.go:182: [32m
+[0m[33m[1.233ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.014ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.482ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[12.404ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.578ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.284ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.445ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[7.143ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.497ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.308ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.418ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[5.247ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.449ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[2.080ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:100
+[0m[33m[0.132ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`user_id` = 2
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:100
+[0m[33m[0.141ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 2
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:100
+[0m[33m[2.798ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE id = 2 ORDER BY `users`.`id` LIMIT 1
+
+2024/09/05 17:29:48 logger.go:182: [32m
+[0m[33m[0.797ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.288ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.619ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.619ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.401ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.250ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.129ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.174ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.485ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.261ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.311ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.191ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[4.151ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:29:48 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[1.875ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.808ms] [34;1m[rows:3][0m SELECT * FROM `users` ORDER BY id asc LIMIT 15
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[1.020ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.395ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.199ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.093ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.604ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.416ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:29:52 logger.go:182: [32m
+[0m[33m[0.700ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.206ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.068ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[3.414ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.238ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.508ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:29:52 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[8.380ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:32:44 logger.go:182: [32m
+[0m[33m[0.811ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.388ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.740ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[7.191ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.324ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.273ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.458ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.763ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.529ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.369ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.521ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:32:44 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[4.629ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.756ms] [34;1m[rows:1][0m SELECT count(*) FROM `roles`
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[7.253ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[5.291ms] [34;1m[rows:6][0m SELECT * FROM `roles` ORDER BY id asc LIMIT 25
+
+2024/09/05 17:33:40 logger.go:182: [32m
+[0m[33m[1.159ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.818ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.184ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[5.107ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.505ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.278ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.441ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[4.098ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.155ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.614ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.476ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:33:40 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[5.737ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[3.697ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.104ms] [34;1m[rows:1][0m SELECT count(*) FROM `roles`
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[2.725ms] [34;1m[rows:6][0m SELECT * FROM `roles` ORDER BY id asc LIMIT 25
+
+2024/09/05 17:33:47 logger.go:182: [32m
+[0m[33m[0.848ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.418ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.574ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.310ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[18.018ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.352ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.931ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[10.178ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[2.306ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.340ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[3.691ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:33:47 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[7.053ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[4.554ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.675ms] [34;1m[rows:1][0m SELECT count(*) FROM `roles`
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[5.301ms] [34;1m[rows:6][0m SELECT * FROM `roles` ORDER BY id asc LIMIT 25
+
+2024/09/05 17:34:04 logger.go:182: [32m
+[0m[33m[1.045ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.919ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.935ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.305ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[9.225ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.312ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[2.486ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[5.111ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.356ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.188ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.091ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:34:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[3.866ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.130ms] [34;1m[rows:0][0m SELECT * FROM `features` WHERE `features`.`role_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.197ms] [34;1m[rows:9][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.382ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (3,2,1,4,5,6,7,8,9)
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[0.224ms] [34;1m[rows:0][0m SELECT * FROM `features` WHERE `features`.`role_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[0.817ms] [34;1m[rows:9][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[0.423ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (3,2,1,4,5,6,7,8,9)
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[0.136ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`role_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[3.379ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`role_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[0.145ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE `users`.`id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.157ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE `users`.`id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[5.001ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE id = 1 ORDER BY `roles`.`id` LIMIT 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[9.797ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE id = 1 ORDER BY `roles`.`id` LIMIT 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.574ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.524ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.991ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[5.590ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:38:10 logger.go:182: [32m
+[0m[33m[1.402ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.205ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.533ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[10.085ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.130ms] [34;1m[rows:0][0m SELECT * FROM `features` WHERE `features`.`role_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.788ms] [34;1m[rows:9][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[1.090ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (3,2,1,4,5,6,7,8,9)
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.130ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.189ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`role_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.267ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.166ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE `users`.`id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[2.643ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[12.735ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE id = 1 ORDER BY `roles`.`id` LIMIT 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[14.086ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/feature_controller.go:543
+[0m[33m[0.583ms] [34;1m[rows:13][0m SELECT `features`.`id`,`features`.`name` FROM `features` WHERE active = true
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[2.265ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/feature_controller.go:543
+[0m[33m[0.685ms] [34;1m[rows:13][0m SELECT `features`.`id`,`features`.`name` FROM `features` WHERE active = true
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[2.724ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:99
+[0m[33m[0.271ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:99
+[0m[33m[3.365ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE id = 1 ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:99
+[0m[33m[0.211ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:38:10 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:99
+[0m[33m[12.351ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE id = 1 ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.424ms] [34;1m[rows:0][0m SELECT * FROM `features` WHERE `features`.`role_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.279ms] [34;1m[rows:9][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.414ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (3,2,1,4,5,6,7,8,9)
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.140ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`role_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.160ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE `users`.`id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[4.867ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE id = 1 ORDER BY `roles`.`id` LIMIT 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[0.403ms] [34;1m[rows:0][0m SELECT * FROM `features` WHERE `features`.`role_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[0.516ms] [34;1m[rows:9][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[0.720ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (3,2,1,4,5,6,7,8,9)
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[0.425ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`role_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[0.271ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE `users`.`id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:804
+[0m[33m[9.505ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE id = 1 ORDER BY `roles`.`id` LIMIT 1
+
+2024/09/05 17:38:59 logger.go:182: [32m
+[0m[33m[1.532ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.266ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.633ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[11.120ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.477ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.278ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.570ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[4.982ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.100ms] [34;1m[rows:0][0m SELECT * FROM `features` WHERE `features`.`role_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.166ms] [34;1m[rows:9][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.384ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (3,2,1,4,5,6,7,8,9)
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.152ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`role_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[0.171ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE `users`.`id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:99
+[0m[33m[3.718ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE id = 1 ORDER BY `roles`.`id` LIMIT 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.563ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.227ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.224ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[6.853ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/feature_controller.go:543
+[0m[33m[0.916ms] [34;1m[rows:13][0m SELECT `features`.`id`,`features`.`name` FROM `features` WHERE active = true
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/feature_controller.go:543
+[0m[33m[0.894ms] [34;1m[rows:13][0m SELECT `features`.`id`,`features`.`name` FROM `features` WHERE active = true
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[6.742ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:544
+[0m[33m[2.967ms] [34;1m[rows:1][0m SELECT `apps`.`id`,`apps`.`name` FROM `apps` WHERE active = true
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:99
+[0m[33m[0.315ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:38:59 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:99
+[0m[33m[5.157ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE id = 1 ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:39:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:99
+[0m[33m[0.309ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:39:00 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/app_controller.go:99
+[0m[33m[20.846ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE id = 1 ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[3.353ms] [34;1m[rows:3][0m SELECT * FROM `users` ORDER BY id asc LIMIT 15
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.573ms] [34;1m[rows:1][0m SELECT count(*) FROM `users`
+
+2024/09/05 17:39:04 logger.go:182: [32m
+[0m[33m[1.375ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[2.301ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[3.553ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[6.278ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.451ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.238ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.237ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[18.825ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.373ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.227ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.134ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:39:04 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[22.711ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:100
+[0m[33m[0.135ms] [34;1m[rows:1][0m SELECT * FROM `user_roles` WHERE `user_roles`.`user_id` = 1
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:100
+[0m[33m[0.146ms] [34;1m[rows:1][0m SELECT * FROM `roles` WHERE `roles`.`id` = 1
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/user_controller.go:100
+[0m[33m[3.399ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE id = 1 ORDER BY `users`.`id` LIMIT 1
+
+2024/09/05 17:39:06 logger.go:182: [32m
+[0m[33m[0.988ms] [34;1m[rows:46][0m SELECT * FROM `endpoints` WHERE `endpoints`.`feature_id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.655ms] [34;1m[rows:14][0m SELECT * FROM `features` WHERE `features`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[1.994ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:156
+[0m[33m[4.659ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.583ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[0.467ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[1.808ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:202
+[0m[33m[4.474ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.562ms] [34;1m[rows:27][0m SELECT * FROM `page_roles` WHERE `page_roles`.`role_id` IN (1,2,3,4,5,6)
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[0.436ms] [34;1m[rows:9][0m SELECT * FROM `pages` WHERE `pages`.`id` IN (1,5,2,3,4,6,7,8,9)
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[1.968ms] [34;1m[rows:6][0m SELECT * FROM `roles` WHERE `roles`.`app_id` = 1
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/dashboard.go:292
+[0m[33m[6.893ms] [34;1m[rows:1][0m SELECT * FROM `apps` WHERE uuid = "019155fd-0c66-7ef1-84bc-556c163821f9" ORDER BY `apps`.`id` LIMIT 1
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.325ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true
+
+2024/09/05 17:39:06 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/role_controller.go:150
+[0m[33m[3.110ms] [34;1m[rows:6][0m SELECT `roles`.`id`,`roles`.`name` FROM `roles` WHERE active = true

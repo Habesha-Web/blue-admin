@@ -186,9 +186,14 @@ func fiber_run(env string) {
 	// allow cross origin request
 	app.Use(cors.New())
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!\n")
+	// app.Get("/", func(c *fiber.Ctx) error {
+	// 	return c.SendString("Hello, World!\n")
+	// })
+	app.Static("/", "./dist")
+	app.Get("/admin/*", func(ctx *fiber.Ctx) error {
+		return ctx.SendFile("./dist/index.html")
 	})
+
 	// swagger docs
 	app.Get("/docs/*", swagger.HandlerDefault)
 	app.Get("/docs/*", swagger.New()).Name("swagger_routes")
