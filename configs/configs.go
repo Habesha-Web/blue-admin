@@ -1,4 +1,3 @@
-
 package configs
 
 import (
@@ -62,6 +61,16 @@ func (e *EnvConfig) read() {
 		fmt.Printf("INFO: config from file: %v \n", overrideFile)
 	}
 }
+func (e *EnvConfig) renderread() {
+
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Printf("WARNING: Failed to load config from file: Err: %v \n", err)
+	} else {
+		fmt.Printf("INFO: Loaded config from file: %v\n", ".env")
+	}
+
+}
 
 func (e *EnvConfig) Get(key string) string {
 	return os.Getenv(key)
@@ -70,9 +79,13 @@ func (e *EnvConfig) Get(key string) string {
 func (e *EnvConfig) SetEnv(key string) {
 	AppConfig = EnvConfig{
 		defaultPath: "./configs",
-		prodFlag: key,
+		prodFlag:    key,
 	}
 	AppConfig.read()
+}
+func (e *EnvConfig) SetRenderEnv() {
+
+	AppConfig.renderread()
 }
 
 func (e *EnvConfig) GetOrDefault(key, defaultValue string) string {

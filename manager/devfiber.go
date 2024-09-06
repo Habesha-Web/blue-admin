@@ -93,7 +93,7 @@ func fiber_run(env string) {
 		prefork = true
 	}
 	//  Loading Configuration
-	configs.AppConfig.SetEnv(env)
+	configs.AppConfig.SetRenderEnv()
 
 	// //  Staring global tracer
 	// tp := observe.InitTracer()
@@ -262,8 +262,8 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Patch("/app/:app_id", NextFunc).Name("patch_app").Patch("/app/:app_id", controllers.PatchApp)
 	gapp.Delete("/app/:app_id", NextFunc).Name("delete_app").Delete("/app/:app_id", controllers.DeleteApp).Name("delete_app")
 
-	gapp.Patch("/roleapp/:role_id", NextFunc).Name("add_roleapp").Patch("/roleapp/:role_id", controllers.AddRoleApps)
-	gapp.Delete("/roleapp/:role_id", NextFunc).Name("delete_roleapp").Delete("/roleapp/:role_id", controllers.DeleteRoleApps)
+	gapp.Patch("/approle/:role_id", NextFunc).Name("add_roleapp").Patch("/approle/:role_id", controllers.AddRoleApps)
+	gapp.Delete("/approle/:role_id", NextFunc).Name("delete_roleapp").Delete("/approle/:role_id", controllers.DeleteRoleApps)
 
 	gapp.Get("/user", NextFunc).Name("get_all_users").Get("/user", controllers.GetUsers)
 	gapp.Get("/user/:user_id", NextFunc).Name("get_one_users").Get("/user/:user_id", controllers.GetUserByID)
