@@ -3,3 +3,4 @@ configs/*.env
 *.log
 tests/.env
 tests/.test.env
+.env

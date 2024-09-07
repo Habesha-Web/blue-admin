@@ -93,7 +93,7 @@ func fiber_run(env string) {
 		prefork = true
 	}
 	//  Loading Configuration
-	configs.AppConfig.SetRenderEnv()
+	configs.AppConfig.SetEnv(env)
 
 	// //  Staring global tracer
 	// tp := observe.InitTracer()
