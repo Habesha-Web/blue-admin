@@ -1742,17 +1742,6 @@ paths:
       consumes:
       - application/json
       description: Get JWTSalts
-      parameters:
-      - description: page
-        in: query
-        name: page
-        required: true
-        type: integer
-      - description: page size
-        in: query
-        name: size
-        required: true
-        type: integer
       produces:
       - application/json
       responses:
@@ -1763,9 +1752,7 @@ paths:
             - $ref: '#/definitions/common.ResponsePagination'
             - properties:
                 data:
-                  items:
-                    $ref: '#/definitions/models.JWTSalt'
-                  type: array
+                  $ref: '#/definitions/models.JWTSalt'
               type: object
         "404":
           description: Not Found

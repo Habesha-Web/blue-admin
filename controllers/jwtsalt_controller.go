@@ -1,8 +1,8 @@
 package controllers
 
 import (
+	"errors"
 	"net/http"
-	"strconv"
 
 	"blue-admin.com/common"
 	"blue-admin.com/models"
@@ -19,9 +19,7 @@ import (
 // @Produce json
 // @Security ApiKeyAuth
 // @Security Refresh
-// @Param page query int true "page"
-// @Param size query int true "page size"
-// @Success 200 {object} common.ResponsePagination{data=[]models.JWTSalt}
+// @Success 200 {object} common.ResponsePagination{data=models.JWTSalt}
 // @Failure 404 {object} common.ResponseHTTP{}
 // @Router /jwtsalt [get]
 func GetJWTSalts(contx *fiber.Ctx) error {
@@ -33,28 +31,28 @@ func GetJWTSalts(contx *fiber.Ctx) error {
 	//  Getting Database connection
 	db, _ := contx.Locals("db").(*gorm.DB)
 
-	//  parsing Query Prameters
-	Page, _ := strconv.Atoi(contx.Query("page"))
-	Limit, _ := strconv.Atoi(contx.Query("size"))
-	//  checking if query parameters  are correct
-	if Page == 0 || Limit == 0 {
-		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+	//  querying result with pagination using gorm function
+	var salts models.JWTSalt
+	if res := db.WithContext(tracer.Tracer).Model(&models.JWTSalt{}).Where("id = ?", 1).First(&salts); res.Error != nil {
+		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
+			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "Role not found",
+				Data:    nil,
+			})
+		}
+		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Not Allowed, Bad request",
+			Message: "Error retrieving Role",
 			Data:    nil,
 		})
 	}
 
-	//  querying result with pagination using gorm function
-	result, err := common.PaginationPureModel(db, models.JWTSalt{}, []models.JWTSalt{}, uint(Page), uint(Limit), tracer.Tracer)
-	if err != nil {
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
-			Success: false,
-			Message: "Failed to get all JWTSalt.",
-			Data:    "something",
-		})
-	}
-
 	// returning result if all the above completed successfully
-	return contx.Status(http.StatusOK).JSON(result)
+	//  Finally returing response if All the above compeleted successfully
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success got one salts.",
+		Data:    &salts,
+	})
 }

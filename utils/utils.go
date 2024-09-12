@@ -10,8 +10,6 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-// var key = config.Config("TOKEN_SALT")
-
 type UserClaim struct {
 	jwt.RegisteredClaims
 	Email string   `json:"email"`

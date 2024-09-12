@@ -208,3 +208,18 @@
 [0m[33m[0.359ms] [34;1m[rows:5][0m select apps.id as appID, roles.id, roles.name, roles.description,roles.active from roles
 						inner join apps on roles.app_id == apps.id
 						where apps.uuid = "0191c74f-d039-71c6-a3be-66e2571a9cf1" ORDER BY roles.id;
+
+2024/09/12 13:16:36 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:102
+[0m[33m[0.118ms] [34;1m[rows:1][0m SELECT count(*) FROM `jwt_salts`
+
+2024/09/12 13:16:36 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/common/common.go:114
+[0m[33m[0.761ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` ORDER BY id asc LIMIT 5
+
+2024/09/12 13:19:08 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:78
+[0m[33m[0.472ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1
+
+2024/09/12 13:19:08 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:78
+[0m[33m[0.397ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1
+
+2024/09/12 13:19:08 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:78
+[0m[33m[0.403ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1

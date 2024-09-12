@@ -2176,22 +2176,6 @@ const docTemplate = `{
                     "JWTSalts"
                 ],
                 "summary": "Get JWTSalts",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "page",
-                        "name": "page",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "page size",
-                        "name": "size",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2204,10 +2188,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/models.JWTSalt"
-                                            }
+                                            "$ref": "#/definitions/models.JWTSalt"
                                         }
                                     }
                                 }
