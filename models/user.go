@@ -46,6 +46,16 @@ type UserGet struct {
 	Roles         []Role    `gorm:"many2many:user_roles; constraint:OnUpdate:CASCADE; OnDelete:CASCADE;" json:"roles,omitempty"`
 }
 
+// UserGet model info
+// @Description UserGet type information
+type UserNoRlnGet struct {
+	ID            uint      `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
+	Email         string    `gorm:"not null; unique;" json:"email,omitempty"`
+	DateRegistred time.Time `gorm:"constraint:not null; default:current_timestamp;" json:"date_registered,omitempty"`
+	Disabled      bool      `gorm:"default:true; constraint:not null;" json:"disabled"`
+	UUID          string    `gorm:"constraint:not null; unique; type:string;" json:"uuid"`
+}
+
 // UserPut model info
 // @Description UserPut type information
 type UserPut struct {

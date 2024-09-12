@@ -252,11 +252,9 @@ func PatchPage(contx *fiber.Ctx) error {
 
 	// startng update transaction
 	var page models.Page
-	page.ID = uint(id)
 	tx := db.WithContext(tracer.Tracer).Begin()
-
 	// Check if the record exists
-	if err := db.WithContext(tracer.Tracer).First(&page, page.ID).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&page).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			// If the record doesn't exist, return an error response
 			tx.Rollback()
@@ -414,8 +412,7 @@ func AddRolePages(contx *fiber.Ctx) error {
 
 	// fetching page to be added
 	var page models.Page
-	page.ID = uint(page_id)
-	if res := db.Find(&page); res.Error != nil {
+	if res := db.WithContext(tracer.Tracer).Where("id = ?", page_id).First(&page); res.Error != nil {
 		return contx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: res.Error.Error(),
@@ -425,8 +422,7 @@ func AddRolePages(contx *fiber.Ctx) error {
 
 	//  pageending assocation
 	var role models.Role
-	role.ID = uint(role_id)
-	if err := db.Find(&role); err.Error != nil {
+	if err := db.WithContext(tracer.Tracer).Where("ID = ? ", role_id).First(&role); err.Error != nil {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: "Record not Found",
@@ -495,8 +491,7 @@ func DeleteRolePages(contx *fiber.Ctx) error {
 	}
 	// fetching page to be deleted
 	var page models.Page
-	page.ID = uint(page_id)
-	if res := db.Find(&page); res.Error != nil {
+	if res := db.WithContext(tracer.Tracer).Where("id = ?", page_id).First(&page); res.Error != nil {
 		return contx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: res.Error.Error(),
@@ -507,7 +502,7 @@ func DeleteRolePages(contx *fiber.Ctx) error {
 	// fettchng role
 	var role models.Role
 	role.ID = uint(role_id)
-	if err := db.Find(&role); err.Error != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ?", role_id).First(&role); err.Error != nil {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: "Record not Found",

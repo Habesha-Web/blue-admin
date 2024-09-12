@@ -1,9 +1,11 @@
 package manager
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -78,6 +80,7 @@ func dbsessioninjection(ctx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
+
 	ctx.Locals("db", db)
 	return ctx.Next()
 }
@@ -95,13 +98,13 @@ func fiber_run(env string) {
 	//  Loading Configuration
 	configs.AppConfig.SetEnv(env)
 
-	// //  Staring global tracer
-	// tp := observe.InitTracer()
-	// defer func() {
-	// 	if err := tp.Shutdown(context.Background()); err != nil {
-	// 		log.Printf("Error shutting down tracer provider: %v", err)
-	// 	}
-	// }()
+	//  Staring global tracer
+	tp := observe.InitTracer()
+	defer func() {
+		if err := tp.Shutdown(context.Background()); err != nil {
+			log.Printf("Error shutting down tracer provider: %v", err)
+		}
+	}()
 
 	//  starting scheduler files
 	schd := bluetasks.ScheduledTasks()
@@ -193,6 +196,9 @@ func fiber_run(env string) {
 	app.Get("/admin/*", func(ctx *fiber.Ctx) error {
 		return ctx.SendFile("./dist/index.html")
 	})
+	app.Get("/admin", func(ctx *fiber.Ctx) error {
+		return ctx.SendFile("./dist/index.html")
+	})
 
 	// swagger docs
 	app.Get("/docs/*", swagger.HandlerDefault)
@@ -258,6 +264,7 @@ func setupRoutes(gapp *fiber.Group) {
 
 	gapp.Get("/app", NextFunc).Name("get_all_apps").Get("/app", controllers.GetApps)
 	gapp.Get("/app/:app_id", NextFunc).Name("get_one_apps").Get("/app/:app_id", controllers.GetAppByID)
+	gapp.Get("/appruid/:app_uuid", NextFunc).Name("get_app_roles_uuid").Get("/appruid/:app_uuid", controllers.GetAppRoleUUID)
 	gapp.Post("/app", NextFunc).Name("post_app").Post("/app", controllers.PostApp)
 	gapp.Patch("/app/:app_id", NextFunc).Name("patch_app").Patch("/app/:app_id", controllers.PatchApp)
 	gapp.Delete("/app/:app_id", NextFunc).Name("delete_app").Delete("/app/:app_id", controllers.DeleteApp).Name("delete_app")
@@ -267,21 +274,27 @@ func setupRoutes(gapp *fiber.Group) {
 
 	gapp.Get("/user", NextFunc).Name("get_all_users").Get("/user", controllers.GetUsers)
 	gapp.Get("/user/:user_id", NextFunc).Name("get_one_users").Get("/user/:user_id", controllers.GetUserByID)
+	gapp.Get("/useruuid", NextFunc).Name("get_one_user_uuid").Get("/useruuid", controllers.GetUserByUUID)
+	gapp.Get("/appuser", NextFunc).Name("get_appusers_uuid").Get("/appusers", controllers.GetAppUsers)
+	gapp.Get("/appuser/:user_id", NextFunc).Name("get_one_appuser_by_app_id").Get("appuser/:user_id", controllers.GetAppUserByID)
 	gapp.Post("/user", NextFunc).Name("post_user").Post("/user", controllers.PostUser)
 	gapp.Patch("/user/:user_id", NextFunc).Name("patch_user").Patch("/user/:user_id", controllers.PatchUser)
-	gapp.Delete("/user/:user_id", NextFunc).Name("delete_user").Delete("/user/:user_id", controllers.DeleteUser).Name("delete_user")
+	gapp.Delete("/user/:user_id", NextFunc).Name("delete_user").Delete("/user/:user_id", controllers.DeleteUser)
+	gapp.Delete("/appuser/:user_id", NextFunc).Name("delete_app_user").Delete("/appuser/:user_id", controllers.DeleteAppUser)
 	gapp.Put("/user/:user_id", NextFunc).Name("activate_deactivate_user").Put("/user/:user_id", controllers.ActivateDeactivateUser)
 	gapp.Put("/user", NextFunc).Name("change_reset_password").Put("/user", controllers.ChangePassword)
 
 	gapp.Post("/roleuser/:role_id/:user_id", NextFunc).Name("add_roleuser").Post("/roleuser/:role_id/:user_id", controllers.AddRoleUsers)
 	gapp.Delete("/roleuser/:role_id/:user_id", NextFunc).Name("delete_roleuser").Delete("/roleuser/:role_id/:user_id", controllers.DeleteRoleUsers)
+	gapp.Post("/approleuser/:role_id/:user_id", NextFunc).Name("add_approleuser").Post("/approleuser/:role_id/:user_id", controllers.AddAppsRoleUsers)
+	gapp.Delete("/approleuser/:role_id/:user_id", NextFunc).Name("delete_approleuser").Delete("/approleuser/:role_id/:user_id", controllers.DeleteAppRoleUsers)
 
 	gapp.Get("/feature", NextFunc).Name("get_all_features").Get("/feature", controllers.GetFeatures)
 	gapp.Get("/feature/:feature_id", NextFunc).Name("get_one_features").Get("/feature/:feature_id", controllers.GetFeatureByID)
 	gapp.Post("/feature", NextFunc).Name("post_feature").Post("/feature", controllers.PostFeature)
 	gapp.Patch("/feature/:feature_id", NextFunc).Name("patch_feature").Patch("/feature/:feature_id", controllers.PatchFeature)
 	gapp.Delete("/feature/:feature_id", NextFunc).Name("delete_feature").Delete("/feature/:feature_id", controllers.DeleteFeature).Name("delete_feature")
-	gapp.Put("/features/:feature_id", NextFunc).Name("activate_deactivate_features").Put("/features/:feature_id", controllers.ActivateDeactivateFeature)
+	gapp.Put("/feature/:feature_id", NextFunc).Name("activate_deactivate_features").Put("/feature/:feature_id", controllers.ActivateDeactivateFeature)
 	gapp.Get("/featuredrop", NextFunc).Name("drop_features").Get("/featuredrop", controllers.GetDropFeatures)
 
 	gapp.Patch("/endpointfeature/:endpoint_id", NextFunc).Name("add_endpointfeature").Patch("/endpointfeature/:endpoint_id", controllers.AddEndpointFeatures)

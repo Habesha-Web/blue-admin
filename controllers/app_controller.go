@@ -122,6 +122,66 @@ func GetAppByID(contx *fiber.Ctx) error {
 	})
 }
 
+// GetAppRoleUUID is a function to get a Apps by ID
+// @Summary Get App Roles by UUID
+// @Description Get app roles by UUID
+// @Tags Apps
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param app_uuid path string true "App UUID"
+// @Success 200 {object} common.ResponseHTTP{data=[]models.RolePut}
+// @Failure 404 {object} common.ResponseHTTP{}
+// @Router /appruid/{app_uuid} [get]
+func GetAppRoleUUID(contx *fiber.Ctx) error {
+
+	// Starting tracer context and tracer
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	//  parsing Query Prameters
+	uuid := contx.Params("app_uuid")
+	if uuid == "" {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "No uuid",
+			Data:    nil,
+		})
+	}
+
+	// Preparing and querying database using Gorm
+	var roles []models.RolePut
+	// select apps.id as appID, roles.id, roles.name, roles.description,roles.active from roles inner join apps on roles.app_id == apps.id where apps.uuid =="0191c74f-d039-71c6-a3be-66e2571a9cf1" ORDER BY roles.id;
+	query_string := `select apps.id as appID, roles.id, roles.name, roles.description,roles.active from roles
+						inner join apps on roles.app_id == apps.id
+						where apps.uuid = ? ORDER BY roles.id;`
+
+	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid).Scan(&roles); res.Error != nil {
+		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
+			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "App Roles not found",
+				Data:    nil,
+			})
+		}
+		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Error retrieving App",
+			Data:    nil,
+		})
+	}
+
+	//  Finally returing response if All the above compeleted successfully
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success got one app.",
+		Data:    &roles,
+	})
+}
+
 // Add App to data
 // @Summary Add a new App
 // @Description Add App

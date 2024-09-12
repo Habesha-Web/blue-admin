@@ -371,7 +371,7 @@ func DeleteRole(contx *fiber.Ctx) error {
 	tx := db.WithContext(tracer.Tracer).Begin()
 
 	// first getting role and checking if it exists
-	if err := db.Where("id = ?", id).First(&role).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&role).Error; err != nil {
 		tx.Rollback()
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
@@ -388,7 +388,7 @@ func DeleteRole(contx *fiber.Ctx) error {
 	}
 
 	// Delete the role
-	if err := db.Delete(&role).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Delete(&role).Error; err != nil {
 		tx.Rollback()
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,
@@ -454,9 +454,8 @@ func AddUserRoles(contx *fiber.Ctx) error {
 
 	// fetching role to be added
 	var role models.Role
-	role.ID = uint(role_id)
-	if res := db.Find(&role); res.Error != nil {
-		return contx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
+	if res := db.WithContext(tracer.Tracer).Where("id = ?", role_id).First(&role); res.Error != nil {
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: res.Error.Error(),
 			Data:    nil,
@@ -465,8 +464,7 @@ func AddUserRoles(contx *fiber.Ctx) error {
 
 	//  roleending assocation
 	var user models.User
-	user.ID = uint(user_id)
-	if err := db.Find(&user); err.Error != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&user); err.Error != nil {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: "Record not Found",
@@ -535,9 +533,8 @@ func DeleteUserRoles(contx *fiber.Ctx) error {
 	}
 	// fetching role to be deleted
 	var role models.Role
-	role.ID = uint(role_id)
-	if res := db.Find(&role); res.Error != nil {
-		return contx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
+	if res := db.WithContext(tracer.Tracer).Where("id = ?", role_id).First(&role); res.Error != nil {
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: res.Error.Error(),
 			Data:    nil,
@@ -546,12 +543,11 @@ func DeleteUserRoles(contx *fiber.Ctx) error {
 
 	// fettchng user
 	var user models.User
-	user.ID = uint(user_id)
-	if err := db.Find(&user); err.Error != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&user); err.Error != nil {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Record not Found",
-			Data:    err.Error.Error(),
+			Message: err.Error.Error(),
+			Data:    nil,
 		})
 	}
 
@@ -755,7 +751,7 @@ func ActivateDeactivateRoles(contx *fiber.Ctx) error {
 	var role models.Role
 	role.ID = uint(id)
 	tx := db.WithContext(tracer.Tracer).Begin()
-	if err := db.Model(&role).Update("active", active).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ? ", id).Model(&role).Update("active", active).Error; err != nil {
 		tx.Rollback()
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
@@ -765,12 +761,20 @@ func ActivateDeactivateRoles(contx *fiber.Ctx) error {
 	}
 	tx.Commit()
 
-	role.Active = active
-	// return value if transaction is sucessfull
-	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
-		Success: true,
-		Message: "Success Updating a role.",
-		Data:    role,
+	if role.ID != 0 {
+		role.Active = active
+		// return value if transaction is sucessfull
+		return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+			Success: true,
+			Message: "Success Updating a role.",
+			Data:    role,
+		})
+	}
+
+	return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+		Success: false,
+		Message: "No Record Found",
+		Data:    nil,
 	})
 }
 

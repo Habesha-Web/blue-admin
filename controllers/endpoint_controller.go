@@ -252,11 +252,10 @@ func PatchEndpoint(contx *fiber.Ctx) error {
 
 	// startng update transaction
 	var endpoint models.Endpoint
-	endpoint.ID = uint(id)
 	tx := db.WithContext(tracer.Tracer).Begin()
 
 	// Check if the record exists
-	if err := db.WithContext(tracer.Tracer).First(&endpoint, endpoint.ID).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&endpoint).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			// If the record doesn't exist, return an error response
 			tx.Rollback()

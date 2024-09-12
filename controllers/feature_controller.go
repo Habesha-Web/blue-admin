@@ -252,11 +252,9 @@ func PatchFeature(contx *fiber.Ctx) error {
 
 	// startng update transaction
 	var feature models.Feature
-	feature.ID = uint(id)
 	tx := db.WithContext(tracer.Tracer).Begin()
-
 	// Check if the record exists
-	if err := db.WithContext(tracer.Tracer).First(&feature, feature.ID).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&feature).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			// If the record doesn't exist, return an error response
 			tx.Rollback()
@@ -589,9 +587,8 @@ func ActivateDeactivateFeature(contx *fiber.Ctx) error {
 	active := contx.QueryBool("active")
 	// startng update transaction
 	var feature models.Feature
-	feature.ID = uint(feature_id)
 	tx := db.WithContext(tracer.Tracer).Begin()
-	if err := db.WithContext(tracer.Tracer).Model(&feature).Update("active", active).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ?", feature_id).First(&feature).Update("active", active).Error; err != nil {
 		tx.Rollback()
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
@@ -600,11 +597,21 @@ func ActivateDeactivateFeature(contx *fiber.Ctx) error {
 		})
 	}
 	tx.Commit()
-	feature.Active = active
-	// return value if transaction is sucessfull
-	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
-		Success: true,
-		Message: "Success Updating a feature.",
-		Data:    feature,
+	if feature.ID != 0 {
+		feature.Active = active
+		// return value if transaction is sucessfull
+		return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+			Success: true,
+			Message: "Success Updating a feature.",
+			Data:    feature,
+		})
+
+	}
+
+	// Finally if no record found
+	return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+		Success: false,
+		Message: "No Record Found",
+		Data:    nil,
 	})
 }

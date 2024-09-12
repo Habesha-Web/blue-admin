@@ -19,7 +19,7 @@ import (
 	oteltrace "go.opentelemetry.io/otel/trace"
 )
 
-var AppTracer = otel.Tracer(fmt.Sprintf("fiber-server-%v", configs.AppConfig.Get("APP_NAME")))
+var AppTracer = otel.Tracer(fmt.Sprintf("badmin-server-%v", configs.AppConfig.Get("APP_NAME")))
 
 func InitTracer() *sdktrace.TracerProvider {
 	traceExporter := configs.AppConfig.Get("TRACE_EXPORTER")

@@ -375,6 +375,18 @@ definitions:
       name:
         type: string
     type: object
+  models.RolePut:
+    description: RolePut type information
+    properties:
+      active:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
   models.User:
     description: App type information
     properties:
@@ -410,6 +422,20 @@ definitions:
         items:
           $ref: '#/definitions/models.Role'
         type: array
+      uuid:
+        type: string
+    type: object
+  models.UserNoRlnGet:
+    description: UserGet type information
+    properties:
+      date_registered:
+        type: string
+      disabled:
+        type: boolean
+      email:
+        type: string
+      id:
+        type: integer
       uuid:
         type: string
     type: object
@@ -609,6 +635,118 @@ paths:
       summary: Patch App
       tags:
       - Apps
+  /approleuser/{role_id}/{user_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Role User
+      parameters:
+      - description: Role ID
+        in: path
+        name: role_id
+        required: true
+        type: integer
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: app uuid
+        in: query
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.UserPost'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Add User
+      tags:
+      - Roles
+    post:
+      consumes:
+      - application/json
+      description: Add Role User
+      parameters:
+      - description: Role ID
+        in: path
+        name: role_id
+        required: true
+        type: integer
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: app uuid
+        in: query
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Add User to Role
+      tags:
+      - RoleUsers
+  /appruid/{app_uuid}:
+    get:
+      consumes:
+      - application/json
+      description: Get app roles by UUID
+      parameters:
+      - description: App UUID
+        in: path
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.RolePut'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App Roles by UUID
+      tags:
+      - Apps
   /appsdrop:
     get:
       consumes:
@@ -637,6 +775,123 @@ paths:
       summary: Get FeatureDropDown
       tags:
       - Feature
+  /appuser/{user_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Remove App user by ID
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: app uuid
+        in: query
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Remove App User by ID
+      tags:
+      - Users
+    get:
+      consumes:
+      - application/json
+      description: Get App user by ID
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: app uuid
+        in: query
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.UserGet'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App User by ID
+      tags:
+      - Users
+  /appusers:
+    get:
+      consumes:
+      - application/json
+      description: Get App Users
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: size
+        required: true
+        type: integer
+      - description: app uuid
+        in: query
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponsePagination'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.UserGet'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      - Refresh: []
+      summary: Get App Users
+      tags:
+      - Users
   /checklogin:
     get:
       consumes:
@@ -2253,6 +2508,43 @@ paths:
       summary: Add a new User
       tags:
       - Users
+    put:
+      consumes:
+      - application/json
+      description: Put User
+      parameters:
+      - description: Password User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.UserPassword'
+      - description: Reset Password
+        in: query
+        name: reset
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.UserGet'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Put User
+      tags:
+      - Users
   /user/{user_id}:
     delete:
       consumes:
@@ -2356,6 +2648,33 @@ paths:
       summary: Patch User
       tags:
       - Users
+    put:
+      consumes:
+      - application/json
+      description: Activate/Deactivate User
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: Disabled
+        in: query
+        name: status
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Activate/Deactivate User
+      tags:
+      - Users
   /userrole/{user_id}/{role_id}:
     delete:
       consumes:
@@ -2424,23 +2743,22 @@ paths:
       summary: Add Role to User
       tags:
       - UserRoles
-  /users:
-    put:
+  /useruuid:
+    get:
       consumes:
       - application/json
-      description: Put User
+      description: Get user by UUID
       parameters:
-      - description: Password User
-        in: body
-        name: user
-        required: true
-        schema:
-          $ref: '#/definitions/controllers.UserPassword'
-      - description: Reset Password
+      - description: User UUID
         in: query
-        name: reset
+        name: uuid
         required: true
-        type: boolean
+        type: string
+      - description: App UUID
+        in: query
+        name: app_uuid
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -2451,43 +2769,15 @@ paths:
             - $ref: '#/definitions/common.ResponseHTTP'
             - properties:
                 data:
-                  $ref: '#/definitions/models.UserGet'
+                  $ref: '#/definitions/models.UserNoRlnGet'
               type: object
-        "400":
-          description: Bad Request
+        "404":
+          description: Not Found
           schema:
             $ref: '#/definitions/common.ResponseHTTP'
       security:
       - ApiKeyAuth: []
-      summary: Put User
-      tags:
-      - Users
-  /users/{user_id}:
-    put:
-      consumes:
-      - application/json
-      description: Activate/Deactivate User
-      parameters:
-      - description: User ID
-        in: path
-        name: user_id
-        required: true
-        type: integer
-      - description: Disabled
-        in: query
-        name: status
-        required: true
-        type: boolean
-      produces:
-      - application/json
-      responses:
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/common.ResponseHTTP'
-      security:
-      - ApiKeyAuth: []
-      summary: Activate/Deactivate User
+      summary: Get User by UUID
       tags:
       - Users
 securityDefinitions:

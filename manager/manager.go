@@ -1,5 +1,5 @@
-
 package manager
+
 import (
 	"fmt"
 	"os"
@@ -18,6 +18,7 @@ var (
 	}
 )
 
+// go build -tags netgo -ldflags '-s -w' -o app
 func Execute() {
 	if err := goFrame.Execute(); err != nil {
 
