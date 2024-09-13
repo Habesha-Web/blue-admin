@@ -2157,6 +2157,42 @@ paths:
       summary: Patch Role
       tags:
       - Roles
+    put:
+      consumes:
+      - application/json
+      description: Activate/Deactivate
+      parameters:
+      - description: Role ID
+        in: path
+        name: role_id
+        required: true
+        type: integer
+      - description: Active
+        in: query
+        name: active
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.RolePost'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Activate/Deactivate
+      tags:
+      - Role
   /role_endpoints:
     get:
       consumes:
@@ -2314,43 +2350,6 @@ paths:
       summary: Add Page to Role
       tags:
       - RolePages
-  /roles/{role_id}:
-    put:
-      consumes:
-      - application/json
-      description: Activate/Deactivate
-      parameters:
-      - description: Role ID
-        in: path
-        name: role_id
-        required: true
-        type: integer
-      - description: Active
-        in: query
-        name: active
-        required: true
-        type: boolean
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/common.ResponseHTTP'
-            - properties:
-                data:
-                  $ref: '#/definitions/models.RolePost'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/common.ResponseHTTP'
-      security:
-      - ApiKeyAuth: []
-      summary: Activate/Deactivate
-      tags:
-      - Role
   /roleuser/{role_id}/{user_id}:
     delete:
       consumes:

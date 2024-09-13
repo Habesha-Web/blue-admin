@@ -157,7 +157,7 @@ func GetAppRoleUUID(contx *fiber.Ctx) error {
 	// select apps.id as appID, roles.id, roles.name, roles.description,roles.active from roles inner join apps on roles.app_id == apps.id where apps.uuid =="0191c74f-d039-71c6-a3be-66e2571a9cf1" ORDER BY roles.id;
 	query_string := `select apps.id as appID, roles.id, roles.name, roles.description,roles.active from roles
 						inner join apps on roles.app_id == apps.id
-						where apps.uuid = ? ORDER BY roles.id;`
+						where apps.uuid = ? and roles.active = true ORDER BY roles.id;`
 
 	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid).Scan(&roles); res.Error != nil {
 		if errors.Is(res.Error, gorm.ErrRecordNotFound) {

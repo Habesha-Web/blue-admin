@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
 
-	"os"
 	"os/signal"
 
 	"blue-admin.com/bluetasks"
@@ -252,9 +252,9 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Get("/role/:role_id", NextFunc).Name("get_one_roles").Get("/role/:role_id", controllers.GetRoleByID)
 	gapp.Post("/role", NextFunc).Name("post_role").Post("/role", controllers.PostRole)
 	gapp.Patch("/role/:role_id", NextFunc).Name("patch_role").Patch("/role/:role_id", controllers.PatchRole)
-	gapp.Delete("/role/:role_id", NextFunc).Name("delete_role").Delete("/role/:role_id", controllers.DeleteRole).Name("delete_role")
+	gapp.Delete("/role/:role_id", NextFunc).Name("delete_role").Delete("/role/:role_id", controllers.DeleteRole)
 	gapp.Get("/droproles", NextFunc).Name("drop_roles").Get("/droproles", controllers.GetDropDownRoles)
-	gapp.Put("/roles/:role_id", NextFunc).Name("activate_deactivate_role").Put("/roles/:role_id", controllers.ActivateDeactivateRoles)
+	gapp.Put("/role/:role_id", NextFunc).Name("activate_deactivate_role").Put("/role/:role_id", controllers.ActivateDeactivateRoles)
 	gapp.Get("/role_endpoints", NextFunc).Name("roles_endpoints").Get("/role_endpoints", controllers.GetRoleEndpointsID)
 
 	gapp.Post("/userrole/:user_id/:role_id", NextFunc).Name("add_userrole").Post("/userrole/:user_id/:role_id", controllers.AddUserRoles)
@@ -293,7 +293,7 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Get("/feature/:feature_id", NextFunc).Name("get_one_features").Get("/feature/:feature_id", controllers.GetFeatureByID)
 	gapp.Post("/feature", NextFunc).Name("post_feature").Post("/feature", controllers.PostFeature)
 	gapp.Patch("/feature/:feature_id", NextFunc).Name("patch_feature").Patch("/feature/:feature_id", controllers.PatchFeature)
-	gapp.Delete("/feature/:feature_id", NextFunc).Name("delete_feature").Delete("/feature/:feature_id", controllers.DeleteFeature).Name("delete_feature")
+	gapp.Delete("/feature/:feature_id", NextFunc).Name("delete_feature").Delete("/feature/:feature_id", controllers.DeleteFeature)
 	gapp.Put("/feature/:feature_id", NextFunc).Name("activate_deactivate_features").Put("/feature/:feature_id", controllers.ActivateDeactivateFeature)
 	gapp.Get("/featuredrop", NextFunc).Name("drop_features").Get("/featuredrop", controllers.GetDropFeatures)
 
@@ -301,7 +301,7 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Delete("/endpointfeature/:endpoint_id", NextFunc).Name("delete_endpointfeature").Delete("/endpointfeature/:endpoint_id", controllers.DeleteEndpointFeatures)
 
 	gapp.Get("/endpoint", NextFunc).Name("get_all_endpoints").Get("/endpoint", controllers.GetEndpoints)
-	gapp.Get("/endpoint/:endpoint_id", NextFunc).Name("get_one_endpoints").Get("/endpoint/:endpoint_id", controllers.GetEndpointByID)
+	gapp.Get("/endpoint/:endpoint_id", NextFunc).Name("get_one_endpoint").Get("/endpoint/:endpoint_id", controllers.GetEndpointByID)
 	gapp.Post("/endpoint", NextFunc).Name("post_endpoint").Post("/endpoint", controllers.PostEndpoint)
 	gapp.Patch("/endpoint/:endpoint_id", NextFunc).Name("patch_endpoint").Patch("/endpoint/:endpoint_id", controllers.PatchEndpoint)
 	gapp.Delete("/endpoint/:endpoint_id", NextFunc).Name("delete_endpoint").Delete("/endpoint/:endpoint_id", controllers.DeleteEndpoint).Name("delete_endpoint")

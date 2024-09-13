@@ -829,7 +829,7 @@ func AddAppsRoleUsers(contx *fiber.Ctx) error {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: "Record not Found",
-			Data:    err.Error,
+			Data:    res.Error.Error(),
 		})
 	}
 
@@ -1020,7 +1020,7 @@ func DeleteAppRoleUsers(contx *fiber.Ctx) error {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: "Record not Found",
-			Data:    err.Error,
+			Data:    res.Error.Error(),
 		})
 	}
 
@@ -1092,7 +1092,7 @@ func ActivateDeactivateUser(contx *fiber.Ctx) error {
 	var user models.User
 	//Updating Didabled Status it it exists
 	tx := db.WithContext(tracer.Tracer).Begin()
-	if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).Model(&user).Update("disabled", status).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&user).Error; err != nil {
 		tx.Rollback()
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
@@ -1100,6 +1100,8 @@ func ActivateDeactivateUser(contx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
+
+	db.WithContext(tracer.Tracer).Model(&user).Update("disabled", status)
 	tx.Commit()
 
 	var response_user models.UserGet
@@ -1120,7 +1122,6 @@ func ActivateDeactivateUser(contx *fiber.Ctx) error {
 		Message: "No Record Found",
 		Data:    nil,
 	})
-
 }
 
 type UserPassword struct {

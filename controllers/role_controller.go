@@ -727,7 +727,7 @@ func DeleteFeatureRoles(contx *fiber.Ctx) error {
 // @Param active query bool true "Active"
 // @Success 200 {object} common.ResponseHTTP{data=models.RolePost}
 // @Failure 400 {object} common.ResponseHTTP{}
-// @Router /roles/{role_id} [put]
+// @Router /role/{role_id} [put]
 func ActivateDeactivateRoles(contx *fiber.Ctx) error {
 	//  Getting tracer context
 	ctx := contx.Locals("tracer")
@@ -749,9 +749,8 @@ func ActivateDeactivateRoles(contx *fiber.Ctx) error {
 	active := contx.QueryBool("active")
 	// startng update transaction
 	var role models.Role
-	role.ID = uint(id)
 	tx := db.WithContext(tracer.Tracer).Begin()
-	if err := db.WithContext(tracer.Tracer).Where("id = ? ", id).Model(&role).Update("active", active).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Where("id = ? ", id).First(&role).Error; err != nil {
 		tx.Rollback()
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
@@ -759,6 +758,7 @@ func ActivateDeactivateRoles(contx *fiber.Ctx) error {
 			Data:    err,
 		})
 	}
+	db.WithContext(tracer.Tracer).Model(&role).Update("active", active)
 	tx.Commit()
 
 	if role.ID != 0 {
