@@ -5,3 +5,4 @@ tests/.env
 tests/.test.env
 .env
 some.txt
+tests/blue-test.db

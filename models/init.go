@@ -14,13 +14,13 @@ func InitDatabase() {
 	fmt.Println("Connection Opened to Database")
 	if err == nil {
 		if err := database.AutoMigrate(
-			// &Role{},
-			// &App{},
-			// &User{},
-			// &Feature{},
+			&Role{},
+			&App{},
+			&User{},
+			&Feature{},
 			&Endpoint{},
-			// &Page{},
-			// &JWTSalt{},
+			&Page{},
+			&JWTSalt{},
 		); err != nil {
 			log.Fatalln(err)
 		}
@@ -33,27 +33,25 @@ func InitDatabase() {
 func CleanDatabase() {
 	configs.NewEnvFile("./configs")
 	database, err := database.ReturnSession()
+
 	if err == nil {
 		fmt.Println("Connection Opened to Database")
 		fmt.Println("Dropping Models if Exist")
 		database.Migrator().DropTable(
-
 			&Role{},
-
 			&App{},
-
 			&User{},
-
 			&Feature{},
-
 			&Endpoint{},
-
 			&Page{},
-
 			&JWTSalt{},
 		)
-
 		fmt.Println("Database Cleaned")
+		// Reset autoincrement values
+		result := database.Exec("Delete from sqlite_sequence;")
+		if result.Error != nil {
+			fmt.Println("Clean Database Function: " + result.Error.Error())
+		}
 	} else {
 		panic(err)
 	}

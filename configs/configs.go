@@ -85,12 +85,11 @@ func (e *RenderConfig) Get(key string) string {
 //		AppConfig.read()
 //	}
 func (e *RenderConfig) SetEnv(env string) {
-	fmt.Println(env)
+	// fmt.Println(env)
 	AppConfig = RenderConfig{}
 	if err := godotenv.Load(); err != nil {
 		fmt.Println(err.Error())
 	}
-
 
 }
 

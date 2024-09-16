@@ -374,6 +374,9 @@ definitions:
         type: string
       name:
         type: string
+    required:
+    - description
+    - name
     type: object
   models.RolePut:
     description: RolePut type information
@@ -897,13 +900,6 @@ paths:
       consumes:
       - application/json
       description: CheckLogin
-      parameters:
-      - description: Login
-        in: body
-        name: user
-        required: true
-        schema:
-          $ref: '#/definitions/controllers.LoginPost'
       produces:
       - application/json
       responses:
@@ -920,6 +916,8 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
       summary: Auth
       tags:
       - Authentication

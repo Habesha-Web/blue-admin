@@ -739,6 +739,11 @@ const docTemplate = `{
         },
         "/checklogin": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "CheckLogin",
                 "consumes": [
                     "application/json"
@@ -750,17 +755,6 @@ const docTemplate = `{
                     "Authentication"
                 ],
                 "summary": "Auth",
-                "parameters": [
-                    {
-                        "description": "Login",
-                        "name": "user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/controllers.LoginPost"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -4415,6 +4409,10 @@ const docTemplate = `{
         "models.RolePost": {
             "description": "RolePost type information",
             "type": "object",
+            "required": [
+                "description",
+                "name"
+            ],
             "properties": {
                 "description": {
                     "type": "string"

@@ -162,33 +162,30 @@ func PostLogin(contx *fiber.Ctx) error {
 // @Tags Authentication
 // @Accept json
 // @Produce json
-// @Param user body LoginPost true "Login"
+// @Security ApiKeyAuth
 // @Success 200 {object} common.ResponseHTTP{data=TokenResponse{}}
 // @Failure 404 {object} common.ResponseHTTP{}
 // @Router /checklogin [get]
 func CheckLogin(contx *fiber.Ctx) error {
 
-	// Getting header X-APP-TOKEN
-	type Token struct {
-		token string `reqHeader:"X-APP-TOKEN"`
-	}
-	var token Token
-	err := contx.ReqHeaderParser(token)
-	if err != nil {
+	token := contx.Get("X-APP-TOKEN")
+
+	if token == "" {
 		contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: err.Error(),
+			Message: "No header provided",
 			Data:    "Error Getting Header Value",
 		})
 	}
 
-	claims, err := utils.ParseJWTToken(token.token)
+
+	claims, err := utils.ParseJWTToken(token)
 	//  Decoding the token
 	if err != nil {
-		return contx.Status(http.StatusAccepted).JSON(common.ResponseHTTP{
-			Success: true,
-			Message: "Token decode sucessfull",
-			Data:    claims,
+		return contx.Status(http.StatusForbidden).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
 		})
 	}
 

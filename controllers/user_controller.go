@@ -291,7 +291,7 @@ func GetUserByUUID(contx *fiber.Ctx) error {
 	}
 
 	//  parsing Query Prameters
-	app_uuid := contx.Query("uuid")
+	app_uuid := contx.Query("app_uuid")
 	if app_uuid == "" {
 		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
 			Success: false,

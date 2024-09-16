@@ -22,7 +22,11 @@ func HashFunc(password string) string {
 
 	// var salt []byte
 	// get salt from env variable
-	salt := []byte(configs.AppConfig.Get("SECRETE_SALT"))
+	hsalt := configs.AppConfig.Get("SECRETE_SALT")
+	if configs.AppConfig.Get("SECRETE_SALT") == "" {
+		hsalt = "test_salt"
+	}
+	salt := []byte(hsalt)
 
 	// Convert password string to byte slice
 	var pwdByte = []byte(password)

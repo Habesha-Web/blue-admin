@@ -9,7 +9,7 @@ import (
 type Role struct {
 	ID          uint          `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string        `gorm:"not null; unique;" json:"name,omitempty"`
-	Description string        `gorm:"not null; unique;" json:"description,omitempty"`
+	Description string        `gorm:"not null;" json:"description,omitempty"`
 	Active      bool          `gorm:"default:true; constraint:not null;" json:"active"`
 	Users       []User        `gorm:"many2many:user_roles; constraint:OnUpdate:CASCADE; OnDelete:CASCADE;" json:"users,omitempty"`
 	Features    []Feature     `gorm:"foreignkey:RoleID; constraint:OnUpdate:CASCADE; OnDelete:SET NULL;" json:"features,omitempty"`
@@ -20,8 +20,8 @@ type Role struct {
 // RolePost model info
 // @Description RolePost type information
 type RolePost struct {
-	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
-	Description string `gorm:"not null; unique;" json:"description,omitempty"`
+	Name        string `gorm:"not null; unique;" json:"name,omitempty" validate:"required"`
+	Description string `gorm:"not null;" json:"description,omitempty" validate:"required"`
 }
 
 // RoleGet model info
@@ -29,7 +29,7 @@ type RolePost struct {
 type RoleGet struct {
 	ID          uint          `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string        `gorm:"not null; unique;" json:"name,omitempty"`
-	Description string        `gorm:"not null; unique;" json:"description,omitempty"`
+	Description string        `gorm:"not null;" json:"description,omitempty"`
 	Active      bool          `gorm:"default:true; constraint:not null;" json:"active"`
 	AppID       sql.NullInt64 `gorm:"foreignkey:AppID OnDelete:SET NULL" json:"app,omitempty" swaggertype:"number"`
 	Users       []User        `gorm:"many2many:user_roles; constraint:OnUpdate:CASCADE; OnDelete:CASCADE;" json:"users,omitempty"`
@@ -41,7 +41,7 @@ type RoleGet struct {
 type RolePut struct {
 	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
-	Description string `gorm:"not null; unique;" json:"description,omitempty"`
+	Description string `gorm:"not null;" json:"description,omitempty"`
 	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
 }
 
@@ -50,6 +50,6 @@ type RolePut struct {
 type RolePatch struct {
 	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
-	Description string `gorm:"not null; unique;" json:"description,omitempty"`
+	Description string `gorm:"not null;" json:"description,omitempty"`
 	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
 }

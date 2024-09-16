@@ -6,7 +6,7 @@ type Page struct {
 	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
 	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
-	Description string `gorm:"not null; unique;" json:"description,omitempty"`
+	Description string `gorm:"not null;" json:"description,omitempty"`
 	Roles       []Role `gorm:"many2many:page_roles; constraint:OnUpdate:CASCADE; OnDelete:CASCADE;" json:"roles,omitempty"`
 }
 
@@ -14,7 +14,7 @@ type Page struct {
 // @Description PagePost type information
 type PagePost struct {
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
-	Description string `gorm:"not null; unique;" json:"description,omitempty"`
+	Description string `gorm:"not null;" json:"description,omitempty"`
 }
 
 // PageGet model info
@@ -23,7 +23,7 @@ type PageGet struct {
 	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
 	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
-	Description string `gorm:"not null; unique;" json:"description,omitempty"`
+	Description string `gorm:"not null;" json:"description,omitempty"`
 	Roles       []Role `gorm:"many2many:page_roles; constraint:OnUpdate:CASCADE; OnDelete:CASCADE;" json:"roles,omitempty"`
 }
 
@@ -32,7 +32,7 @@ type PageGet struct {
 type PagePut struct {
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
 	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
-	Description string `gorm:"not null; unique;" json:"description,omitempty"`
+	Description string `gorm:"not null;" json:"description,omitempty"`
 }
 
 // PagePatch model info
@@ -40,5 +40,5 @@ type PagePut struct {
 type PagePatch struct {
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
 	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
-	Description string `gorm:"not null; unique;" json:"description,omitempty"`
+	Description string `gorm:"not null;" json:"description,omitempty"`
 }

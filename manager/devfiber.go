@@ -211,7 +211,7 @@ func fiber_run(env string) {
 
 	// adding group with authenthication middleware
 	admin_app := app.Group("/api/v1")
-	setupRoutes(admin_app.(*fiber.Group))
+	SetupRoutes(admin_app.(*fiber.Group))
 
 	//  Starting Apps and Conumers comes here below
 	HTTP_PORT := configs.AppConfig.Get("HTTP_PORT")
@@ -246,7 +246,7 @@ func init() {
 
 }
 
-func setupRoutes(gapp *fiber.Group) {
+func SetupRoutes(gapp *fiber.Group) {
 
 	gapp.Get("/role", NextFunc).Name("get_all_roles").Get("/role", controllers.GetRoles)
 	gapp.Get("/role/:role_id", NextFunc).Name("get_one_roles").Get("/role/:role_id", controllers.GetRoleByID)
@@ -316,8 +316,8 @@ func setupRoutes(gapp *fiber.Group) {
 	gapp.Delete("/rolepage/:role_id/:page_id", NextFunc).Name("delete_rolepage").Delete("/rolepage/:role_id/:page_id", controllers.DeleteRolePages)
 
 	// adding endpoints
-	gapp.Get("/checklogin", NextFunc).Name("check_login").Get("/checklogin", controllers.CheckLogin).Name("check_login")
-	gapp.Post("/login", controllers.PostLogin).Name("login_route")
+	gapp.Get("/checklogin", NextFunc).Name("check_login").Get("/checklogin", controllers.CheckLogin)
+	gapp.Post("/login", controllers.PostLogin)
 
 	gapp.Get("/endpointdrop", NextFunc).Name("drop_endpoints").Get("/endpointdrop", controllers.GetDropEndPoints)
 	gapp.Get("/appsdrop", NextFunc).Name("drop_sppd").Get("/appsdrop", controllers.GetDropApps)
