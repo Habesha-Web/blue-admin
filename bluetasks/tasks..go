@@ -56,6 +56,7 @@ func ScheduledTasks() *tasks.Scheduler {
 			// }
 			gormLoggerfile.Truncate(0)
 			log_file.Truncate(0)
+			FetchAndPrintIPs()
 			return nil
 		},
 	}); err != nil {
