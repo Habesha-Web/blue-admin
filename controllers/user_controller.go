@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -162,16 +161,9 @@ func GetUserByID(contx *fiber.Ctx) error {
 	var users_get models.UserGet
 	var users models.User
 	if res := db.WithContext(tracer.Tracer).Model(&models.User{}).Preload(clause.Associations).Where("id = ?", id).First(&users); res.Error != nil {
-		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "User not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving User",
+			Message: res.Error.Error(),
 			Data:    nil,
 		})
 	}
@@ -237,16 +229,9 @@ func GetAppUserByID(contx *fiber.Ctx) error {
 			WHERE a.uuid = ? AND u.id = ?;`
 
 	if res := db.WithContext(tracer.Tracer).Raw(query_string, app_uuid, id).Scan(&users_get); res.Error != nil {
-		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "User not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving User",
+			Message: "Some thing happened",
 			Data:    nil,
 		})
 	}
@@ -310,16 +295,9 @@ func GetUserByUUID(contx *fiber.Ctx) error {
 			WHERE a.uuid = ? AND u.uuid = ?;`
 
 	if res := db.WithContext(tracer.Tracer).Raw(query_string, app_uuid, user_uuid).Scan(&users_get); res.Error != nil {
-		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "User not found",
-				Data:    nil,
-			})
-		}
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving User",
+			Message: res.Error.Error(),
 			Data:    nil,
 		})
 	}
@@ -464,27 +442,15 @@ func PatchUser(contx *fiber.Ctx) error {
 	// startng update transaction
 	var user models.User
 	tx := db.WithContext(tracer.Tracer).Begin()
-	// Check if the record exists
 	if err := db.WithContext(tracer.Tracer).Where("id = ? ", id).First(&user).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			// If the record doesn't exist, return an error response
-			tx.Rollback()
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "User not found",
-				Data:    nil,
-			})
-		}
-		// If there's an unexpected error, return an internal server error response
 		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: err.Error(),
 			Data:    nil,
 		})
 	}
 
-	// Update the record
 	if err := db.WithContext(tracer.Tracer).Model(&user).UpdateColumns(*patch_user).Error; err != nil {
 		tx.Rollback()
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
@@ -542,16 +508,9 @@ func DeleteUser(contx *fiber.Ctx) error {
 	// first getting user and checking if it exists
 	if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&user).Error; err != nil {
 		tx.Rollback()
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "User not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving user",
+			Message: err.Error(),
 			Data:    nil,
 		})
 	}
@@ -634,16 +593,9 @@ func DeleteAppUser(contx *fiber.Ctx) error {
 	// first getting user and checking if it exists
 	if err := db.WithContext(tracer.Tracer).Raw(query_string, app_uuid, id).Scan(&user).Error; err != nil {
 		tx.Rollback()
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "User not found",
-				Data:    nil,
-			})
-		}
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving user",
+			Message: err.Error(),
 			Data:    nil,
 		})
 	}
@@ -717,13 +669,11 @@ func AddRoleUsers(contx *fiber.Ctx) error {
 	var user models.User
 	// first getting user and checking if it exists
 	if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&user).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "User not found",
-				Data:    nil,
-			})
-		}
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
 	}
 
 	//  userending assocation
@@ -810,13 +760,12 @@ func AddAppsRoleUsers(contx *fiber.Ctx) error {
 	// fetching user to be added
 	var user models.User
 	if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&user).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "User not found",
-				Data:    nil,
-			})
-		}
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+
 	}
 
 	//  userending assocation
@@ -905,13 +854,12 @@ func DeleteRoleUsers(contx *fiber.Ctx) error {
 	// fetching user to be deleted
 	var user models.User
 	if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&user).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "User not found",
-				Data:    nil,
-			})
-		}
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+
 	}
 
 	// fettchng role
@@ -990,13 +938,12 @@ func DeleteAppRoleUsers(contx *fiber.Ctx) error {
 	// fetching user to be deleted
 	var user models.User
 	if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&user).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "User not found",
-				Data:    nil,
-			})
-		}
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: err.Error(),
+			Data:    nil,
+		})
+
 	}
 
 	//  getting app uuid

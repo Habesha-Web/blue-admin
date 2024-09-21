@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -21,6 +20,7 @@ import (
 //	@name						X-REFRESH-TOKEN
 //	@description				Description for what is this security definition being used
 
+// go build -tags netgo -ldflags '-s -w' -o app
 func main() {
 	manager.Execute()
 }

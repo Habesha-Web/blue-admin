@@ -69,25 +69,25 @@
 				
 				<option value="file6">blue-admin.com/configs/configs.go (17.9%)</option>
 				
-				<option value="file7">blue-admin.com/controllers/app_controller.go (50.0%)</option>
+				<option value="file7">blue-admin.com/controllers/app_controller.go (51.1%)</option>
 				
 				<option value="file8">blue-admin.com/controllers/dashboard.go (0.0%)</option>
 				
 				<option value="file9">blue-admin.com/controllers/email.go (0.0%)</option>
 				
-				<option value="file10">blue-admin.com/controllers/endpoint_controller.go (77.2%)</option>
+				<option value="file10">blue-admin.com/controllers/endpoint_controller.go (80.0%)</option>
 				
-				<option value="file11">blue-admin.com/controllers/feature_controller.go (48.3%)</option>
+				<option value="file11">blue-admin.com/controllers/feature_controller.go (48.6%)</option>
 				
 				<option value="file12">blue-admin.com/controllers/jwtsalt_controller.go (0.0%)</option>
 				
 				<option value="file13">blue-admin.com/controllers/login.go (86.7%)</option>
 				
-				<option value="file14">blue-admin.com/controllers/page_controller.go (55.5%)</option>
+				<option value="file14">blue-admin.com/controllers/page_controller.go (56.2%)</option>
 				
-				<option value="file15">blue-admin.com/controllers/role_controller.go (35.6%)</option>
+				<option value="file15">blue-admin.com/controllers/role_controller.go (35.4%)</option>
 				
-				<option value="file16">blue-admin.com/controllers/user_controller.go (36.2%)</option>
+				<option value="file16">blue-admin.com/controllers/user_controller.go (37.3%)</option>
 				
 				<option value="file17">blue-admin.com/database/database.go (45.0%)</option>
 				
@@ -97,7 +97,7 @@
 				
 				<option value="file20">blue-admin.com/manager/consumer.go (25.0%)</option>
 				
-				<option value="file21">blue-admin.com/manager/devfiber.go (48.3%)</option>
+				<option value="file21">blue-admin.com/manager/devfiber.go (59.2%)</option>
 				
 				<option value="file22">blue-admin.com/manager/manager.go (0.0%)</option>
 				
@@ -119,7 +119,7 @@
 				
 				<option value="file31">blue-admin.com/observe/tracer.go (22.2%)</option>
 				
-				<option value="file32">blue-admin.com/tests/test_app.go (69.2%)</option>
+				<option value="file32">blue-admin.com/tests/test_app.go (100.0%)</option>
 				
 				<option value="file33">blue-admin.com/utils/dynamic_salt.go (81.2%)</option>
 				
@@ -839,7 +839,6 @@ func (e *RenderConfig) GetOrDefault(key, defaultValue string) string <span class
 		<pre class="file" id="file7" style="display: none">package controllers
 
 import (
-        "errors"
         "net/http"
         "strconv"
 
@@ -935,19 +934,12 @@ func GetAppByID(contx *fiber.Ctx) error <span class="cov8" title="1">{
         <span class="cov8" title="1">var apps_get models.AppGet
         var apps models.App
         if res := db.WithContext(tracer.Tracer).Model(&amp;models.App{}).Preload(clause.Associations).Where("id = ?", id).First(&amp;apps); res.Error != nil </span><span class="cov8" title="1">{
-                if errors.Is(res.Error, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "App not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving App",
+                        Message: res.Error.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // filtering response data according to filtered defined struct
         <span class="cov8" title="1">mapstructure.Decode(apps, &amp;apps_get)
@@ -998,19 +990,12 @@ func GetAppRoleUUID(contx *fiber.Ctx) error <span class="cov0" title="0">{
                                                 where apps.uuid = ? and roles.active = true ORDER BY roles.id;`
 
         if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid).Scan(&amp;roles); res.Error != nil </span><span class="cov0" title="0">{
-                if errors.Is(res.Error, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "App Roles not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving App",
+                        Message: res.Error.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         //  Finally returing response if All the above compeleted successfully
         <span class="cov0" title="0">return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
@@ -1155,23 +1140,14 @@ func PatchApp(contx *fiber.Ctx) error <span class="cov8" title="1">{
 
         // Check if the record exists
         if err := db.WithContext(tracer.Tracer).First(&amp;app, app.ID).Error; err != nil </span><span class="cov8" title="1">{
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        // If the record doesn't exist, return an error response
-                        tx.Rollback()
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "App not found",
-                                Data:    nil,
-                        })
-                }</span>
                 // If there's an unexpected error, return an internal server error response
-                <span class="cov0" title="0">tx.Rollback()
-                return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                tx.Rollback()
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
                         Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // Update the record
         <span class="cov8" title="1">if err := db.WithContext(tracer.Tracer).Model(&amp;app).UpdateColumns(*patch_app).Error; err != nil </span><span class="cov0" title="0">{
@@ -1231,19 +1207,12 @@ func DeleteApp(contx *fiber.Ctx) error <span class="cov8" title="1">{
         // first getting app and checking if it exists
         if err := db.Where("id = ?", id).First(&amp;app).Error; err != nil </span><span class="cov8" title="1">{
                 tx.Rollback()
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "App not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving app",
+                        Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // Delete the app
         <span class="cov8" title="1">if err := db.Delete(&amp;app).Error; err != nil </span><span class="cov0" title="0">{
@@ -1836,7 +1805,6 @@ func SendEmail(contx *fiber.Ctx) error <span class="cov0" title="0">{
 		<pre class="file" id="file10" style="display: none">package controllers
 
 import (
-        "errors"
         "net/http"
         "strconv"
 
@@ -1932,19 +1900,12 @@ func GetEndpointByID(contx *fiber.Ctx) error <span class="cov8" title="1">{
         <span class="cov8" title="1">var endpoints_get models.EndpointGet
         var endpoints models.Endpoint
         if res := db.WithContext(tracer.Tracer).Model(&amp;models.Endpoint{}).Preload(clause.Associations).Where("id = ?", id).First(&amp;endpoints); res.Error != nil </span><span class="cov8" title="1">{
-                if errors.Is(res.Error, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Endpoint not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving Endpoint",
+                        Message: res.Error.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // filtering response data according to filtered defined struct
         <span class="cov8" title="1">mapstructure.Decode(endpoints, &amp;endpoints_get)
@@ -2091,23 +2052,14 @@ func PatchEndpoint(contx *fiber.Ctx) error <span class="cov8" title="1">{
 
         // Check if the record exists
         if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&amp;endpoint).Error; err != nil </span><span class="cov8" title="1">{
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        // If the record doesn't exist, return an error response
-                        tx.Rollback()
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Endpoint not found",
-                                Data:    nil,
-                        })
-                }</span>
                 // If there's an unexpected error, return an internal server error response
-                <span class="cov0" title="0">tx.Rollback()
-                return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                tx.Rollback()
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
                         Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // Update the record
         <span class="cov8" title="1">if err := db.WithContext(tracer.Tracer).Model(&amp;endpoint).UpdateColumns(*patch_endpoint).Error; err != nil </span><span class="cov0" title="0">{
@@ -2167,19 +2119,12 @@ func DeleteEndpoint(contx *fiber.Ctx) error <span class="cov8" title="1">{
         // first getting endpoint and checking if it exists
         if err := db.Where("id = ?", id).First(&amp;endpoint).Error; err != nil </span><span class="cov8" title="1">{
                 tx.Rollback()
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Endpoint not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving endpoint",
+                        Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // Delete the endpoint
         <span class="cov8" title="1">if err := db.Delete(&amp;endpoint).Error; err != nil </span><span class="cov0" title="0">{
@@ -2249,7 +2194,6 @@ func GetDropEndPoints(contx *fiber.Ctx) error <span class="cov0" title="0">{
 		<pre class="file" id="file11" style="display: none">package controllers
 
 import (
-        "errors"
         "net/http"
         "strconv"
 
@@ -2345,19 +2289,12 @@ func GetFeatureByID(contx *fiber.Ctx) error <span class="cov8" title="1">{
         <span class="cov8" title="1">var features_get models.FeatureGet
         var features models.Feature
         if res := db.WithContext(tracer.Tracer).Model(&amp;models.Feature{}).Preload(clause.Associations).Where("id = ?", id).First(&amp;features); res.Error != nil </span><span class="cov8" title="1">{
-                if errors.Is(res.Error, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Feature not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving Feature",
+                        Message: res.Error.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // filtering response data according to filtered defined struct
         <span class="cov8" title="1">mapstructure.Decode(features, &amp;features_get)
@@ -2503,23 +2440,14 @@ func PatchFeature(contx *fiber.Ctx) error <span class="cov8" title="1">{
         tx := db.WithContext(tracer.Tracer).Begin()
         // Check if the record exists
         if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&amp;feature).Error; err != nil </span><span class="cov8" title="1">{
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        // If the record doesn't exist, return an error response
-                        tx.Rollback()
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Feature not found",
-                                Data:    nil,
-                        })
-                }</span>
                 // If there's an unexpected error, return an internal server error response
-                <span class="cov0" title="0">tx.Rollback()
-                return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                tx.Rollback()
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
                         Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // Update the record
         <span class="cov8" title="1">if err := db.WithContext(tracer.Tracer).Model(&amp;feature).UpdateColumns(*patch_feature).Error; err != nil </span><span class="cov0" title="0">{
@@ -2579,19 +2507,12 @@ func DeleteFeature(contx *fiber.Ctx) error <span class="cov8" title="1">{
         // first getting feature and checking if it exists
         if err := db.Where("id = ?", id).First(&amp;feature).Error; err != nil </span><span class="cov8" title="1">{
                 tx.Rollback()
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Feature not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving feature",
+                        Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // Delete the feature
         <span class="cov8" title="1">if err := db.Delete(&amp;feature).Error; err != nil </span><span class="cov0" title="0">{
@@ -3128,7 +3049,6 @@ func CheckLogin(contx *fiber.Ctx) error <span class="cov8" title="1">{
 		<pre class="file" id="file14" style="display: none">package controllers
 
 import (
-        "errors"
         "net/http"
         "strconv"
 
@@ -3224,19 +3144,12 @@ func GetPageByID(contx *fiber.Ctx) error <span class="cov8" title="1">{
         <span class="cov8" title="1">var pages_get models.PageGet
         var pages models.Page
         if res := db.WithContext(tracer.Tracer).Model(&amp;models.Page{}).Preload(clause.Associations).Where("id = ?", id).First(&amp;pages); res.Error != nil </span><span class="cov8" title="1">{
-                if errors.Is(res.Error, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Page not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving Page",
+                        Message: res.Error.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // filtering response data according to filtered defined struct
         <span class="cov8" title="1">mapstructure.Decode(pages, &amp;pages_get)
@@ -3382,23 +3295,14 @@ func PatchPage(contx *fiber.Ctx) error <span class="cov8" title="1">{
         tx := db.WithContext(tracer.Tracer).Begin()
         // Check if the record exists
         if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&amp;page).Error; err != nil </span><span class="cov8" title="1">{
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        // If the record doesn't exist, return an error response
-                        tx.Rollback()
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Page not found",
-                                Data:    nil,
-                        })
-                }</span>
-                // If there's an unexpected error, return an internal server error response
-                <span class="cov0" title="0">tx.Rollback()
-                return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                // If the record doesn't exist, return an error response
+                tx.Rollback()
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
                         Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // Update the record
         <span class="cov8" title="1">if err := db.WithContext(tracer.Tracer).Model(&amp;page).UpdateColumns(*patch_page).Error; err != nil </span><span class="cov0" title="0">{
@@ -3458,19 +3362,13 @@ func DeletePage(contx *fiber.Ctx) error <span class="cov8" title="1">{
         // first getting page and checking if it exists
         if err := db.Where("id = ?", id).First(&amp;page).Error; err != nil </span><span class="cov8" title="1">{
                 tx.Rollback()
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Page not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving page",
+                        Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+
+        }</span>
 
         // Delete the page
         <span class="cov8" title="1">if err := db.Delete(&amp;page).Error; err != nil </span><span class="cov0" title="0">{
@@ -3662,7 +3560,6 @@ func DeleteRolePages(contx *fiber.Ctx) error <span class="cov0" title="0">{
 		<pre class="file" id="file15" style="display: none">package controllers
 
 import (
-        "errors"
         "net/http"
         "strconv"
 
@@ -3715,8 +3612,8 @@ func GetRoles(contx *fiber.Ctx) error <span class="cov8" title="1">{
         if err != nil </span><span class="cov0" title="0">{
                 return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Failed to get all Role.",
-                        Data:    "something",
+                        Message: err.Error(),
+                        Data:    nil,
                 })
         }</span>
 
@@ -3758,19 +3655,12 @@ func GetRoleByID(contx *fiber.Ctx) error <span class="cov8" title="1">{
         <span class="cov8" title="1">var roles_get models.RoleGet
         var roles models.Role
         if res := db.WithContext(tracer.Tracer).Model(&amp;models.Role{}).Preload(clause.Associations).Where("id = ?", id).First(&amp;roles); res.Error != nil </span><span class="cov8" title="1">{
-                if errors.Is(res.Error, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Role not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving Role",
+                        Message: res.Error.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // filtering response data according to filtered defined struct
         <span class="cov8" title="1">mapstructure.Decode(roles, &amp;roles_get)
@@ -3958,23 +3848,13 @@ func PatchRole(contx *fiber.Ctx) error <span class="cov8" title="1">{
 
         // Check if the record exists
         if err := db.WithContext(tracer.Tracer).First(&amp;role, role.ID).Error; err != nil </span><span class="cov8" title="1">{
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        // If the record doesn't exist, return an error response
-                        tx.Rollback()
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Role not found",
-                                Data:    nil,
-                        })
-                }</span>
-                // If there's an unexpected error, return an internal server error response
-                <span class="cov0" title="0">tx.Rollback()
-                return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                tx.Rollback()
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
                         Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // Update the record
         <span class="cov8" title="1">if err := db.WithContext(tracer.Tracer).Model(&amp;role).UpdateColumns(*patch_role).Error; err != nil </span><span class="cov0" title="0">{
@@ -4034,19 +3914,13 @@ func DeleteRole(contx *fiber.Ctx) error <span class="cov8" title="1">{
         // first getting role and checking if it exists
         if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&amp;role).Error; err != nil </span><span class="cov8" title="1">{
                 tx.Rollback()
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "Role not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving role",
+                        Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+
+        }</span>
 
         // Delete the role
         <span class="cov8" title="1">if err := db.WithContext(tracer.Tracer).Delete(&amp;role).Error; err != nil </span><span class="cov0" title="0">{
@@ -4494,7 +4368,6 @@ func GetRoleEndpointsID(contx *fiber.Ctx) error <span class="cov0" title="0">{
 		<pre class="file" id="file16" style="display: none">package controllers
 
 import (
-        "errors"
         "net/http"
         "strconv"
 
@@ -4655,19 +4528,12 @@ func GetUserByID(contx *fiber.Ctx) error <span class="cov8" title="1">{
         <span class="cov8" title="1">var users_get models.UserGet
         var users models.User
         if res := db.WithContext(tracer.Tracer).Model(&amp;models.User{}).Preload(clause.Associations).Where("id = ?", id).First(&amp;users); res.Error != nil </span><span class="cov8" title="1">{
-                if errors.Is(res.Error, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "User not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving User",
+                        Message: res.Error.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // filtering response data according to filtered defined struct
         <span class="cov8" title="1">mapstructure.Decode(users, &amp;users_get)
@@ -4730,19 +4596,12 @@ func GetAppUserByID(contx *fiber.Ctx) error <span class="cov8" title="1">{
                         WHERE a.uuid = ? AND u.id = ?;`
 
         if res := db.WithContext(tracer.Tracer).Raw(query_string, app_uuid, id).Scan(&amp;users_get); res.Error != nil </span><span class="cov0" title="0">{
-                if errors.Is(res.Error, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "User not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving User",
+                        Message: "Some thing happened",
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         //  Finally returing response if All the above compeleted successfully
         <span class="cov8" title="1">return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
@@ -4803,19 +4662,12 @@ func GetUserByUUID(contx *fiber.Ctx) error <span class="cov8" title="1">{
                         WHERE a.uuid = ? AND u.uuid = ?;`
 
         if res := db.WithContext(tracer.Tracer).Raw(query_string, app_uuid, user_uuid).Scan(&amp;users_get); res.Error != nil </span><span class="cov0" title="0">{
-                if errors.Is(res.Error, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "User not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving User",
+                        Message: res.Error.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         //  Finally returing response if All the above compeleted successfully
         <span class="cov8" title="1">return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
@@ -4957,27 +4809,15 @@ func PatchUser(contx *fiber.Ctx) error <span class="cov8" title="1">{
         // startng update transaction
         <span class="cov8" title="1">var user models.User
         tx := db.WithContext(tracer.Tracer).Begin()
-        // Check if the record exists
         if err := db.WithContext(tracer.Tracer).Where("id = ? ", id).First(&amp;user).Error; err != nil </span><span class="cov8" title="1">{
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        // If the record doesn't exist, return an error response
-                        tx.Rollback()
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "User not found",
-                                Data:    nil,
-                        })
-                }</span>
-                // If there's an unexpected error, return an internal server error response
-                <span class="cov0" title="0">tx.Rollback()
-                return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                tx.Rollback()
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
                         Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
-        // Update the record
         <span class="cov8" title="1">if err := db.WithContext(tracer.Tracer).Model(&amp;user).UpdateColumns(*patch_user).Error; err != nil </span><span class="cov0" title="0">{
                 tx.Rollback()
                 return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
@@ -5035,19 +4875,12 @@ func DeleteUser(contx *fiber.Ctx) error <span class="cov8" title="1">{
         // first getting user and checking if it exists
         if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&amp;user).Error; err != nil </span><span class="cov8" title="1">{
                 tx.Rollback()
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov8" title="1">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "User not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving user",
+                        Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // Delete the user
         <span class="cov8" title="1">if err := db.WithContext(tracer.Tracer).Delete(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
@@ -5127,19 +4960,12 @@ func DeleteAppUser(contx *fiber.Ctx) error <span class="cov0" title="0">{
         // first getting user and checking if it exists
         if err := db.WithContext(tracer.Tracer).Raw(query_string, app_uuid, id).Scan(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
                 tx.Rollback()
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "User not found",
-                                Data:    nil,
-                        })
-                }</span>
-                <span class="cov0" title="0">return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+                return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
                         Success: false,
-                        Message: "Error retrieving user",
+                        Message: err.Error(),
                         Data:    nil,
-                })</span>
-        }
+                })
+        }</span>
 
         // Delete the user
         <span class="cov0" title="0">if err := db.WithContext(tracer.Tracer).Delete(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
@@ -5210,14 +5036,12 @@ func AddRoleUsers(contx *fiber.Ctx) error <span class="cov0" title="0">{
         <span class="cov0" title="0">var user models.User
         // first getting user and checking if it exists
         if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "User not found",
-                                Data:    nil,
-                        })
-                }</span>
-        }
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+                        Success: false,
+                        Message: err.Error(),
+                        Data:    nil,
+                })
+        }</span>
 
         //  userending assocation
         <span class="cov0" title="0">var role models.Role
@@ -5303,14 +5127,13 @@ func AddAppsRoleUsers(contx *fiber.Ctx) error <span class="cov0" title="0">{
         // fetching user to be added
         <span class="cov0" title="0">var user models.User
         if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "User not found",
-                                Data:    nil,
-                        })
-                }</span>
-        }
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+                        Success: false,
+                        Message: err.Error(),
+                        Data:    nil,
+                })
+
+        }</span>
 
         //  userending assocation
         <span class="cov0" title="0">var role models.Role
@@ -5398,14 +5221,13 @@ func DeleteRoleUsers(contx *fiber.Ctx) error <span class="cov0" title="0">{
         // fetching user to be deleted
         <span class="cov0" title="0">var user models.User
         if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "User not found",
-                                Data:    nil,
-                        })
-                }</span>
-        }
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+                        Success: false,
+                        Message: err.Error(),
+                        Data:    nil,
+                })
+
+        }</span>
 
         // fettchng role
         <span class="cov0" title="0">var role models.Role
@@ -5483,14 +5305,13 @@ func DeleteAppRoleUsers(contx *fiber.Ctx) error <span class="cov0" title="0">{
         // fetching user to be deleted
         <span class="cov0" title="0">var user models.User
         if err := db.WithContext(tracer.Tracer).Where("id = ?", user_id).First(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
-                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
-                        return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-                                Success: false,
-                                Message: "User not found",
-                                Data:    nil,
-                        })
-                }</span>
-        }
+                return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+                        Success: false,
+                        Message: err.Error(),
+                        Data:    nil,
+                })
+
+        }</span>
 
         //  getting app uuid
         <span class="cov0" title="0">app_uuid := contx.Query("app_uuid")
@@ -10565,20 +10386,20 @@ var (
 
 )
 
-func otelspanstarter(ctx *fiber.Ctx) error <span class="cov0" title="0">{
+func otelspanstarter(ctx *fiber.Ctx) error <span class="cov8" title="1">{
         //  creating trace context from span if they exist
         route_name := ctx.Path() + "_" + strings.ToLower(ctx.Route().Method)
         tracer, span := observe.FiberAppSpanner(ctx, fmt.Sprintf("%v-root", route_name))
         ctx.Locals("tracer", &amp;observe.RouteTracer{Tracer: tracer, Span: span})
-        if err := ctx.Next(); err != nil </span><span class="cov0" title="0">{
+        if err := ctx.Next(); err != nil </span><span class="cov8" title="1">{
                 return err
         }</span>
-        <span class="cov0" title="0">span.SetAttributes(attribute.String("response", ctx.Response().String()))
+        <span class="cov8" title="1">span.SetAttributes(attribute.String("response", ctx.Response().String()))
         span.End()
         return nil</span>
 }
 
-func dbsessioninjection(ctx *fiber.Ctx) error <span class="cov0" title="0">{
+func dbsessioninjection(ctx *fiber.Ctx) error <span class="cov8" title="1">{
         db, err := database.ReturnSession()
         if err != nil </span><span class="cov0" title="0">{
                 return ctx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
@@ -10588,7 +10409,7 @@ func dbsessioninjection(ctx *fiber.Ctx) error <span class="cov0" title="0">{
                 })
         }</span>
 
-        <span class="cov0" title="0">ctx.Locals("db", db)
+        <span class="cov8" title="1">ctx.Locals("db", db)
         return ctx.Next()</span>
 }
 
@@ -10629,6 +10450,7 @@ func fiber_run(env string) <span class="cov0" title="0">{
         <span class="cov0" title="0">body_limit, _ := strconv.Atoi(configs.AppConfig.GetOrDefault("BODY_LIMIT", "70"))
         read_buffer_size, _ := strconv.Atoi(configs.AppConfig.GetOrDefault("READ_BUFFER_SIZE", "70"))
         rate_limit_per_second, _ := strconv.Atoi(configs.AppConfig.GetOrDefault("RATE_LIMIT_PER_SECOND", "5000"))
+
         //load config file
         app := fiber.New(fiber.Config{
                 Prefork: prefork,
@@ -10657,18 +10479,18 @@ func fiber_run(env string) <span class="cov0" title="0">{
                 },
         })
 
+        // recover from panic attacks middlerware
+        <span class="cov0" title="0">app.Use(recover.New())
+
         //  rate limiting middleware
-        <span class="cov0" title="0">app.Use(limiter.New(limiter.Config{
+        app.Use(limiter.New(limiter.Config{
                 Max:               rate_limit_per_second,
                 Expiration:        1 * time.Second,
                 LimiterMiddleware: limiter.SlidingWindow{},
         }))
-        //app logging open telemetery
-        app.Use(otelfiber.Middleware())
-        app.Use(otelspanstarter)
 
-        // database session injection to local context
-        app.Use(dbsessioninjection)
+        // adding group with authenthication middleware
+        SetupRoutes(app)
 
         // idempotency middleware
         app.Use(idempotency.New(idempotency.Config{
@@ -10690,9 +10512,6 @@ func fiber_run(env string) <span class="cov0" title="0">{
         // prometheus monitoring middleware
         app.Use(prometheus.Middleware)
 
-        // recover from panic attacks middlerware
-        app.Use(recover.New())
-
         // allow cross origin request
         app.Use(cors.New())
 
@@ -10713,12 +10532,6 @@ func fiber_run(env string) <span class="cov0" title="0">{
 
         // fiber native monitoring metrics endpoint
         app.Get("/lmetrics", monitor.New(monitor.Config{Title: "goBlue Metrics Page"})).Name("custom_metrics_route")
-
-        // recover middlware
-
-        // adding group with authenthication middleware
-        admin_app := app.Group("/api/v1")
-        SetupRoutes(admin_app.(*fiber.Group))
 
         //  Starting Apps and Conumers comes here below
         HTTP_PORT := configs.AppConfig.Get("HTTP_PORT")
@@ -10753,7 +10566,17 @@ func init() <span class="cov8" title="1">{
 
 }</span>
 
-func SetupRoutes(gapp *fiber.Group) <span class="cov8" title="1">{
+func SetupRoutes(app *fiber.App) <span class="cov8" title="1">{
+
+        //app logging open telemetery
+        app.Use(otelfiber.Middleware())
+        // app otel spanner
+        app.Use(otelspanstarter)
+
+        // database session injection to local context
+        app.Use(dbsessioninjection)
+
+        gapp := app.Group("/api/v1")
 
         gapp.Get("/role", NextFunc).Name("get_all_roles").Get("/role", controllers.GetRoles)
         gapp.Get("/role/:role_id", NextFunc).Name("get_one_roles").Get("/role/:role_id", controllers.GetRoleByID)
@@ -11548,80 +11371,20 @@ type RouteTracer struct {
 		<pre class="file" id="file32" style="display: none">package tests
 
 import (
-        "fmt"
-        "net/http"
-        "strings"
-
-        "blue-admin.com/common"
-        "blue-admin.com/database"
         "blue-admin.com/manager"
-        "blue-admin.com/observe"
         "github.com/gofiber/fiber/v2"
         "github.com/joho/godotenv"
-        "go.opentelemetry.io/otel/attribute"
 )
 
 var (
-        TestApp    *fiber.App
-        group_path = "/api/v1"
-        groupPath  = "/api/v1"
+        TestApp   *fiber.App
+        groupPath = "/api/v1"
 )
 
 func setupUserTestApp() <span class="cov8" title="1">{
         godotenv.Load(".test.env")
         TestApp = fiber.New()
-        TestApp.Use(dbSessionInjection)
-        TestApp.Use(otelspanstarter)
-        gapp := TestApp.Group("/api/v1")
-
-        manager.SetupRoutes(gapp.(*fiber.Group))
-}</span>
-
-func nextFunc(contx *fiber.Ctx) error <span class="cov0" title="0">{
-        contx.Next()
-        return nil
-}</span>
-
-func otelspanstarter(ctx *fiber.Ctx) error <span class="cov8" title="1">{
-        //  creating trace context from span if they exist
-        route_name := ctx.Path() + "_" + strings.ToLower(ctx.Route().Method)
-        tracer, span := observe.FiberAppSpanner(ctx, fmt.Sprintf("%v-root", route_name))
-        ctx.Locals("tracer", &amp;observe.RouteTracer{Tracer: tracer, Span: span})
-        if err := ctx.Next(); err != nil </span><span class="cov8" title="1">{
-                return err
-        }</span>
-        <span class="cov8" title="1">span.SetAttributes(attribute.String("response", ctx.Response().String()))
-        span.End()
-        return nil</span>
-}
-
-func dbSessionInjection(c *fiber.Ctx) error <span class="cov8" title="1">{
-        db, err := database.ReturnSession()
-        if err != nil </span><span class="cov0" title="0">{
-                return c.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
-                        Success: false,
-                        Message: err.Error(),
-                        Data:    nil,
-                })
-        }</span>
-        <span class="cov8" title="1">c.Locals("db", db)
-        return c.Next()</span>
-}
-
-// initalaizing the app
-func ReturnTestApp() <span class="cov0" title="0">{
-
-        // loading env file
-        godotenv.Load(".test.env")
-
-        TestApp = fiber.New()
-
-        group_path = "/api/v1"
-
-        app := TestApp.Group(group_path)
-
-        manager.SetupRoutes(app.(*fiber.Group))
-
+        manager.SetupRoutes(TestApp)
 }</span>
 </pre>
 		

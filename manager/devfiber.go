@@ -122,6 +122,7 @@ func fiber_run(env string) {
 	body_limit, _ := strconv.Atoi(configs.AppConfig.GetOrDefault("BODY_LIMIT", "70"))
 	read_buffer_size, _ := strconv.Atoi(configs.AppConfig.GetOrDefault("READ_BUFFER_SIZE", "70"))
 	rate_limit_per_second, _ := strconv.Atoi(configs.AppConfig.GetOrDefault("RATE_LIMIT_PER_SECOND", "5000"))
+
 	//load config file
 	app := fiber.New(fiber.Config{
 		Prefork: prefork,
@@ -150,18 +151,18 @@ func fiber_run(env string) {
 		},
 	})
 
+	// recover from panic attacks middlerware
+	app.Use(recover.New())
+
 	//  rate limiting middleware
 	app.Use(limiter.New(limiter.Config{
 		Max:               rate_limit_per_second,
 		Expiration:        1 * time.Second,
 		LimiterMiddleware: limiter.SlidingWindow{},
 	}))
-	//app logging open telemetery
-	app.Use(otelfiber.Middleware())
-	app.Use(otelspanstarter)
 
-	// database session injection to local context
-	app.Use(dbsessioninjection)
+	// adding group with authenthication middleware
+	SetupRoutes(app)
 
 	// idempotency middleware
 	app.Use(idempotency.New(idempotency.Config{
@@ -182,9 +183,6 @@ func fiber_run(env string) {
 
 	// prometheus monitoring middleware
 	app.Use(prometheus.Middleware)
-
-	// recover from panic attacks middlerware
-	app.Use(recover.New())
 
 	// allow cross origin request
 	app.Use(cors.New())
@@ -207,18 +205,14 @@ func fiber_run(env string) {
 	// fiber native monitoring metrics endpoint
 	app.Get("/lmetrics", monitor.New(monitor.Config{Title: "goBlue Metrics Page"})).Name("custom_metrics_route")
 
-	// recover middlware
-
-	// adding group with authenthication middleware
-	admin_app := app.Group("/api/v1")
-	SetupRoutes(admin_app.(*fiber.Group))
-
 	//  Starting Apps and Conumers comes here below
 	HTTP_PORT := configs.AppConfig.Get("HTTP_PORT")
 	// starting on provided port
 	go func(app *fiber.App) {
 		app.Listen("0.0.0.0:" + HTTP_PORT)
 	}(app)
+
+	bluetasks.FetchAndPrintIPs()
 
 	// Starting App Conumers
 	// // running background consumer on specific quues
@@ -246,7 +240,17 @@ func init() {
 
 }
 
-func SetupRoutes(gapp *fiber.Group) {
+func SetupRoutes(app *fiber.App) {
+
+	//app logging open telemetery
+	app.Use(otelfiber.Middleware())
+	// app otel spanner
+	app.Use(otelspanstarter)
+
+	// database session injection to local context
+	app.Use(dbsessioninjection)
+
+	gapp := app.Group("/api/v1")
 
 	gapp.Get("/role", NextFunc).Name("get_all_roles").Get("/role", controllers.GetRoles)
 	gapp.Get("/role/:role_id", NextFunc).Name("get_one_roles").Get("/role/:role_id", controllers.GetRoleByID)

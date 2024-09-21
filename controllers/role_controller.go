@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -54,8 +53,8 @@ func GetRoles(contx *fiber.Ctx) error {
 	if err != nil {
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Failed to get all Role.",
-			Data:    "something",
+			Message: err.Error(),
+			Data:    nil,
 		})
 	}
 
@@ -97,16 +96,9 @@ func GetRoleByID(contx *fiber.Ctx) error {
 	var roles_get models.RoleGet
 	var roles models.Role
 	if res := db.WithContext(tracer.Tracer).Model(&models.Role{}).Preload(clause.Associations).Where("id = ?", id).First(&roles); res.Error != nil {
-		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "Role not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving Role",
+			Message: res.Error.Error(),
 			Data:    nil,
 		})
 	}
@@ -297,18 +289,8 @@ func PatchRole(contx *fiber.Ctx) error {
 
 	// Check if the record exists
 	if err := db.WithContext(tracer.Tracer).First(&role, role.ID).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			// If the record doesn't exist, return an error response
-			tx.Rollback()
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "Role not found",
-				Data:    nil,
-			})
-		}
-		// If there's an unexpected error, return an internal server error response
 		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: err.Error(),
 			Data:    nil,
@@ -373,18 +355,12 @@ func DeleteRole(contx *fiber.Ctx) error {
 	// first getting role and checking if it exists
 	if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&role).Error; err != nil {
 		tx.Rollback()
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "Role not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving role",
+			Message: err.Error(),
 			Data:    nil,
 		})
+
 	}
 
 	// Delete the role

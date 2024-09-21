@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -97,16 +96,9 @@ func GetFeatureByID(contx *fiber.Ctx) error {
 	var features_get models.FeatureGet
 	var features models.Feature
 	if res := db.WithContext(tracer.Tracer).Model(&models.Feature{}).Preload(clause.Associations).Where("id = ?", id).First(&features); res.Error != nil {
-		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "Feature not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving Feature",
+			Message: res.Error.Error(),
 			Data:    nil,
 		})
 	}
@@ -255,18 +247,9 @@ func PatchFeature(contx *fiber.Ctx) error {
 	tx := db.WithContext(tracer.Tracer).Begin()
 	// Check if the record exists
 	if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&feature).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			// If the record doesn't exist, return an error response
-			tx.Rollback()
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "Feature not found",
-				Data:    nil,
-			})
-		}
 		// If there's an unexpected error, return an internal server error response
 		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: err.Error(),
 			Data:    nil,
@@ -331,16 +314,9 @@ func DeleteFeature(contx *fiber.Ctx) error {
 	// first getting feature and checking if it exists
 	if err := db.Where("id = ?", id).First(&feature).Error; err != nil {
 		tx.Rollback()
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "Feature not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving feature",
+			Message: err.Error(),
 			Data:    nil,
 		})
 	}

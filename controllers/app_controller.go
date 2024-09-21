@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -97,16 +96,9 @@ func GetAppByID(contx *fiber.Ctx) error {
 	var apps_get models.AppGet
 	var apps models.App
 	if res := db.WithContext(tracer.Tracer).Model(&models.App{}).Preload(clause.Associations).Where("id = ?", id).First(&apps); res.Error != nil {
-		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "App not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving App",
+			Message: res.Error.Error(),
 			Data:    nil,
 		})
 	}
@@ -160,16 +152,9 @@ func GetAppRoleUUID(contx *fiber.Ctx) error {
 						where apps.uuid = ? and roles.active = true ORDER BY roles.id;`
 
 	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid).Scan(&roles); res.Error != nil {
-		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "App Roles not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving App",
+			Message: res.Error.Error(),
 			Data:    nil,
 		})
 	}
@@ -317,18 +302,9 @@ func PatchApp(contx *fiber.Ctx) error {
 
 	// Check if the record exists
 	if err := db.WithContext(tracer.Tracer).First(&app, app.ID).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			// If the record doesn't exist, return an error response
-			tx.Rollback()
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "App not found",
-				Data:    nil,
-			})
-		}
 		// If there's an unexpected error, return an internal server error response
 		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: err.Error(),
 			Data:    nil,
@@ -393,16 +369,9 @@ func DeleteApp(contx *fiber.Ctx) error {
 	// first getting app and checking if it exists
 	if err := db.Where("id = ?", id).First(&app).Error; err != nil {
 		tx.Rollback()
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "App not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving app",
+			Message: err.Error(),
 			Data:    nil,
 		})
 	}

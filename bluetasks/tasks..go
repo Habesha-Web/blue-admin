@@ -2,7 +2,8 @@ package bluetasks
 
 import (
 	"fmt"
-	"os/exec"
+	"net"
+	"os"
 	"strconv"
 	"time"
 
@@ -40,19 +41,19 @@ func ScheduledTasks() *tasks.Scheduler {
 	//  App should not start
 	log_file, _ := Logfile()
 	if _, err := scheduler.Add(&tasks.Task{
-		Interval: time.Duration(1 * time.Hour),
+		Interval: time.Duration(1 * time.Minute),
 		TaskFunc: func() error {
-			currentTime := time.Now()
-			FileName := fmt.Sprintf("%v-%v-%v-%v-%v", currentTime.Year(), currentTime.Month(), currentTime.Day(), currentTime.Hour(), currentTime.Minute())
-			Command := fmt.Sprintf("cp goblue.log logs/blue-%v.log", FileName)
-			Command2 := fmt.Sprintf("cp blue-admin.log logs/gorm-%v.log", FileName)
-			if _, err := exec.Command("bash", "-c", Command).Output(); err != nil {
-				fmt.Printf("error: %v\n", err)
-			}
+			// currentTime := time.Now()
+			// FileName := fmt.Sprintf("%v-%v-%v-%v-%v", currentTime.Year(), currentTime.Month(), currentTime.Day(), currentTime.Hour(), currentTime.Minute())
+			// Command := fmt.Sprintf("cp goblue.log logs/blue-%v.log", FileName)
+			// Command2 := fmt.Sprintf("cp blue-admin.log logs/gorm-%v.log", FileName)
+			// if _, err := exec.Command("bash", "-c", Command).Output(); err != nil {
+			// 	fmt.Printf("error: %v\n", err)
+			// }
 
-			if _, err := exec.Command("bash", "-c", Command2).Output(); err != nil {
-				fmt.Printf("error: %v\n", err)
-			}
+			// if _, err := exec.Command("bash", "-c", Command2).Output(); err != nil {
+			// 	fmt.Printf("error: %v\n", err)
+			// }
 			gormLoggerfile.Truncate(0)
 			log_file.Truncate(0)
 			return nil
@@ -63,4 +64,26 @@ func ScheduledTasks() *tasks.Scheduler {
 	}
 
 	return scheduler
+}
+
+func FetchAndPrintIPs() {
+	// Obtain discovery hostname from environment variable
+	discoveryHostname := os.Getenv("RENDER_DISCOVERY_SERVICE")
+
+	// Perform DNS lookup
+	ips, err := net.LookupIP(discoveryHostname)
+	if err != nil {
+		fmt.Println("Error resolving DNS:", err)
+		return
+	}
+
+	// Filter out only IPv4 addresses
+	var ipv4Addresses []string
+	for _, ip := range ips {
+		if ip.To4() != nil { // Checks if it's an IPv4 address
+			ipv4Addresses = append(ipv4Addresses, ip.String())
+		}
+	}
+
+	fmt.Printf("IP addresses for %s: %s\n", discoveryHostname, ipv4Addresses)
 }

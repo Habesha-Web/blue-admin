@@ -217,48 +217,7 @@ func TestRolesOperations(t *testing.T) {
 
 			//  Finally asserting test cases
 			assert.Equalf(t, test.expectedCode, resp.StatusCode, test.description)
-			//  running delete test if post is success
-			// if resp.StatusCode == 200 {
-			// 	t.Run("Checking the Delete Request Path for Roles", func(t *testing.T) {
 
-			// 		test_route := fmt.Sprintf("%v/%v", test.route, responseMap["data"].(map[string]interface{})["id"])
-
-			// 		req_delete := httptest.NewRequest(http.MethodDelete, test_route, bytes.NewReader(post_data))
-
-			// 		// Add specfic headers if needed as below
-			// 		req_delete.Header.Set("Content-Type", "application/json")
-
-			// 		resp, _ := TestApp.Test(req_delete)
-
-			// 		assert.Equalf(t, 200, resp.StatusCode, test.description+"deleteing")
-			// 	})
-			// } else {
-			// 	t.Run("Checking the Delete Request Path for  that does not exit", func(t *testing.T) {
-
-			// 		test_route_1 := fmt.Sprintf("%v/:%v", test.route, 1000000)
-
-			// 		req_delete := httptest.NewRequest(http.MethodDelete, test_route_1, bytes.NewReader(post_data))
-
-			// 		// Add specfic headers if needed as below
-			// 		req_delete.Header.Set("Content-Type", "application/json")
-
-			// 		resp, _ := TestApp.Test(req_delete)
-			// 		assert.Equalf(t, 500, resp.StatusCode, test.description+"deleteing")
-			// 	})
-
-			// 	t.Run("Checking the Delete Request Path that is not valid", func(t *testing.T) {
-
-			// 		test_route_2 := fmt.Sprintf("%v/%v", test.route, "$$$")
-
-			// 		req_delete := httptest.NewRequest(http.MethodDelete, test_route_2, bytes.NewReader(post_data))
-
-			// 		// Add specfic headers if needed as below
-			// 		req_delete.Header.Set("Content-Type", "application/json")
-			// 		resp, _ := TestApp.Test(req_delete)
-
-			// 		assert.Equalf(t, 500, resp.StatusCode, test.description+"deleteing")
-			// 	})
-			// }
 		})
 	}
 

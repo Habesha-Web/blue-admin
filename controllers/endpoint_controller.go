@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -97,16 +96,9 @@ func GetEndpointByID(contx *fiber.Ctx) error {
 	var endpoints_get models.EndpointGet
 	var endpoints models.Endpoint
 	if res := db.WithContext(tracer.Tracer).Model(&models.Endpoint{}).Preload(clause.Associations).Where("id = ?", id).First(&endpoints); res.Error != nil {
-		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "Endpoint not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving Endpoint",
+			Message: res.Error.Error(),
 			Data:    nil,
 		})
 	}
@@ -256,18 +248,9 @@ func PatchEndpoint(contx *fiber.Ctx) error {
 
 	// Check if the record exists
 	if err := db.WithContext(tracer.Tracer).Where("id = ?", id).First(&endpoint).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			// If the record doesn't exist, return an error response
-			tx.Rollback()
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "Endpoint not found",
-				Data:    nil,
-			})
-		}
 		// If there's an unexpected error, return an internal server error response
 		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: err.Error(),
 			Data:    nil,
@@ -332,16 +315,9 @@ func DeleteEndpoint(contx *fiber.Ctx) error {
 	// first getting endpoint and checking if it exists
 	if err := db.Where("id = ?", id).First(&endpoint).Error; err != nil {
 		tx.Rollback()
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
-				Success: false,
-				Message: "Endpoint not found",
-				Data:    nil,
-			})
-		}
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
-			Message: "Error retrieving endpoint",
+			Message: err.Error(),
 			Data:    nil,
 		})
 	}
