@@ -2533,7 +2533,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.PagePost"
+                                            "$ref": "#/definitions/models.PagePatch"
                                         }
                                     }
                                 }
@@ -4322,6 +4322,21 @@ const docTemplate = `{
                 }
             }
         },
+        "models.PagePatch": {
+            "description": "PagePatch type information",
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
         "models.PagePost": {
             "description": "PagePost type information",
             "type": "object",
@@ -4414,6 +4429,9 @@ const docTemplate = `{
                 "name"
             ],
             "properties": {
+                "active": {
+                    "type": "boolean"
+                },
                 "description": {
                     "type": "string"
                 },

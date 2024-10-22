@@ -203,6 +203,7 @@ func PostRole(contx *fiber.Ctx) error {
 	role := new(models.Role)
 	role.Name = posted_role.Name
 	role.Description = posted_role.Description
+	role.Active = posted_role.Active
 
 	//  start transaction to database
 	tx := db.WithContext(tracer.Tracer).Begin()
@@ -364,13 +365,15 @@ func DeleteRole(contx *fiber.Ctx) error {
 	}
 
 	// Delete the role
-	if err := db.WithContext(tracer.Tracer).Delete(&role).Error; err != nil {
-		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
-			Success: false,
-			Message: "Error deleting role",
-			Data:    nil,
-		})
+	if id > 11 {
+		if err := db.WithContext(tracer.Tracer).Delete(&role).Error; err != nil {
+			tx.Rollback()
+			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "Error deleting role",
+				Data:    nil,
+			})
+		}
 	}
 
 	// Commit the transaction

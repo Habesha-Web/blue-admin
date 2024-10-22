@@ -323,13 +323,15 @@ func DeleteEndpoint(contx *fiber.Ctx) error {
 	}
 
 	// Delete the endpoint
-	if err := db.Delete(&endpoint).Error; err != nil {
-		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
-			Success: false,
-			Message: "Error deleting endpoint",
-			Data:    nil,
-		})
+	if id > 76 {
+		if err := db.Delete(&endpoint).Error; err != nil {
+			tx.Rollback()
+			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "Error deleting endpoint",
+				Data:    nil,
+			})
+		}
 	}
 
 	// Commit the transaction

@@ -22,6 +22,7 @@ type Role struct {
 type RolePost struct {
 	Name        string `gorm:"not null; unique;" json:"name,omitempty" validate:"required"`
 	Description string `gorm:"not null;" json:"description,omitempty" validate:"required"`
+	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
 }
 
 // RoleGet model info

@@ -161,6 +161,9 @@ func fiber_run(env string) {
 		LimiterMiddleware: limiter.SlidingWindow{},
 	}))
 
+	// allow cross origin request
+	app.Use(cors.New())
+
 	// adding group with authenthication middleware
 	SetupRoutes(app)
 
@@ -183,9 +186,6 @@ func fiber_run(env string) {
 
 	// prometheus monitoring middleware
 	app.Use(prometheus.Middleware)
-
-	// allow cross origin request
-	app.Use(cors.New())
 
 	// app.Get("/", func(c *fiber.Ctx) error {
 	// 	return c.SendString("Hello, World!\n")
@@ -211,8 +211,6 @@ func fiber_run(env string) {
 	go func(app *fiber.App) {
 		app.Listen("0.0.0.0:" + HTTP_PORT)
 	}(app)
-
-	bluetasks.FetchAndPrintIPs()
 
 	// Starting App Conumers
 	// // running background consumer on specific quues

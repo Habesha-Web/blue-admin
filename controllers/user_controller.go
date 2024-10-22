@@ -516,13 +516,15 @@ func DeleteUser(contx *fiber.Ctx) error {
 	}
 
 	// Delete the user
-	if err := db.WithContext(tracer.Tracer).Delete(&user).Error; err != nil {
-		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
-			Success: false,
-			Message: "Error deleting user",
-			Data:    nil,
-		})
+	if id > 6 {
+		if err := db.WithContext(tracer.Tracer).Delete(&user).Error; err != nil {
+			tx.Rollback()
+			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "Error deleting user",
+				Data:    nil,
+			})
+		}
 	}
 
 	// Commit the transaction
@@ -601,15 +603,16 @@ func DeleteAppUser(contx *fiber.Ctx) error {
 	}
 
 	// Delete the user
-	if err := db.WithContext(tracer.Tracer).Delete(&user).Error; err != nil {
-		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
-			Success: false,
-			Message: "Error deleting user",
-			Data:    nil,
-		})
+	if user.ID > 1 {
+		if err := db.WithContext(tracer.Tracer).Delete(&user).Error; err != nil {
+			tx.Rollback()
+			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "Error deleting user",
+				Data:    nil,
+			})
+		}
 	}
-
 	// Commit the transaction
 	tx.Commit()
 

@@ -2,13 +2,12 @@ package bluetasks
 
 import (
 	"fmt"
-	"net"
-	"os"
 	"strconv"
 	"time"
 
 	"blue-admin.com/configs"
 	"blue-admin.com/database"
+	"blue-admin.com/models"
 	"blue-admin.com/utils"
 
 	"github.com/madflojo/tasks"
@@ -56,7 +55,7 @@ func ScheduledTasks() *tasks.Scheduler {
 			// }
 			gormLoggerfile.Truncate(0)
 			log_file.Truncate(0)
-			FetchAndPrintIPs()
+
 			return nil
 		},
 	}); err != nil {
@@ -64,27 +63,26 @@ func ScheduledTasks() *tasks.Scheduler {
 
 	}
 
+	if _, err := scheduler.Add(&tasks.Task{
+		Interval: 60 * time.Minute,
+		TaskFunc: func() error {
+			db, _ := database.ReturnSession()
+			var user_q models.User
+			if err := db.Model(&user_q).Where("email =?", "superuser@mail.com").Find(&user_q).Error; err != nil {
+				fmt.Printf("Error Fetching: %v", err)
+			}
+
+			hashed_password := utils.HashFunc("default@123")
+			if err := db.Model(user_q).Where("id = ?", 1).Update("password", hashed_password); err != nil {
+				fmt.Println(err)
+			}
+
+			fmt.Println("working")
+			return nil
+		},
+	}); err != nil {
+		fmt.Println(err)
+	}
+
 	return scheduler
-}
-
-func FetchAndPrintIPs() {
-	// Obtain discovery hostname from environment variable
-	discoveryHostname := os.Getenv("RENDER_DISCOVERY_SERVICE")
-
-	// Perform DNS lookup
-	ips, err := net.LookupIP(discoveryHostname)
-	if err != nil {
-		fmt.Println("Error resolving DNS:", err)
-		return
-	}
-
-	// Filter out only IPv4 addresses
-	var ipv4Addresses []string
-	for _, ip := range ips {
-		if ip.To4() != nil { // Checks if it's an IPv4 address
-			ipv4Addresses = append(ipv4Addresses, ip.String())
-		}
-	}
-
-	fmt.Printf("IP addresses for %s: %s\n", discoveryHostname, ipv4Addresses)
 }

@@ -197,7 +197,7 @@ func PostPage(contx *fiber.Ctx) error {
 // @Produce json
 // @Param page body models.PagePost true "Patch Page"
 // @Param page_id path int true "Page ID"
-// @Success 200 {object} common.ResponseHTTP{data=models.PagePost}
+// @Success 200 {object} common.ResponseHTTP{data=models.PagePatch}
 // @Failure 400 {object} common.ResponseHTTP{}
 // @Failure 500 {object} common.ResponseHTTP{}
 // @Router /page/{page_id} [patch]
@@ -257,7 +257,7 @@ func PatchPage(contx *fiber.Ctx) error {
 	}
 
 	// Update the record
-	if err := db.WithContext(tracer.Tracer).Model(&page).UpdateColumns(*patch_page).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Model(&page).UpdateColumns(*patch_page).Update("active", patch_page.Active).Error; err != nil {
 		tx.Rollback()
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,
@@ -323,15 +323,16 @@ func DeletePage(contx *fiber.Ctx) error {
 	}
 
 	// Delete the page
-	if err := db.Delete(&page).Error; err != nil {
-		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
-			Success: false,
-			Message: "Error deleting page",
-			Data:    nil,
-		})
+	if id > 9 {
+		if err := db.Delete(&page).Error; err != nil {
+			tx.Rollback()
+			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "Error deleting page",
+				Data:    nil,
+			})
+		}
 	}
-
 	// Commit the transaction
 	tx.Commit()
 

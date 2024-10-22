@@ -322,13 +322,15 @@ func DeleteFeature(contx *fiber.Ctx) error {
 	}
 
 	// Delete the feature
-	if err := db.Delete(&feature).Error; err != nil {
-		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
-			Success: false,
-			Message: "Error deleting feature",
-			Data:    nil,
-		})
+	if id > 16 {
+		if err := db.Delete(&feature).Error; err != nil {
+			tx.Rollback()
+			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "Error deleting feature",
+				Data:    nil,
+			})
+		}
 	}
 
 	// Commit the transaction

@@ -1,9 +1,8 @@
-
 package common
 
 import (
-	"math"
 	"context"
+	"math"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -29,8 +28,8 @@ func Pagination(db *gorm.DB, queryModel interface{}, responseObjectModel interfa
 	//  protection against requesting large amount of data
 	//  set to 50
 	var update_size uint
-	if size > 50 {
-		size = 50
+	if size > 100 {
+		size = 100
 	}
 
 	count_channel := make(chan int64)
@@ -89,8 +88,8 @@ func Pagination(db *gorm.DB, queryModel interface{}, responseObjectModel interfa
 }
 
 func PaginationPureModel(db *gorm.DB, queryModel interface{}, responseObjectModel interface{}, page uint, size uint, tracer context.Context) (ResponsePagination, error) {
-	if size > 50 {
-		size = 50
+	if size > 100 {
+		size = 100
 	}
 	count_channel := make(chan int64)
 	str_chann := make(chan string)
@@ -142,4 +141,3 @@ func PaginationPureModel(db *gorm.DB, queryModel interface{}, responseObjectMode
 	}
 	return result, nil
 }
-

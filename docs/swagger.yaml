@@ -311,6 +311,16 @@ definitions:
           $ref: '#/definitions/models.Role'
         type: array
     type: object
+  models.PagePatch:
+    description: PagePatch type information
+    properties:
+      active:
+        type: boolean
+      description:
+        type: string
+      name:
+        type: string
+    type: object
   models.PagePost:
     description: PagePost type information
     properties:
@@ -370,6 +380,8 @@ definitions:
   models.RolePost:
     description: RolePost type information
     properties:
+      active:
+        type: boolean
       description:
         type: string
       name:
@@ -1961,7 +1973,7 @@ paths:
             - $ref: '#/definitions/common.ResponseHTTP'
             - properties:
                 data:
-                  $ref: '#/definitions/models.PagePost'
+                  $ref: '#/definitions/models.PagePatch'
               type: object
         "400":
           description: Bad Request

@@ -377,13 +377,15 @@ func DeleteApp(contx *fiber.Ctx) error {
 	}
 
 	// Delete the app
-	if err := db.Delete(&app).Error; err != nil {
-		tx.Rollback()
-		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
-			Success: false,
-			Message: "Error deleting app",
-			Data:    nil,
-		})
+	if id > 3 {
+		if err := db.Delete(&app).Error; err != nil {
+			tx.Rollback()
+			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+				Success: false,
+				Message: "Error deleting app",
+				Data:    nil,
+			})
+		}
 	}
 
 	// Commit the transaction
