@@ -451,7 +451,7 @@ func PatchUser(contx *fiber.Ctx) error {
 		})
 	}
 
-	if err := db.WithContext(tracer.Tracer).Model(&user).UpdateColumns(*patch_user).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Model(&user).UpdateColumns(*patch_user).Update("disabled", patch_user.Disabled).Error; err != nil {
 		tx.Rollback()
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,
