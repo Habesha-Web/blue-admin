@@ -257,7 +257,7 @@ func PatchFeature(contx *fiber.Ctx) error {
 	}
 
 	// Update the record
-	if err := db.WithContext(tracer.Tracer).Model(&feature).UpdateColumns(*patch_feature).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Model(&feature).UpdateColumns(*patch_feature).Update("active", patch_feature.Active).Error; err != nil {
 		tx.Rollback()
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,

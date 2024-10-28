@@ -299,7 +299,7 @@ func PatchRole(contx *fiber.Ctx) error {
 	}
 
 	// Update the record
-	if err := db.WithContext(tracer.Tracer).Model(&role).UpdateColumns(*patch_role).Error; err != nil {
+	if err := db.WithContext(tracer.Tracer).Model(&role).UpdateColumns(*patch_role).Update("active", patch_role.Active).Error; err != nil {
 		tx.Rollback()
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,

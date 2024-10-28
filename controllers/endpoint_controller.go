@@ -163,6 +163,8 @@ func PostEndpoint(contx *fiber.Ctx) error {
 	endpoint := new(models.Endpoint)
 	endpoint.Name = posted_endpoint.Name
 	endpoint.Description = posted_endpoint.Description
+	endpoint.Method = posted_endpoint.Method
+	endpoint.RoutePath = posted_endpoint.RoutePath
 
 	//  start transaction to database
 	tx := db.WithContext(tracer.Tracer).Begin()
