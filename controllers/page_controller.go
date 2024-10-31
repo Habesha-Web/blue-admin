@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -114,6 +115,91 @@ func GetPageByID(contx *fiber.Ctx) error {
 	})
 }
 
+// GetAppPagesUUID is a function to get a Pages by UUID
+// @Summary Get App Pages by UUID
+// @Description Get app pages by UUID
+// @Tags Pages
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param page query int true "page"
+// @Param size query int true "page size"
+// @Param app_uuid path string true "App UUID"
+// @Success 200 {object} common.ResponseHTTP{data=[]models.PagePut}
+// @Failure 404 {object} common.ResponseHTTP{}
+// @Router /apppagesuuid/{app_uuid} [get]
+func GetAppPagesAllUUID(contx *fiber.Ctx) error {
+
+	// Starting tracer context and tracer
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	//  parsing Query Prameters
+	Page, _ := strconv.Atoi(contx.Query("page"))
+	Limit, _ := strconv.Atoi(contx.Query("size"))
+	//  checking if query parameters  are correct
+	if Page == 0 || Limit == 0 {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Not Allowed, Bad request",
+			Data:    nil,
+		})
+	}
+
+	//  parsing Query Prameters
+	uuid := contx.Params("app_uuid")
+	if uuid == "" {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "No uuid",
+			Data:    nil,
+		})
+	}
+
+	// Preparing and querying database using Gorm
+	//getting total count first
+	var total_counter int64
+	count_string := `select distinct pages.id from pages inner join page_roles on pages.id= page_roles.page_id
+							inner join roles on roles.id == page_roles.role_id
+							inner join apps on roles.app_id == apps.id
+							where apps.uuid = ? ORDER BY pages.id;`
+	if res := db.WithContext(tracer.Tracer).Raw(count_string, uuid, Limit, Page).Count(&total_counter); res.Error != nil {
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
+
+	var pages []models.PagePut
+	// select apps.id as appID, roles.id, roles.name, roles.description,roles.active from roles inner join apps on roles.app_id == apps.id where apps.uuid =="0191c74f-d039-71c6-a3be-66e2571a9cf1" ORDER BY roles.id;
+	query_string := `select distinct pages.id,pages.name, pages.active,pages.description from pages inner join page_roles on pages.id= page_roles.page_id
+							inner join roles on roles.id == page_roles.role_id
+							inner join apps on roles.app_id == apps.id
+							where apps.uuid = ? ORDER BY pages.id LIMIT ? OFFSET ?;`
+
+	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page).Scan(&pages); res.Error != nil {
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
+
+	//  Finally returing response if All the above compeleted successfully
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success got one app.",
+		Total:   uint(total_counter),
+		Page:    uint(Page),
+		Size:    uint(Limit),
+		Data:    &pages,
+	})
+}
+
 // Add Page to data
 // @Summary Add a new Page
 // @Description Add Page
@@ -140,7 +226,7 @@ func PostPage(contx *fiber.Ctx) error {
 
 	//validating post data
 	posted_page := new(models.PagePost)
-
+	fmt.Println(posted_page)
 	//first parse request data
 	if err := contx.BodyParser(&posted_page); err != nil {
 		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
@@ -163,6 +249,7 @@ func PostPage(contx *fiber.Ctx) error {
 	page := new(models.Page)
 	page.Name = posted_page.Name
 	page.Description = posted_page.Description
+	page.Active = posted_page.Active
 
 	//  start transaction to database
 	tx := db.WithContext(tracer.Tracer).Begin()

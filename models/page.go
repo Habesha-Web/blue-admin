@@ -5,7 +5,7 @@ package models
 type Page struct {
 	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
-	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
+	Active      bool   `gorm:"constraint:not null;" json:"active"`
 	Description string `gorm:"not null;" json:"description,omitempty"`
 	Roles       []Role `gorm:"many2many:page_roles; constraint:OnUpdate:CASCADE; OnDelete:CASCADE;" json:"roles,omitempty"`
 }
@@ -15,6 +15,7 @@ type Page struct {
 type PagePost struct {
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
 	Description string `gorm:"not null;" json:"description,omitempty"`
+	Active      bool   `gorm:"constraint:not null;" json:"active"`
 }
 
 // PageGet model info
@@ -22,7 +23,7 @@ type PagePost struct {
 type PageGet struct {
 	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
-	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
+	Active      bool   `gorm:"constraint:not null;" json:"active"`
 	Description string `gorm:"not null;" json:"description,omitempty"`
 	Roles       []Role `gorm:"many2many:page_roles; constraint:OnUpdate:CASCADE; OnDelete:CASCADE;" json:"roles,omitempty"`
 }
@@ -30,8 +31,9 @@ type PageGet struct {
 // PagePut model info
 // @Description PagePut type information
 type PagePut struct {
+	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
-	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
+	Active      bool   `gorm:"constraint:not null;" json:"active"`
 	Description string `gorm:"not null;" json:"description,omitempty"`
 }
 
@@ -39,6 +41,6 @@ type PagePut struct {
 // @Description PagePatch type information
 type PagePatch struct {
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
-	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
+	Active      bool   `gorm:"constraint:not null;" json:"active"`
 	Description string `gorm:"not null;" json:"description,omitempty"`
 }

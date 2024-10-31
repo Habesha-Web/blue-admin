@@ -32,17 +32,18 @@ type EndpointGet struct {
 	RoutePath   string        `gorm:"not null;" json:"route_path,omitempty"`
 	Method      string        `gorm:"not null;" json:"method,omitempty"`
 	Description string        `gorm:"not null;" json:"description,omitempty"`
-	FeatureID   sql.NullInt64 `gorm:"foreignkey:FeatureID default:NULL;,OnDelete:SET NULL;" json:"feature_id,omitempty" swaggertype:"number"`
+	FeatureID   sql.NullInt64 `gorm:"foreignkey:FeatureID default:NULL;,OnDelete:SET NULL;" json:"feature_id,omitempty" swaggertype:"number" json:"feature_id,omitempty"`
 }
 
 // EndpointPut model info
 // @Description EndpointPut type information
 type EndpointPut struct {
-	Name        string        `gorm:"not null; unique;" json:"name,omitempty"`
-	RoutePath   string        `gorm:"not null;" json:"route_path,omitempty"`
-	Method      string        `gorm:"not null;" json:"method,omitempty"`
-	Description string        `gorm:"not null;" json:"description,omitempty"`
-	FeatureID   sql.NullInt64 `gorm:"foreignkey:FeatureID default:NULL;,OnDelete:SET NULL;" json:"feature_id,omitempty" swaggertype:"number"`
+	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
+	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
+	RoutePath   string `gorm:"not null;" json:"route_path,omitempty"`
+	Method      string `gorm:"not null;" json:"method,omitempty"`
+	Description string `gorm:"not null;" json:"description,omitempty"`
+	// FeatureID   sql.NullInt64 `gorm:"foreignkey:FeatureID default:NULL;,OnDelete:SET NULL;" json:"feature_id,omitempty" swaggertype:"number" json:"feature_id,omitempty"`
 }
 
 // EndpointPatch model info

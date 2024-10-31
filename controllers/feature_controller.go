@@ -163,6 +163,7 @@ func PostFeature(contx *fiber.Ctx) error {
 	feature := new(models.Feature)
 	feature.Name = posted_feature.Name
 	feature.Description = posted_feature.Description
+	feature.Active = posted_feature.Active
 
 	//  start transaction to database
 	tx := db.WithContext(tracer.Tracer).Begin()
@@ -591,5 +592,90 @@ func ActivateDeactivateFeature(contx *fiber.Ctx) error {
 		Success: false,
 		Message: "No Record Found",
 		Data:    nil,
+	})
+}
+
+// #####################################################
+
+// GetAppFeaturesUUID is a function to get a App Features by UUID
+// @Summary Get App Features by UUID
+// @Description Get app features by UUID
+// @Tags Features
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param page query int true "page"
+// @Param size query int true "page size"
+// @Param app_uuid path string true "App UUID"
+// @Success 200 {object} common.ResponseHTTP{data=[]models.FeaturePut}
+// @Failure 404 {object} common.ResponseHTTP{}
+// @Router /appfeatureuuid/{app_uuid} [get]
+func GetAppFeaturesAllUUID(contx *fiber.Ctx) error {
+
+	// Starting tracer context and tracer
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	//  parsing Query Prameters
+	Page, _ := strconv.Atoi(contx.Query("page"))
+	Limit, _ := strconv.Atoi(contx.Query("size"))
+	//  checking if query parameters  are correct
+	if Page == 0 || Limit == 0 {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Not Allowed, Bad request",
+			Data:    nil,
+		})
+	}
+
+	//  parsing Query Prameters
+	uuid := contx.Params("app_uuid")
+	if uuid == "" {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "No uuid",
+			Data:    nil,
+		})
+	}
+
+	// Preparing and querying database using Gorm
+	//getting total count first
+	var total_counter int64
+	count_string := `select distinct features.id from features  inner join roles on features.role_id == roles.id
+							inner join apps on roles.app_id == apps.id
+							where apps.uuid = ? ORDER BY features.id;`
+	if res := db.WithContext(tracer.Tracer).Raw(count_string, uuid, Limit, Page).Count(&total_counter); res.Error != nil {
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
+
+	var features []models.FeaturePut
+	// select apps.id as appID, roles.id, roles.name, roles.description,roles.active from roles inner join apps on roles.app_id == apps.id where apps.uuid =="0191c74f-d039-71c6-a3be-66e2571a9cf1" ORDER BY roles.id;
+	query_string := `select distinct features.id, features.name, features.description,features.active from features inner join roles on features.role_id == roles.id
+							inner join apps on roles.app_id == apps.id
+							where apps.uuid = ? ORDER BY features.id LIMIT ? OFFSET ?;`
+
+	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page).Scan(&features); res.Error != nil {
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
+
+	//  Finally returing response if All the above compeleted successfully
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success got one app.",
+		Total:   uint(total_counter),
+		Page:    uint(Page),
+		Size:    uint(Limit),
+		Data:    &features,
 	})
 }

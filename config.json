@@ -85,7 +85,7 @@
         {
           "name": "Active",
           "type": "bool",
-          "annotation": "gorm:\"default:true; constraint:not null;\" json:\"active\"",
+          "annotation": "gorm:\"constraint:not null;\" json:\"active\"",
           "curd_flag": "true$false$true$true$false$false"
         },
         {

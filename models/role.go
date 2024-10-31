@@ -31,7 +31,7 @@ type RoleGet struct {
 	ID          uint          `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string        `gorm:"not null; unique;" json:"name,omitempty"`
 	Description string        `gorm:"not null;" json:"description,omitempty"`
-	Active      bool          `gorm:"default:true; constraint:not null;" json:"active"`
+	Active      bool          `gorm:"constraint:not null;" json:"active"`
 	AppID       sql.NullInt64 `gorm:"foreignkey:AppID OnDelete:SET NULL" json:"app,omitempty" swaggertype:"number"`
 	Users       []User        `gorm:"many2many:user_roles; constraint:OnUpdate:CASCADE; OnDelete:CASCADE;" json:"users,omitempty"`
 	Features    []Feature     `gorm:"foreignkey:RoleID; constraint:OnUpdate:CASCADE; OnDelete:SET NULL;" json:"features,omitempty"`
@@ -43,7 +43,7 @@ type RolePut struct {
 	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
 	Description string `gorm:"not null;" json:"description,omitempty"`
-	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
+	Active      bool   `gorm:"constraint:not null;" json:"active"`
 }
 
 // RolePatch model info
@@ -52,5 +52,5 @@ type RolePatch struct {
 	ID          uint   `gorm:"primaryKey;autoIncrement:true" json:"id,omitempty"`
 	Name        string `gorm:"not null; unique;" json:"name,omitempty"`
 	Description string `gorm:"not null;" json:"description,omitempty"`
-	Active      bool   `gorm:"default:true; constraint:not null;" json:"active"`
+	Active      bool   `gorm:"constraint:not null;" json:"active"`
 }

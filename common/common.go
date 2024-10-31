@@ -11,6 +11,9 @@ import (
 type ResponseHTTP struct {
 	Success bool        `json:"success"`
 	Data    interface{} `json:"data"`
+	Total   uint        `json:"total,omitempty"`
+	Page    uint        `json:"page,omitempty"`
+	Size    uint        `json:"size,omitempty"`
 	Message string      `json:"details"`
 }
 

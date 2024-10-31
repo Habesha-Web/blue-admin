@@ -1,13 +1,12 @@
 package manager
 
 import (
-	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -20,13 +19,15 @@ import (
 	"blue-admin.com/controllers"
 	"blue-admin.com/database"
 	_ "blue-admin.com/docs"
-	"blue-admin.com/messages"
+	"blue-admin.com/models"
 	"blue-admin.com/observe"
+	"blue-admin.com/utils"
 	"github.com/ansrivas/fiberprometheus/v2"
 	"github.com/gofiber/contrib/otelfiber"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/idempotency"
+	"github.com/gofiber/fiber/v2/middleware/keyauth"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
@@ -54,8 +55,14 @@ var (
 		},
 	}
 
-	// Define flags using cobra's mechanism
-
+	protectedURLs = []*regexp.Regexp{
+		regexp.MustCompile("^/api/v1/login"),
+		regexp.MustCompile("^/api/v1/checklogin"),
+		regexp.MustCompile("^/api/v1/pics"),
+		regexp.MustCompile("^/lmetrics"),
+		regexp.MustCompile("^/docs"),
+		regexp.MustCompile("^/metrics$"),
+	}
 )
 
 func otelspanstarter(ctx *fiber.Ctx) error {
@@ -86,7 +93,43 @@ func dbsessioninjection(ctx *fiber.Ctx) error {
 }
 
 func NextFunc(contx *fiber.Ctx) error {
-	return contx.Next()
+	return nil
+}
+
+// this is path filter which wavies token requirement for provided paths
+func authFilter(c *fiber.Ctx) bool {
+	originalURL := strings.ToLower(c.OriginalURL())
+
+	for _, pattern := range protectedURLs {
+		if pattern.MatchString(originalURL) {
+			c.Request().Header.Add("X-APP-TOKEN", "allowed")
+			return true
+		}
+	}
+	return false
+}
+
+func NextRoute(contx *fiber.Ctx, key string) (bool, error) {
+	contx.Next()
+	route_name := contx.Route().Name + "_" + strings.ToLower(contx.Route().Method)
+
+	if key == "anonymous" && models.Endpoints_JSON[route_name] == "Anonymous" {
+		return true, nil
+	} else {
+
+		//  first validating the token
+		claims, err := utils.ParseJWTToken(key)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		// check if the token have the desired role for the route
+		role_test := utils.CheckValueExistsInSlice(claims.Roles, models.Endpoints_JSON[route_name])
+		if role_test {
+			return true, nil
+		}
+		return false, nil
+	}
 }
 
 func fiber_run(env string) {
@@ -99,13 +142,15 @@ func fiber_run(env string) {
 	configs.AppConfig.SetEnv(env)
 
 	//  Staring global tracer
-	tp := observe.InitTracer()
-	defer func() {
-		if err := tp.Shutdown(context.Background()); err != nil {
-			log.Printf("Error shutting down tracer provider: %v", err)
-		}
-	}()
+	// tp := observe.InitTracer()
+	// defer func() {
+	// 	if err := tp.Shutdown(context.Background()); err != nil {
+	// 		log.Printf("Error shutting down tracer provider: %v", err)
+	// 	}
+	// }()
 
+	//  lodaing privilge data
+	utils.GetAppFeatures()
 	//  starting scheduler files
 	schd := bluetasks.ScheduledTasks()
 	defer schd.Stop()
@@ -215,10 +260,10 @@ func fiber_run(env string) {
 	// Starting App Conumers
 	// // running background consumer on specific quues
 	// the provided arument is the name of the queues
-	go func() {
-		messages.RabbitConsumer("email", env)
-		messages.RabbitConsumer("esb", env)
-	}()
+	// go func() {
+	// 	messages.RabbitConsumer("email", env)
+	// 	messages.RabbitConsumer("esb", env)
+	// }()
 
 	c := make(chan os.Signal, 1)   // Create channel to signify a signal being sent
 	signal.Notify(c, os.Interrupt) // When an interrupt or termination signal is sent, notify the channel
@@ -248,7 +293,12 @@ func SetupRoutes(app *fiber.App) {
 	// database session injection to local context
 	app.Use(dbsessioninjection)
 
-	gapp := app.Group("/api/v1")
+	// Role Middleware
+	gapp := app.Group("/api/v1", keyauth.New(keyauth.Config{
+		Next:      authFilter,
+		KeyLookup: "header:X-APP-TOKEN",
+		Validator: NextRoute,
+	}))
 
 	gapp.Get("/role", NextFunc).Name("get_all_roles").Get("/role", controllers.GetRoles)
 	gapp.Get("/role/:role_id", NextFunc).Name("get_one_roles").Get("/role/:role_id", controllers.GetRoleByID)
@@ -267,6 +317,7 @@ func SetupRoutes(app *fiber.App) {
 	gapp.Get("/app", NextFunc).Name("get_all_apps").Get("/app", controllers.GetApps)
 	gapp.Get("/app/:app_id", NextFunc).Name("get_one_apps").Get("/app/:app_id", controllers.GetAppByID)
 	gapp.Get("/appruid/:app_uuid", NextFunc).Name("get_app_roles_uuid").Get("/appruid/:app_uuid", controllers.GetAppRoleUUID)
+	gapp.Get("/approleuuid/:app_uuid", NextFunc).Name("get_app_roles_all_uuid").Get("/approleuuid/:app_uuid", controllers.GetAppRoleAllUUID)
 	gapp.Post("/app", NextFunc).Name("post_app").Post("/app", controllers.PostApp)
 	gapp.Patch("/app/:app_id", NextFunc).Name("patch_app").Patch("/app/:app_id", controllers.PatchApp)
 	gapp.Delete("/app/:app_id", NextFunc).Name("delete_app").Delete("/app/:app_id", controllers.DeleteApp).Name("delete_app")
@@ -295,6 +346,7 @@ func SetupRoutes(app *fiber.App) {
 	gapp.Get("/feature/:feature_id", NextFunc).Name("get_one_features").Get("/feature/:feature_id", controllers.GetFeatureByID)
 	gapp.Post("/feature", NextFunc).Name("post_feature").Post("/feature", controllers.PostFeature)
 	gapp.Patch("/feature/:feature_id", NextFunc).Name("patch_feature").Patch("/feature/:feature_id", controllers.PatchFeature)
+	gapp.Get("/appfeatureuuid/:app_uuid", NextFunc).Name("get_app_feature_all_uuid").Get("/appfeatureuuid/:app_uuid", controllers.GetAppFeaturesAllUUID)
 	gapp.Delete("/feature/:feature_id", NextFunc).Name("delete_feature").Delete("/feature/:feature_id", controllers.DeleteFeature)
 	gapp.Put("/feature/:feature_id", NextFunc).Name("activate_deactivate_features").Put("/feature/:feature_id", controllers.ActivateDeactivateFeature)
 	gapp.Get("/featuredrop", NextFunc).Name("drop_features").Get("/featuredrop", controllers.GetDropFeatures)
@@ -304,12 +356,14 @@ func SetupRoutes(app *fiber.App) {
 
 	gapp.Get("/endpoint", NextFunc).Name("get_all_endpoints").Get("/endpoint", controllers.GetEndpoints)
 	gapp.Get("/endpoint/:endpoint_id", NextFunc).Name("get_one_endpoint").Get("/endpoint/:endpoint_id", controllers.GetEndpointByID)
+	gapp.Get("/appendpointuuid/:app_uuid", NextFunc).Name("get_app_endpoint_all_uuid").Get("/appendpointuuid/:app_uuid", controllers.GetAppEndpointsAllUUID)
 	gapp.Post("/endpoint", NextFunc).Name("post_endpoint").Post("/endpoint", controllers.PostEndpoint)
 	gapp.Patch("/endpoint/:endpoint_id", NextFunc).Name("patch_endpoint").Patch("/endpoint/:endpoint_id", controllers.PatchEndpoint)
 	gapp.Delete("/endpoint/:endpoint_id", NextFunc).Name("delete_endpoint").Delete("/endpoint/:endpoint_id", controllers.DeleteEndpoint).Name("delete_endpoint")
 
 	gapp.Get("/page", NextFunc).Name("get_all_pages").Get("/page", controllers.GetPages)
 	gapp.Get("/page/:page_id", NextFunc).Name("get_one_pages").Get("/page/:page_id", controllers.GetPageByID)
+	gapp.Get("/apppagesuuid/:app_uuid", NextFunc).Name("get_app_pages_all_uuid").Get("/apppagesuuid/:app_uuid", controllers.GetAppPagesAllUUID)
 	gapp.Post("/page", NextFunc).Name("post_page").Post("/page", controllers.PostPage)
 	gapp.Patch("/page/:page_id", NextFunc).Name("patch_page").Patch("/page/:page_id", controllers.PatchPage)
 	gapp.Delete("/page/:page_id", NextFunc).Name("delete_page").Delete("/page/:page_id", controllers.DeletePage).Name("delete_page")
@@ -328,6 +382,9 @@ func SetupRoutes(app *fiber.App) {
 	gapp.Get("/email", NextFunc).Name("send_email").Get("/email", controllers.SendEmail).Name("send_email")
 
 	gapp.Get("/jwtsalt", NextFunc).Name("get_all_jwtsalts").Get("/jwtsalt", controllers.GetJWTSalts)
+
+	// Client matrix
+	gapp.Get("/clientmatrix/:app_uuid", NextFunc).Name("get_client_matrix").Get("/clientmatrix/:app_uuid", controllers.GetClientMatrix)
 
 	// dashboard
 	gapp.Get("/dashboard", NextFunc).Name("dashboard_one").Get("/dashboard", controllers.GetDashBoardGrouped)

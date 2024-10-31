@@ -358,6 +358,8 @@ func PostUser(contx *fiber.Ctx) error {
 	user := new(models.User)
 	user.Email = posted_user.Email
 	user.Password = posted_user.Password
+	user.Disabled = posted_user.Disabled
+
 	//  start transaction to database
 	tx := db.WithContext(tracer.Tracer).Begin()
 

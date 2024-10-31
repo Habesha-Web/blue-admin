@@ -114,6 +114,93 @@ func GetEndpointByID(contx *fiber.Ctx) error {
 	})
 }
 
+// GetAppEndpointUUID is a function to get a App enpoints by UUID
+// @Summary Get App Endpoints by UUID
+// @Description Get app endpoints by UUID
+// @Tags Endpoints
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param page query int true "page"
+// @Param size query int true "page size"
+// @Param app_uuid path string true "App UUID"
+// @Success 200 {object} common.ResponseHTTP{data=[]models.EndpointPut}
+// @Failure 404 {object} common.ResponseHTTP{}
+// @Router /appendpointuuid/{app_uuid} [get]
+func GetAppEndpointsAllUUID(contx *fiber.Ctx) error {
+
+	// Starting tracer context and tracer
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	//  parsing Query Prameters
+	Page, _ := strconv.Atoi(contx.Query("page"))
+	Limit, _ := strconv.Atoi(contx.Query("size"))
+	//  checking if query parameters  are correct
+	if Page == 0 || Limit == 0 {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Not Allowed, Bad request",
+			Data:    nil,
+		})
+	}
+
+	//  parsing Query Prameters
+	uuid := contx.Params("app_uuid")
+	if uuid == "" {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "No uuid",
+			Data:    nil,
+		})
+	}
+
+	// Preparing and querying database using Gorm
+	//getting total count first
+	var total_counter int64
+	count_string := `select distinct endpoints.id from endpoints inner join features on
+							endpoints.feature_id = features.id
+							inner join roles on features.role_id= roles.id
+							inner join apps on roles.app_id == apps.id
+							where apps.uuid = ? ORDER BY endpoints.id;`
+	if res := db.WithContext(tracer.Tracer).Raw(count_string, uuid, Limit, Page).Count(&total_counter); res.Error != nil {
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
+
+	var endpoints []models.EndpointPut
+	// select apps.id as appID, roles.id, roles.name, roles.description,roles.active from roles inner join apps on roles.app_id == apps.id where apps.uuid =="0191c74f-d039-71c6-a3be-66e2571a9cf1" ORDER BY roles.id;
+	query_string := `select distinct endpoints.id,endpoints.name, endpoints.method,endpoints.route_path,endpoints.description from endpoints inner join features on
+							endpoints.feature_id = features.id
+							inner join roles on features.role_id= roles.id
+							inner join apps on roles.app_id == apps.id
+							where apps.uuid = ? ORDER BY endpoints.id LIMIT ? OFFSET ?;`
+
+	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page).Scan(&endpoints); res.Error != nil {
+		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: res.Error.Error(),
+			Data:    nil,
+		})
+	}
+
+	//  Finally returing response if All the above compeleted successfully
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success got one app.",
+		Total:   uint(total_counter),
+		Page:    uint(Page),
+		Size:    uint(Limit),
+		Data:    &endpoints,
+	})
+}
+
 // Add Endpoint to data
 // @Summary Add a new Endpoint
 // @Description Add Endpoint
@@ -325,7 +412,7 @@ func DeleteEndpoint(contx *fiber.Ctx) error {
 	}
 
 	// Delete the endpoint
-	if id > 76 {
+	if id > 70 {
 		if err := db.Delete(&endpoint).Error; err != nil {
 			tx.Rollback()
 			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{

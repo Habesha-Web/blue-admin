@@ -19,7 +19,6 @@ func ScheduledTasks() *tasks.Scheduler {
 	scheduler := tasks.New()
 
 	// JWT signature salt will be updated based on the env variable provided
-	// this is what the peice of code below does, using golangs task scheduler
 	//  Salt Timer Tasks
 	clear_run, _ := strconv.Atoi(configs.AppConfig.Get("JWT_SALT_LIFE_TIME"))
 	clear_run = int(clear_run)

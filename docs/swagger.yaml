@@ -5,8 +5,14 @@ definitions:
       data: {}
       details:
         type: string
+      page:
+        type: integer
+      size:
+        type: integer
       success:
         type: boolean
+      total:
+        type: integer
     type: object
   common.ResponsePagination:
     properties:
@@ -225,6 +231,20 @@ definitions:
       route_path:
         type: string
     type: object
+  models.EndpointPut:
+    description: EndpointPut type information
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      method:
+        type: string
+      name:
+        type: string
+      route_path:
+        type: string
+    type: object
   models.Feature:
     description: App type information
     properties:
@@ -266,6 +286,18 @@ definitions:
         type: boolean
       description:
         type: string
+      name:
+        type: string
+    type: object
+  models.FeaturePut:
+    description: FeaturePut type information
+    properties:
+      active:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: integer
       name:
         type: string
     type: object
@@ -326,6 +358,18 @@ definitions:
     properties:
       description:
         type: string
+      name:
+        type: string
+    type: object
+  models.PagePut:
+    description: PagePut type information
+    properties:
+      active:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: integer
       name:
         type: string
     type: object
@@ -650,6 +694,138 @@ paths:
       summary: Patch App
       tags:
       - Apps
+  /appendpointuuid/{app_uuid}:
+    get:
+      consumes:
+      - application/json
+      description: Get app endpoints by UUID
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: size
+        required: true
+        type: integer
+      - description: App UUID
+        in: path
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.EndpointPut'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App Endpoints by UUID
+      tags:
+      - Endpoints
+  /appfeatureuuid/{app_uuid}:
+    get:
+      consumes:
+      - application/json
+      description: Get app features by UUID
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: size
+        required: true
+        type: integer
+      - description: App UUID
+        in: path
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.FeaturePut'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App Features by UUID
+      tags:
+      - Features
+  /apppagesuuid/{app_uuid}:
+    get:
+      consumes:
+      - application/json
+      description: Get app pages by UUID
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: size
+        required: true
+        type: integer
+      - description: App UUID
+        in: path
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.PagePut'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App Pages by UUID
+      tags:
+      - Pages
   /approleuser/{role_id}/{user_id}:
     delete:
       consumes:
@@ -728,6 +904,50 @@ paths:
       summary: Add User to Role
       tags:
       - RoleUsers
+  /approleuuid/{app_uuid}:
+    get:
+      consumes:
+      - application/json
+      description: Get app roles by UUID
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: size
+        required: true
+        type: integer
+      - description: App UUID
+        in: path
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.RolePut'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App Roles by UUID
+      tags:
+      - Apps
   /appruid/{app_uuid}:
     get:
       consumes:
@@ -933,6 +1153,40 @@ paths:
       summary: Auth
       tags:
       - Authentication
+  /clientmatrix/{app_uuid}:
+    get:
+      consumes:
+      - application/json
+      description: Get app roles by UUID
+      parameters:
+      - description: App UUID
+        in: path
+        name: app_uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.ResponseHTTP'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.RolePut'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/common.ResponseHTTP'
+      security:
+      - ApiKeyAuth: []
+      summary: Get App Roles by UUID
+      tags:
+      - ClientOnly
   /dashboard:
     get:
       consumes:
