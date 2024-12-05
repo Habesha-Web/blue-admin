@@ -385,6 +385,7 @@ func SetupRoutes(app *fiber.App) {
 
 	// Client matrix
 	gapp.Get("/clientmatrix/:app_uuid", NextFunc).Name("get_client_matrix").Get("/clientmatrix/:app_uuid", controllers.GetClientMatrix)
+	gapp.Get("/clientmatrixpath/:app_uuid", NextFunc).Name("get_client_matrix").Get("/clientmatrixpath/:app_uuid", controllers.GetClientMatrixPath)
 
 	// dashboard
 	gapp.Get("/dashboard", NextFunc).Name("dashboard_one").Get("/dashboard", controllers.GetDashBoardGrouped)

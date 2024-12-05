@@ -232,7 +232,7 @@ func GetAppRoleAllUUID(contx *fiber.Ctx) error {
 						inner join apps on roles.app_id == apps.id
 						where apps.uuid = ? ORDER BY roles.id LIMIT ? OFFSET ?;`
 
-	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page).Scan(&roles); res.Error != nil {
+	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page-1).Scan(&roles); res.Error != nil {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: res.Error.Error(),
@@ -283,6 +283,54 @@ func GetClientMatrix(contx *fiber.Ctx) error {
 
 	// client matrix result
 	result, err := utils.GetAppFeaturesReturn(uuid, db, tracer.Tracer)
+	if err != nil {
+		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+			Success: true,
+			Message: err.Error(),
+			Data:    nil,
+		})
+	}
+
+	//  Finally returing response if All the above compeleted successfully
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "Success got matrix.",
+		Data:    &result,
+	})
+}
+
+// GetAppRoleMatrixPath is a function to get APP
+// @Summary Get App Roles Matrix by UUID
+// @Description Get app endpoint role matrix by UUID
+// @Tags ClientOnly
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param app_uuid path string true "App UUID"
+// @Success 200 {object} common.ResponseHTTP{data=map[string]string}
+// @Failure 404 {object} common.ResponseHTTP{}
+// @Router /clientmatrixpath/{app_uuid} [get]
+func GetClientMatrixPath(contx *fiber.Ctx) error {
+
+	// Starting tracer context and tracer
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	//  parsing Query Prameters
+	uuid := contx.Params("app_uuid")
+	if uuid == "" {
+		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "No uuid",
+			Data:    nil,
+		})
+	}
+
+	// client matrix result
+	result, err := utils.GetAppFeaturesReturnPath(uuid, db, tracer.Tracer)
 	if err != nil {
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: true,

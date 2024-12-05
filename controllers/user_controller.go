@@ -518,7 +518,7 @@ func DeleteUser(contx *fiber.Ctx) error {
 	}
 
 	// Delete the user
-	if id > 6 {
+	if id > 7 {
 		if err := db.WithContext(tracer.Tracer).Delete(&user).Error; err != nil {
 			tx.Rollback()
 			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{

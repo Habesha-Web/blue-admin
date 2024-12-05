@@ -51,8 +51,9 @@ func TestCreateJWTToken(t *testing.T) {
 	uuid := "test-uuid"
 	roles := []string{"user"}
 	duration := 10
+	user_id := 4
 
-	token, err := CreateJWTToken(email, uuid, roles, duration)
+	token, err := CreateJWTToken(email, uuid, user_id, roles, duration)
 	require.NoError(t, err, "Token creation should not return an error")
 
 	// Check if the token can be parsed
@@ -69,8 +70,9 @@ func TestParseJWTToken(t *testing.T) {
 	uuid := "test-uuid"
 	roles := []string{"user"}
 	duration := 10
+	user_id := 4
 
-	token, err := CreateJWTToken(email, uuid, roles, duration)
+	token, err := CreateJWTToken(email, uuid, user_id, roles, duration)
 	require.NoError(t, err, "Token creation should not return an error")
 
 	parsedClaim, err := ParseJWTToken(token)

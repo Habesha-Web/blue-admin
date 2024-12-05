@@ -1078,7 +1078,7 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Get app roles by UUID",
+                "description": "Get app endpoint role matrix by UUID",
                 "consumes": [
                     "application/json"
                 ],
@@ -1088,7 +1088,7 @@ const docTemplate = `{
                 "tags": [
                     "ClientOnly"
                 ],
-                "summary": "Get App Roles by UUID",
+                "summary": "Get App Roles Matrix by UUID",
                 "parameters": [
                     {
                         "type": "string",
@@ -1110,9 +1110,67 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/models.RolePut"
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ResponseHTTP"
+                        }
+                    }
+                }
+            }
+        },
+        "/clientmatrixpath/{app_uuid}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get app endpoint role matrix by UUID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ClientOnly"
+                ],
+                "summary": "Get App Roles Matrix by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "App UUID",
+                        "name": "app_uuid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.ResponseHTTP"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "string"
                                             }
                                         }
                                     }
@@ -4474,6 +4532,9 @@ const docTemplate = `{
             "description": "AppPost type information",
             "type": "object",
             "properties": {
+                "active": {
+                    "type": "boolean"
+                },
                 "description": {
                     "type": "string"
                 },
@@ -4735,6 +4796,9 @@ const docTemplate = `{
             "description": "PagePost type information",
             "type": "object",
             "properties": {
+                "active": {
+                    "type": "boolean"
+                },
                 "description": {
                     "type": "string"
                 },

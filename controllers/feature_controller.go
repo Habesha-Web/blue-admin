@@ -323,7 +323,7 @@ func DeleteFeature(contx *fiber.Ctx) error {
 	}
 
 	// Delete the feature
-	if id > 16 {
+	if id > 19 {
 		if err := db.Delete(&feature).Error; err != nil {
 			tx.Rollback()
 			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
@@ -661,7 +661,7 @@ func GetAppFeaturesAllUUID(contx *fiber.Ctx) error {
 							inner join apps on roles.app_id == apps.id
 							where apps.uuid = ? ORDER BY features.id LIMIT ? OFFSET ?;`
 
-	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page).Scan(&features); res.Error != nil {
+	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page-1).Scan(&features); res.Error != nil {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: res.Error.Error(),

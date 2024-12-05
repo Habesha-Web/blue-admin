@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -181,7 +180,7 @@ func GetAppPagesAllUUID(contx *fiber.Ctx) error {
 							inner join apps on roles.app_id == apps.id
 							where apps.uuid = ? ORDER BY pages.id LIMIT ? OFFSET ?;`
 
-	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page).Scan(&pages); res.Error != nil {
+	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page-1).Scan(&pages); res.Error != nil {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: res.Error.Error(),
@@ -226,7 +225,7 @@ func PostPage(contx *fiber.Ctx) error {
 
 	//validating post data
 	posted_page := new(models.PagePost)
-	fmt.Println(posted_page)
+
 	//first parse request data
 	if err := contx.BodyParser(&posted_page); err != nil {
 		return contx.Status(http.StatusBadRequest).JSON(common.ResponseHTTP{

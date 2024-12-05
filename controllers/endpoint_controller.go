@@ -182,7 +182,7 @@ func GetAppEndpointsAllUUID(contx *fiber.Ctx) error {
 							inner join apps on roles.app_id == apps.id
 							where apps.uuid = ? ORDER BY endpoints.id LIMIT ? OFFSET ?;`
 
-	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page).Scan(&endpoints); res.Error != nil {
+	if res := db.WithContext(tracer.Tracer).Raw(query_string, uuid, Limit, Page-1).Scan(&endpoints); res.Error != nil {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: res.Error.Error(),
@@ -412,7 +412,7 @@ func DeleteEndpoint(contx *fiber.Ctx) error {
 	}
 
 	// Delete the endpoint
-	if id > 70 {
+	if id > 78 {
 		if err := db.Delete(&endpoint).Error; err != nil {
 			tx.Rollback()
 			return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{

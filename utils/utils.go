@@ -12,9 +12,10 @@ import (
 
 type UserClaim struct {
 	jwt.RegisteredClaims
-	Email string   `json:"email"`
-	Roles []string `json:"roles"`
-	UUID  string   `json:"uuid"`
+	Email  string   `json:"email"`
+	Roles  []string `json:"roles"`
+	UUID   string   `json:"uuid"`
+	UserID int      `json:"user_id"`
 }
 
 // Combine password and salt then hash them using the SHA-512
@@ -54,12 +55,13 @@ func PasswordsMatch(hashedPassword, currPassword string) bool {
 
 // source of this token encode decode functions
 // https://github.com/gurleensethi/go-jwt-tutorial/blob/main/main.go
-func CreateJWTToken(email string, uuid string, roles []string, duration int) (string, error) {
+func CreateJWTToken(email string, uuid string, user_id int, roles []string, duration int) (string, error) {
 	my_claim := UserClaim{
 		RegisteredClaims: jwt.RegisteredClaims{},
 		Email:            email,
 		Roles:            roles,
 		UUID:             uuid,
+		UserID:           user_id,
 	}
 
 	salt_a, _ := GetJWTSalt()

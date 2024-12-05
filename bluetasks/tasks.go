@@ -76,7 +76,6 @@ func ScheduledTasks() *tasks.Scheduler {
 				fmt.Println(err)
 			}
 
-			fmt.Println("working")
 			return nil
 		},
 	}); err != nil {

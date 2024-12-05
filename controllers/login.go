@@ -72,7 +72,7 @@ func PostLogin(contx *fiber.Ctx) error {
 	switch login_request_data.GrantType {
 	case "authorization_code":
 		var user models.User
-		res := db.WithContext(tracer.Tracer).Model(&models.User{}).Preload(clause.Associations).Where("email = ?", login_request_data.Email).First(&user)
+		res := db.WithContext(tracer.Tracer).Model(&models.User{}).Preload(clause.Associations).Where("email = ? AND disabled = ?", login_request_data.Email, false).First(&user)
 		if res.Error != nil {
 			return contx.Status(http.StatusServiceUnavailable).JSON(common.ResponseHTTP{
 				Success: false,
@@ -85,8 +85,8 @@ func PostLogin(contx *fiber.Ctx) error {
 
 				roles = append(roles, string(value.Name))
 			}
-			accessString, _ := utils.CreateJWTToken(user.Email, user.UUID, roles, 60)
-			refreshString, _ := utils.CreateJWTToken(user.Email, user.UUID, roles, 65)
+			accessString, _ := utils.CreateJWTToken(user.Email, user.UUID, int(user.ID), roles, 60)
+			refreshString, _ := utils.CreateJWTToken(user.Email, user.UUID, int(user.ID), roles, 65)
 
 			data := TokenResponse{
 				AccessToken:  accessString,
@@ -111,9 +111,10 @@ func PostLogin(contx *fiber.Ctx) error {
 		email := claims.Email
 		uuid := claims.UUID
 		roles := claims.Roles
+		user_id := claims.UserID
 		if err == nil {
-			accessString, _ := utils.CreateJWTToken(email, uuid, roles, 60)
-			refreshString, _ := utils.CreateJWTToken(email, uuid, roles, 65)
+			accessString, _ := utils.CreateJWTToken(email, uuid, user_id, roles, 60)
+			refreshString, _ := utils.CreateJWTToken(email, uuid, user_id, roles, 65)
 			data := TokenResponse{
 				AccessToken:  accessString,
 				RefreshToken: refreshString,
@@ -177,7 +178,6 @@ func CheckLogin(contx *fiber.Ctx) error {
 			Data:    "Error Getting Header Value",
 		})
 	}
-
 
 	claims, err := utils.ParseJWTToken(token)
 	//  Decoding the token
