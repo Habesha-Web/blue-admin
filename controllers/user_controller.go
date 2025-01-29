@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -12,7 +13,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/mitchellh/mapstructure"
 	"gorm.io/gorm"
-	"gorm.io/gorm/clause"
 )
 
 // GetUseris a function to get a Users by ID
@@ -77,7 +77,7 @@ func GetUsers(contx *fiber.Ctx) error {
 // @Param app_uuid query string true "app uuid"
 // @Success 200 {object} common.ResponsePagination{data=[]models.UserGet}
 // @Failure 404 {object} common.ResponseHTTP{}
-// @Router /appusers [get]
+// @Router /appuser [get]
 func GetAppUsers(contx *fiber.Ctx) error {
 
 	//  Getting tracer context
@@ -103,7 +103,7 @@ func GetAppUsers(contx *fiber.Ctx) error {
 
 	//  querying result with pagination using gorm function
 	// result, err := common.PaginationPureModel(db, models.User{}, []models.User{}, uint(Page), uint(Limit), tracer.Tracer)
-	query_string := `SELECT DISTINCT u.email, u.uuid, u.id, a.uuid
+	query_string := `SELECT DISTINCT  u.email,u.name, u.uuid, u.disabled, u.id, a.uuid
 		FROM users u
 		INNER JOIN user_roles ur ON u.id = ur.user_id
 		INNER JOIN roles r ON ur.role_id = r.id
@@ -112,6 +112,54 @@ func GetAppUsers(contx *fiber.Ctx) error {
 		`
 	var users []models.UserGet
 	if res := db.WithContext(tracer.Tracer).Raw(query_string, app_uuid, Limit, Page-1).Scan(&users); res.Error != nil {
+		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
+			Success: false,
+			Message: "Failed to get all User.",
+			Data:    "something",
+		})
+	}
+
+	// returning result if all the above completed successfully
+	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
+		Success: true,
+		Message: "sucess get all app Users.",
+		Data:    users,
+	})
+}
+
+// Get App Users a function to get app Users by App ID
+// @Summary Get App Users
+// @Description Get Drop App Users
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Security ApiKeyAuth
+// @Security Refresh
+// @Param app_uuid query string true "app uuid"
+// @Success 200 {object} common.ResponsePagination{data=[]models.UserGet}
+// @Failure 404 {object} common.ResponseHTTP{}
+// @Router /dropappusers [get]
+func GetAppDropUsers(contx *fiber.Ctx) error {
+
+	//  Getting tracer context
+	ctx := contx.Locals("tracer")
+	tracer, _ := ctx.(*observe.RouteTracer)
+
+	//  Getting Database connection
+	db, _ := contx.Locals("db").(*gorm.DB)
+
+	app_uuid := contx.Query("app_uuid")
+
+	//  querying result with pagination using gorm function
+	query_string := `SELECT DISTINCT  u.email,u.name, u.disabled, u.id,u.uuid
+		FROM users u
+		INNER JOIN user_roles ur ON u.id = ur.user_id
+		INNER JOIN roles r ON ur.role_id = r.id
+		INNER JOIN apps a ON r.app_id = a.id
+		WHERE a.uuid = ? AND u.disabled = false;
+		`
+	var users []models.UserGet
+	if res := db.WithContext(tracer.Tracer).Raw(query_string, app_uuid).Scan(&users); res.Error != nil {
 		return contx.Status(http.StatusInternalServerError).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: "Failed to get all User.",
@@ -160,7 +208,7 @@ func GetUserByID(contx *fiber.Ctx) error {
 	// Preparing and querying database using Gorm
 	var users_get models.UserGet
 	var users models.User
-	if res := db.WithContext(tracer.Tracer).Model(&models.User{}).Preload(clause.Associations).Where("id = ?", id).First(&users); res.Error != nil {
+	if res := db.WithContext(tracer.Tracer).Model(&models.User{}).Where("id = ?", id).First(&users); res.Error != nil {
 		return contx.Status(http.StatusNotFound).JSON(common.ResponseHTTP{
 			Success: false,
 			Message: res.Error.Error(),
@@ -221,7 +269,7 @@ func GetAppUserByID(contx *fiber.Ctx) error {
 
 	// Preparing and querying database using Gorm
 	var users_get models.UserGet
-	query_string := `SELECT DISTINCT u.email, u.uuid, u.id, a.uuid
+	query_string := `SELECT DISTINCT u.email, u.name, u.uuid,u.disabled, u.id, a.uuid
 			FROM users u
 			INNER JOIN user_roles ur ON u.id = ur.user_id
 			INNER JOIN roles r ON ur.role_id = r.id
@@ -236,6 +284,7 @@ func GetAppUserByID(contx *fiber.Ctx) error {
 		})
 	}
 
+	fmt.Println(users_get)
 	//  Finally returing response if All the above compeleted successfully
 	return contx.Status(http.StatusOK).JSON(common.ResponseHTTP{
 		Success: true,
@@ -356,6 +405,7 @@ func PostUser(contx *fiber.Ctx) error {
 
 	//  initiate -> user
 	user := new(models.User)
+	user.Name = posted_user.Name
 	user.Email = posted_user.Email
 	user.Password = posted_user.Password
 	user.Disabled = posted_user.Disabled
