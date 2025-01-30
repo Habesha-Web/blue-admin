@@ -1,6 +1,0 @@
-
-2025/01/29 14:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/utils/dynamic_salt.go:78
-[0m[33m[0.405ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1
-
-2025/01/29 14:29:32 logger.go:182: [32m/home/bushu/Documents/goland/blue-admin/controllers/jwtsalt_controller.go:36
-[0m[33m[0.447ms] [34;1m[rows:1][0m SELECT * FROM `jwt_salts` WHERE id = 1 ORDER BY `jwt_salts`.`id` LIMIT 1
